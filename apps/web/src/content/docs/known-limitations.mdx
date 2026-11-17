@@ -1,0 +1,65 @@
+export const meta = {
+  title: 'Known Limitations',
+  description: 'The SDK is now a strong MVP, but the product boundary should still be documented honestly.',
+  group: 'Reference',
+  order: 3,
+};
+
+<Callout variant="warning" title="Strong MVP, honest boundary">
+  Passing focused validation and red-team coverage means the SDK is real and credible for its intended scope. It does not mean it is a universal web agent or a finished platform for arbitrary pages.
+</Callout>
+
+The current implementation is much stronger than the earliest MVP, but there are still intentional limits.
+
+## It is for websites you control
+
+Cinder is strongest when developers can:
+
+- add semantic tags deliberately
+- understand the app surface
+- choose when extensions are needed
+- improve route/context clues instead of guessing blindly
+
+It is not optimized for arbitrary untagged websites.
+
+## Local resolution is focused, not universal
+
+The planner system is practical and graph-aware, but it is not trying to be a broad general natural-language engine.
+
+That focus is a strength, not a weakness.
+
+## Custom widgets may still need adapters
+
+Standard browser controls work much better now, but apps with heavily custom widgets may still need `registerDomAdapter()`.
+
+## Fallback is bounded, not magical
+
+Fallback is more mature now, but it still depends on:
+
+- a configured endpoint
+- provider behavior
+- graph grounding
+- ambiguity-safe normalization
+
+A fallback result can still be rejected if it cannot be safely grounded to the real graph.
+
+## Browser speech still depends on platform support
+
+Speech input prefers the Web Speech API when it's available. For browsers with no Web Speech API at all (Firefox, older Safari), setting `speech.engine: "auto"` and configuring a self-hosted `@cinder/server` endpoint (the same one already used for text tier-3 fallback) enables a server-side recording-and-transcription path instead - see <a href="/docs/concepts/speech-input">Speech Input</a>. This is `@cinder/server`-only today; `@cinder/relay` has no speech-transcription route. It cannot stream interim results the way the Web Speech API can: there's a transcript only once recording stops and the upload finishes, not a running partial transcript while the user is still speaking. That's an honest UX difference, not a bug to chase.
+
+## Tier 2 (embeddings) covers routes, outputs, and actions - not fields or filters, yet
+
+The optional `@cinder/embeddings` package recovers typos and paraphrases of a page's route/output/action nodes before any network call, plus a separate, simpler grammar-shape match (and, as a last resort, a small extractive question-answering model) for `set_field`/`set_filter` commands specifically. It never claims the top resolved-exact confidence level - every tier-2 match is reported honestly as a best guess among known candidates, never full certainty. See <a href="/docs/concepts/tier-2-embeddings">Tier 2: Embeddings</a>.
+
+## Relay is a real, working prototype of hosted billing - not a finished managed service
+
+`@cinder/relay` has a real, persistent Postgres-backed store (verified against an actual live database, not a mock) when you run it with `DATABASE_URL` set, real token-based cost metering, real account authentication, and a working dashboard UI. Two things are still genuinely unfinished:
+
+- **Razorpay payments are unverified against a real account.** The order-creation and webhook-signature-verification logic is real and tested (real HMAC-SHA256 computations, not faked), but no real test-mode Razorpay account was available while building it.
+- **`balance_cents` is stored as a floating-point number**, matching the simplest possible implementation rather than the integer micro-cents a production ledger handling real money at scale should use.
+
+See <a href="/docs/relay">Relay Overview</a> for the full, current list before putting real money behind it.
+
+## The docs and DX are still catching up to the runtime
+
+The SDK has matured quickly. The documentation and onboarding experience are improving, but developer ergonomics are still an active part of the product work.

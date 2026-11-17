@@ -1,0 +1,133 @@
+export const meta = {
+  title: 'Application Graph',
+  description: 'The Cinder Application Graph turns semantic scan results into scoped local structure that can be queried and resolved.',
+  group: 'Concepts',
+  order: 2,
+};
+
+The Cinder Application Graph, or **CAG**, is the core local structure used by the runtime.
+
+## Why a graph exists
+
+A flat list of tagged elements is not enough. The runtime needs to understand:
+
+- what belongs together
+- which route or context is active
+- which actions, fields, filters, and outputs share a semantic region
+- how repeated structures differ across routes or app regions
+
+## What the graph contains
+
+The graph currently uses these main node types:
+
+- `app`
+- `route`
+- `context`
+- `entity`
+- `field`
+- `filter`
+- `action`
+- `output`
+- `data`
+
+## Why scoped identity matters
+
+The graph now preserves scoped node identity across repeated structures.
+
+That means these are treated as different nodes, not accidental collisions:
+
+- `reports / filters / search`
+- `farmers / filters / search`
+- `reports / registration / details / save`
+- `reports / profile / details / save`
+
+This is critical for:
+
+- duplicate-heavy real apps
+- route/context-aware matching
+- ambiguity handling
+- safe fallback normalization
+
+## Main relationships
+
+The graph is semantic, not visual. It models meaning, not every DOM detail.
+
+Important relationships include:
+
+- route containment
+- context containment
+- scoped ownership
+- action/output/field/filter placement inside route/context hierarchy
+
+## Runtime state inside the graph
+
+The graph snapshot also carries runtime state such as:
+
+- `activeRouteId`
+- `activeContextId`
+- `focusedNodeId`
+- `selections`
+
+This runtime state affects local candidate ranking and dispatch behavior.
+
+## Indexes matter
+
+The graph also maintains indexes by:
+
+- type
+- key
+- context
+- route
+
+These are important because local queries should not behave like blind full-DOM search.
+
+## How the graph helps local resolution
+
+The graph is what lets Cinder answer questions like:
+
+- which `search` action belongs to the active route?
+- which `price` output is in the focused context?
+- which `save` action is ambiguous and should not be auto-chosen?
+- which route or context should be preferred when the app has repeated semantic keys?
+
+## Active route and context are now real inputs
+
+Active state is no longer a fake default from scan order.
+
+The runtime can now use:
+
+- current path
+- route hints
+- `aria-current`
+- visible route/context heuristics
+- focus ancestry
+- previous active-state bias where appropriate
+
+## The graph is for reasoning, not only debugging
+
+The graph is useful for debugging, but it is not just a debug object.
+It is the local reasoning substrate for:
+
+- planner matching
+- scoped ranking
+- ambiguity handling
+- fallback grounding
+- dispatch updates after execution
+
+## What to inspect in practice
+
+When debugging, check:
+
+- `graph.nodes`
+- `graph.edges`
+- `graph.indexes`
+- `graph.runtime`
+- `graph.meta`
+
+That usually explains more than looking at raw DOM alone.
+
+## Related pages
+
+- <a href="/docs/concepts/local-resolution">Local Resolution</a>
+- <a href="/docs/guides/scanning-the-app">Scanning the App</a>
+- <a href="/docs/guides/debugging">Debugging</a>

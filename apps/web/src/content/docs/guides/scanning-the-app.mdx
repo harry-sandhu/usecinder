@@ -1,0 +1,68 @@
+export const meta = {
+  title: 'Scanning the App',
+  description: 'Learn when to scan, what scan results look like, and how to inspect the semantic surface and graph refresh behavior.',
+  group: 'Guides',
+  order: 2,
+};
+
+The scan step converts tagged DOM into normalized semantic records and refreshes the current graph snapshot.
+
+## Basic usage
+
+```ts
+const scanResult = await Cinder.scan(document);
+console.log(scanResult);
+console.log(Cinder.graph());
+```
+
+## When to scan
+
+Scan:
+
+- after the tagged UI is present in the DOM
+- after route or layout changes when scan-on-init is not enough
+- when you want a clean manual inspection point during debugging
+
+## Mutation observation
+
+If `observeMutations` is enabled, the runtime can rescan automatically when the tagged surface changes.
+
+That path is now more production-shaped because it includes:
+
+- debounce
+- backpressure
+- suppression of self-induced churn where practical
+- scan timing metadata
+
+## What to inspect after scan
+
+Look at:
+
+- `scanResult.entries`
+- `scanResult.warnings`
+- `scanResult.summary`
+- `Cinder.graph().runtime`
+- `Cinder.graph().meta`
+
+## Good debugging sequence
+
+```ts
+const scanResult = await Cinder.scan(document);
+console.log('scan', scanResult);
+console.log('lastScan', Cinder.lastScan());
+console.log('graph', Cinder.graph());
+```
+
+## Common scan issues
+
+- scanning before the real tagged UI exists
+- assuming repeated structures are fine without route/context boundaries
+- confusing `field` and `filter`
+- expecting scan to infer business meaning from untagged UI
+- overlooking warnings from the scan result
+
+## Related pages
+
+- <a href="/docs/api/scan">Cinder.scan</a>
+- <a href="/docs/api/last-scan">Cinder.lastScan</a>
+- <a href="/docs/guides/debugging">Debugging</a>

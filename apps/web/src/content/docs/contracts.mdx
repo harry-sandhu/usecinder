@@ -1,0 +1,79 @@
+export const meta = {
+  title: 'Contracts',
+  description: 'Shared contracts keep the browser SDK, server package, and shared types aligned around stable normalized shapes.',
+  group: 'Reference',
+  order: 1,
+};
+
+<Badge tone="brand">Shared boundary</Badge>
+
+Cinder uses shared contracts so the browser SDK and the optional server package can exchange normalized data safely.
+
+## Shared contract areas
+
+The current project explicitly shares contracts for:
+
+- configuration
+- semantic tags and scan results
+- graph data and graph summaries
+- intents and resolution steps
+- infer request and infer response types
+
+## Why this matters
+
+Hybrid mode only works cleanly when both sides agree on:
+
+- what the browser sends
+- what the server returns
+- how cloud output lines up with local dispatch
+
+<Callout variant="tip" title="Stability matters most here">
+  Stable contracts make fallback much less fragile. The browser can send a predictable request, and the server can return a predictable structured response even when providers differ internally.
+</Callout>
+
+## Example infer request shape
+
+```json
+{
+  "text": "show soybean prices in punjab",
+  "context": {
+    "activeRoute": "reports",
+    "region": "north"
+  },
+  "graph": {
+    "activeRoute": "reports",
+    "activeContext": "crop-prices",
+    "routes": ["reports", "farmers"],
+    "filters": ["crop", "state"],
+    "actions": ["search"],
+    "outputs": ["price"],
+    "selections": {
+      "crop": "soybean"
+    }
+  }
+}
+```
+
+## Example infer response shape
+
+```json
+{
+  "intent": "composite_flow",
+  "confidence": 0.82,
+  "steps": [
+    { "type": "set_filter", "target": "crop", "value": "soybean" },
+    { "type": "set_filter", "target": "state", "value": "punjab" },
+    { "type": "trigger_action", "target": "search" }
+  ],
+  "source": "cloud"
+}
+```
+
+## Public vs internal note
+
+Public config, graph, intent, infer request, and infer response shapes should stay much more stable than internal heuristics such as ranking, dispatch order details, or planner scoring.
+
+## Related pages
+
+- <a href="/docs/server/infer-endpoint">Infer Endpoint</a>
+- <a href="/docs/concepts/ai-fallback">AI Fallback</a>

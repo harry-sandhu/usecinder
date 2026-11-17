@@ -1,0 +1,28 @@
+export const meta = {
+  title: 'Health Endpoint',
+  description: 'The health endpoint confirms that the server process is reachable and responding.',
+  group: 'Server',
+  order: 1,
+};
+
+The server exposes `/health` for a simple operational check.
+
+## Endpoint
+
+```http
+GET /health
+```
+
+## Expected response
+
+A healthy response indicates the service is up and accepting requests.
+
+Use it to verify:
+
+- the process started successfully
+- the host and port are reachable
+- your deployment wiring is correct before testing fallback
+
+## Why it matters
+
+You should confirm `/health` before debugging `/v1/llm/infer`, because many fallback issues are actually server availability issues first.

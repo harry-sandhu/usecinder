@@ -1,0 +1,145 @@
+export const meta = {
+  title: 'Installation',
+  description: 'Install the browser SDK first, then add the server package only if you want hybrid fallback inference.',
+  group: 'Getting Started',
+  order: 1,
+};
+
+<Callout variant="tip" title="Recommended first setup">
+  Start with the browser runtime only. Keep AI disabled until scan, graph, local resolution, and DOM execution work cleanly in your app.
+</Callout>
+
+Cinder is browser-first. The fastest path is to install the client SDK, tag one real page, prove the local-first flow, and only then decide whether you need fallback.
+
+## Install the browser SDK
+
+The main browser package is `usecinder` (the exported singleton is still called `Cinder` - only the npm package name is `usecinder`).
+
+<Tabs defaultTab="npm">
+  <Tab label="npm">
+
+```bash
+npm install usecinder
+```
+
+  </Tab>
+  <Tab label="pnpm">
+
+```bash
+pnpm add usecinder
+```
+
+  </Tab>
+  <Tab label="yarn">
+
+```bash
+yarn add usecinder
+```
+
+  </Tab>
+</Tabs>
+
+## Optional packages
+
+None of these are required for the local-first path - add them only when you need what they do.
+
+| Package | Install when you want | More |
+| --- | --- | --- |
+| `@cinder/embeddings` | Tier 2: a free, client-side model that recovers typos/paraphrases before any network call | <a href="/docs/concepts/tier-2-embeddings">Tier 2: Embeddings</a> |
+| `@cinder/server` | Tier 3: self-hosted bounded fallback inference | <a href="/docs/guides/setting-up-the-server">Setting Up the Server</a> |
+| `@cinder/relay` | Tier 3, hosted and metered - skip running your own server | <a href="/docs/relay">Relay Overview</a> |
+| `@cinder/cli` (dev-only) | Crawl your real app and audit every page for tagging gaps | <a href="/docs/cli">CLI Overview</a> |
+
+```bash
+npm install @cinder/server
+# or
+npm install @cinder/relay
+```
+
+## Browser-first initialization
+
+Use a local-first config for the first integration:
+
+```ts
+import { Cinder } from 'usecinder';
+
+await Cinder.init({
+  semantic: {
+    scanOnInit: false,
+    observeMutations: true,
+  },
+  ai: {
+    enabled: false,
+    mode: 'local',
+    endpoint: '',
+    apiKey: '',
+  },
+});
+```
+
+### Why start this way
+
+- it proves the product core first
+- it keeps failure modes easier to inspect
+- it prevents fallback from hiding tagging or graph problems
+- it makes route/context scoping easier to debug
+
+## What the first page should look like
+
+Your first page should be intentionally small:
+
+- one tagged route
+- one tagged context
+- one tagged action, field, filter, or output
+- standard DOM behavior where possible
+
+If the first page is too large, it becomes harder to tell whether a problem comes from tags, graph shape, app timing, custom controls, or unsupported assumptions.
+
+## What to do immediately after init
+
+After the runtime is ready:
+
+1. add semantic tags to a real page
+2. call `await Cinder.scan(document)`
+3. inspect `Cinder.graph()`
+4. execute a first command with `await Cinder.run(...)`
+
+```ts
+await Cinder.scan(document);
+console.log(Cinder.lastScan());
+console.log(Cinder.graph());
+
+const result = await Cinder.run('open reports', document);
+console.log(result.intent, result.dispatch, result.reflex);
+```
+
+## When to enable fallback
+
+Enable fallback only after the local path is already working for your common commands.
+
+```ts
+await Cinder.init({
+  semantic: {
+    scanOnInit: false,
+    observeMutations: true,
+  },
+  ai: {
+    enabled: true,
+    mode: 'hybrid',
+    endpoint: 'http://localhost:8093/v1/llm/infer',
+    apiKey: '',
+    provider: 'custom',
+    timeoutMs: 10000,
+  },
+});
+```
+
+The browser runtime still stays primary. Fallback exists for unknown or weak local understanding, not as the default execution path.
+
+## Next steps
+
+<CardGrid>
+  <PageLinkCard href="/docs/quick-start" title="Quick Start" description="Go from install to first scan, graph snapshot, and working command with the minimum useful setup." />
+  <PageLinkCard href="/docs/concepts/semantic-tags" title="Semantic Tags" description="Learn how to choose stable route/context/action/output keys that help local resolution instead of hurting it." />
+  <PageLinkCard href="/docs/guides/tagging-a-page" title="Tagging a Page" description="See a practical page shape for routes, contexts, fields, filters, actions, and outputs." />
+</CardGrid>

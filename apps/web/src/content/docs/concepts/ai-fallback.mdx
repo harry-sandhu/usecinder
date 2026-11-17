@@ -1,0 +1,101 @@
+export const meta = {
+  title: 'AI Fallback',
+  description: 'Hybrid mode uses bounded fallback only when local graph-based resolution is insufficient.',
+  group: 'Concepts',
+  order: 6,
+};
+
+Fallback exists to support requests the local runtime cannot confidently complete on its own.
+
+## Local-first rule
+
+The runtime should always attempt local resolution first.
+
+Fallback is only relevant when:
+
+- AI is enabled
+- the mode allows fallback
+- an endpoint exists
+- the local result is unknown or low-confidence
+
+## What fallback is for
+
+Typical fallback cases include:
+
+- weak local confidence
+- analytical or open-ended questions
+- phrasing that the local planners do not cover
+- requests that still need to normalize back into the existing app graph
+
+## What fallback is not for
+
+Fallback is **not** the product core.
+It is not there to hide weak tagging, broken graph structure, or ambiguous duplicates that should be fixed locally.
+
+## Fallback flow
+
+1. local resolution runs first
+2. the client builds a normalized request with runtime context and graph summary
+3. the server or provider returns a structured result
+4. the client normalizes that result against the real graph
+5. only usable, non-ambiguous normalized results continue to dispatch
+
+## What the browser now sends
+
+Fallback requests can include:
+
+- input text
+- active route and active context
+- graph summaries
+- runtime selections
+- injected runtime context
+
+## What fallback now guarantees
+
+The fallback path is now bounded and observable.
+
+That includes:
+
+- timeout
+- provider metadata
+- auth mode
+- error classification
+- normalization success/failure state
+- whether the result was actually used
+
+## Runtime events for fallback
+
+Use:
+
+- `fallback:start`
+- `fallback:end`
+
+These events are the best way to inspect:
+
+- why fallback was attempted
+- how long it took
+- whether it timed out
+- whether the provider response normalized successfully
+- whether a usable intent actually came back
+
+## Ambiguity rule still applies
+
+A cloud result should not silently choose the wrong duplicate target.
+
+If normalization cannot safely ground the provider output to one real node, the runtime should reject the fallback result instead of guessing.
+
+## Self-host, or use a hosted fallback server
+
+`config.ai.endpoint` can point at either of two real servers that speak the exact same fallback contract:
+
+- **`@cinder/server`** - run it yourself, with your own provider key and no metering. See <a href="/docs/guides/setting-up-the-server">Setting Up the Server</a>.
+- **`@cinder/relay`** - a hosted, metered alternative if you don't want to run your own server: tier 3 is usage-based, and you choose whether your own key or your app's end user's key is used per call. See <a href="/docs/relay">Relay Overview</a>.
+
+Switching between the two is just a config change - neither one is a dead end if you start with the other.
+
+## Related pages
+
+- <a href="/docs/guides/setting-up-the-server">Setting Up the Server</a>
+- <a href="/docs/relay">Relay Overview</a>
+- <a href="/docs/api/on">Cinder.on</a>
+- <a href="/docs/server/infer-endpoint">Infer Endpoint</a>

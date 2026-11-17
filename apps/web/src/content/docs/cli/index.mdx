@@ -1,0 +1,36 @@
+export const meta = {
+  title: 'CLI Overview',
+  description: 'cinder integrate crawls your real running app and audits every page for untagged elements and weak labels; cinder install-skill teaches your coding agent to keep up.',
+  group: 'CLI',
+  order: 0,
+  navTitle: 'CLI Overview',
+};
+
+`@cinder/cli` closes the loop between "install Cinder" and "every real page is actually tagged well" - instead of a developer running each tagging-checklist audit by hand, one command crawls the real app and writes a single consolidated report a coding agent can act on.
+
+## Install
+
+```bash
+npm install --save-dev @cinder/cli
+```
+
+This installs a `cinder` binary. It depends on `playwright` and `jsdom` - real, dev-time-only dependencies, kept separate from the dependency-light core `usecinder` SDK.
+
+## Commands
+
+<CardGrid>
+  <PageLinkCard
+    href="/docs/cli/integrate"
+    title="cinder integrate"
+    description="Crawl a real running instance of your app and audit every page it finds for untagged elements and weak labels."
+  />
+  <PageLinkCard
+    href="/docs/cli/install-skill"
+    title="cinder install-skill"
+    description="Install a self-contained Claude Code Skill (and an AGENTS.md section) so your coding agent runs the tagging checklist without being told each time."
+  />
+</CardGrid>
+
+## This only reads your app
+
+`cinder integrate` never edits your source files itself. Deciding which findings are real and applying them is left to you and your coding agent - the same judgment call every other Cinder audit tool already requires.

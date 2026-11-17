@@ -1,0 +1,57 @@
+export const meta = {
+  title: 'Concepts Overview',
+  description: 'Understand the semantic model behind tags, graph building, local resolution, dispatch, speech, and bounded fallback.',
+  group: 'Concepts',
+  order: 0,
+  navTitle: 'Overview',
+};
+
+<Callout variant="info" title="Read this before the deeper pages">
+  Cinder makes the most sense when you treat it as a semantic runtime for websites you control, not as a chatbot shell or a speech-only layer.
+</Callout>
+
+This section explains the mental model that makes the SDK coherent.
+
+## The shortest mental model
+
+Cinder works like this:
+
+1. semantic tags describe the app
+2. scan turns the tagged DOM into structured records
+3. graph building turns those records into scoped application state
+4. local planners use graph + route/context awareness to resolve commands
+5. dispatch executes the result through routes, DOM behavior, adapters, or bindings
+6. fallback is optional and bounded, not the default path
+
+## Core ideas
+
+<CardGrid>
+  <Card title="Semantic tags">
+    <p>Meaning is declared directly in the UI through route, context, field, filter, action, output, and data tags.</p>
+  </Card>
+  <Card title="Scoped application graph">
+    <p>The runtime turns scan results into a graph with scoped identity, route/context relationships, indexes, active state, and selections.</p>
+  </Card>
+  <Card title="Graph-aware local resolution">
+    <p>Known commands should resolve through planners, graph queries, route/context state, and optional runtime context before fallback is considered.</p>
+  </Card>
+  <Card title="Real app execution">
+    <p>Dispatch uses route activation, standard DOM behavior, adapters, bindings, and composite steps to act on the actual app surface.</p>
+  </Card>
+  <Card title="Bounded fallback">
+    <p>Fallback exists for unknown or weak local understanding, with timeout, classification, normalization, and telemetry built in.</p>
+  </Card>
+  <Card title="Honest failure handling">
+    <p>Ambiguous duplicates, callback failures, and invalid fallback responses should degrade clearly instead of silently choosing wrong targets.</p>
+  </Card>
+</CardGrid>
+
+## Recommended reading path
+
+1. <a href="/docs/concepts/semantic-tags">Semantic Tags</a>
+2. <a href="/docs/concepts/application-graph">Application Graph</a>
+3. <a href="/docs/concepts/local-resolution">Local Resolution</a>
+4. <a href="/docs/concepts/tier-2-embeddings">Tier 2: Embeddings</a>
+5. <a href="/docs/concepts/dispatch-and-feedback">Dispatch and Feedback</a>
+6. <a href="/docs/concepts/ai-fallback">AI Fallback</a>
+7. <a href="/docs/concepts/speech-input">Speech Input</a>

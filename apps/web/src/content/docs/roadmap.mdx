@@ -1,0 +1,55 @@
+export const meta = {
+  title: 'Roadmap',
+  description: 'See the near-term direction for turning a validated semantic-runtime MVP into a stronger developer product.',
+  group: 'Reference',
+  order: 2,
+};
+
+<Callout variant="info" title="Roadmap principle">
+  Keep sharpening the semantic runtime path for websites you control before expanding outward into broader platform and distribution work.
+</Callout>
+
+The roadmap stays intentionally staged so the team can keep improving developer trust, local-first execution quality, and onboarding clarity.
+
+## Current state
+
+The current SDK now proves:
+
+- semantic scan from tagged UI
+- scoped graph construction
+- active route/context awareness
+- graph-aware local resolution
+- tag-only DOM execution for common browser flows
+- tier 2: optional client-side embeddings for typo/paraphrase recovery (`@cinder/embeddings`)
+- bounded fallback with telemetry and normalization, self-hosted (`@cinder/server`) or hosted and metered (`@cinder/relay`)
+- server-side speech transcription fallback for browsers with no Web Speech API
+- public extension points for routes, adapters, intents, context, events, speech, and the llm-core slot itself (`setLlmCore`)
+- a developer-run audit/integration CLI (`@cinder/cli`) and an agent-fetchable onboarding entry point
+- focused red-team validation coverage, plus full public API coverage validation
+
+## Near-term priorities
+
+<CardGrid>
+  <Card title="Developer ergonomics">
+    <p>Keep improving docs, examples, debugging guidance, and first-run DX so new developers can integrate the SDK quickly and honestly.</p>
+  </Card>
+  <Card title="Real-world app coverage">
+    <p>Prove the runtime on more structured real apps, especially where route/context duplication and custom controls show up in practice.</p>
+  </Card>
+  <Card title="Extension-point maturity">
+    <p>Deepen route registry, DOM adapter, custom intent, and runtime-context patterns so advanced integrations stay explicit and maintainable.</p>
+  </Card>
+</CardGrid>
+
+## Likely later directions
+
+- a production-grade ledger for Relay (integer micro-cents, not floating-point cents) and real verification of its Razorpay integration against a live account
+- an admin/analytics view beyond the current per-developer Relay dashboard
+- richer debug tooling and graph inspection UX
+- optional performance and loading improvements for the docs frontend
+
+## Read next
+
+- <a href="/docs/architecture">Architecture</a>
+- <a href="/docs/contracts">Contracts</a>
+- <a href="/docs/known-limitations">Known Limitations</a>

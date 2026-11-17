@@ -1,0 +1,38 @@
+export const meta = {
+  title: 'FAQ',
+  description: 'Common questions about product identity, AI requirements, speech support, websites you control, and current SDK scope.',
+  group: 'Reference',
+  order: 2,
+};
+
+<Badge tone="default">FAQ</Badge>
+
+This page answers the most common high-level questions quickly.
+
+## Is Cinder a chatbot?
+
+No. Cinder is a semantic runtime for websites you control. It sits on top of application structure and turns text or speech into app actions.
+
+## Does Cinder require AI?
+
+No. The local-first path is primary, and the SDK can run with AI disabled.
+
+## Does Cinder require speech?
+
+No. Text input remains first-class and is important for testing, command bars, unsupported browsers, and explicit app command surfaces.
+
+## Does it work with React?
+
+Yes. The current docs frontend is React-based, and the SDK is designed to fit common web app integration flows.
+
+## Does it only work with React?
+
+No. The product promise is about websites you control, not one frontend framework. What matters most is the semantic surface and whether standard DOM behavior is enough for the app.
+
+## Can it work without bindings?
+
+Yes, for many standard browser flows. Tag-only route/action/field/output behavior is now a real part of the product promise, though custom widgets may still need adapters.
+
+## Is fallback the main path?
+
+No. Fallback is secondary and bounded. Local scan → graph → resolve → dispatch is the product core.

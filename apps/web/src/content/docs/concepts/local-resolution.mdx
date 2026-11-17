@@ -1,0 +1,119 @@
+export const meta = {
+  title: 'Local Resolution',
+  description: 'Cinder resolves known commands locally through planners, graph structure, active state, aliases, and optional runtime context.',
+  group: 'Concepts',
+  order: 3,
+};
+
+Local resolution is the primary control path in Cinder.
+
+## What happens locally
+
+The runtime:
+
+1. normalizes the input
+2. reads current graph state
+3. considers active route and active context
+4. queries graph candidates
+5. runs planner logic for known command shapes
+6. returns a structured intent or an honest unknown/clarification result
+
+## What local planners currently cover
+
+The local path now covers focused command shapes such as:
+
+- route navigation
+- action triggering
+- field setting
+- filter setting
+- output targeting
+- composite multi-step flows
+- custom local matchers registered through `registerIntent()`
+
+## Why this matters
+
+<Callout variant="tip" title="Core product value">
+  The goal is not to call fallback for every request. The goal is to make many real app actions resolvable through structure, state, and deterministic rules alone.
+</Callout>
+
+This keeps known actions:
+
+- faster
+- cheaper
+- easier to debug
+- more aligned with the real app surface
+
+## Inputs to local resolution
+
+Local planners now use more than raw text.
+
+Important inputs include:
+
+- normalized input tokens
+- graph structure
+- key and alias matches
+- active route and active context
+- focused node state
+- runtime selections
+- injected runtime context
+- explicit custom matcher logic
+
+## Runtime context is now first-class
+
+Resolution can also use explicit injected app state.
+
+That means local matching can consider things like:
+
+- current account
+- selected region
+- current workflow state
+- app-specific environment values
+
+without hiding domain logic inside the core runtime.
+
+## Ambiguity is part of the design
+
+A major rule of the current runtime is:
+
+> ambiguous duplicates should degrade safely instead of silently choosing the first match.
+
+This matters when the app has repeated structures such as:
+
+- multiple `save` actions
+- multiple `price` outputs
+- repeated `filters` contexts across routes
+
+If the graph cannot clearly justify one winner, the runtime should produce clarification-friendly output instead of a silent wrong action.
+
+## Graph-aware candidate ranking
+
+Local resolution now uses graph-aware ranking preferences such as:
+
+- active route preference
+- active context preference
+- focused node neighborhood
+- anchor-node relation scoring
+- scoped route/context ties
+
+This is one of the biggest differences between the earlier MVP and the current runtime.
+
+## Extension points for local resolution
+
+When the default planners are not enough, use:
+
+- `registerIntent()` for custom local matchers
+- `setContextProvider()` for explicit runtime context
+- route registry and DOM adapters when matching needs app-side execution support
+
+## Current boundary
+
+Local resolution is practical and intentionally focused. It is **not** trying to be a broad general natural-language engine for arbitrary app surfaces.
+
+That focus is a strength.
+
+## Related pages
+
+- <a href="/docs/concepts/application-graph">Application Graph</a>
+- <a href="/docs/concepts/tier-2-embeddings">Tier 2: Embeddings</a> (the next step before fallback, when local resolution alone comes up short)
+- <a href="/docs/api/register-intent">Cinder.registerIntent</a>
+- <a href="/docs/api/set-context-provider">Cinder.setContextProvider</a>

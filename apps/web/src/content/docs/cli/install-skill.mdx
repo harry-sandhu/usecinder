@@ -1,0 +1,34 @@
+export const meta = {
+  title: 'cinder install-skill',
+  description: 'Install a self-contained Claude Code Skill and an AGENTS.md section, so your coding agent runs the tagging checklist without being told each time.',
+  group: 'CLI',
+  order: 2,
+};
+
+```bash
+npx cinder install-skill [options]
+```
+
+Installs the Cinder Skill into this repo's `.claude/skills/cinder/` (so Claude Code picks it up automatically whenever working in this repo) and adds a short section to `AGENTS.md` (a convention several coding agents already read) pointing at the same checklist - so an agent working here knows to run it after adding new UI, without being told each time.
+
+## Options
+
+| Option | Default | Description |
+| --- | --- | --- |
+| `--target <dir>` | current directory | Repo root to install into. |
+| `--force` | off | Overwrite an existing, different `.claude/skills/cinder/SKILL.md`. |
+
+## What it never does
+
+- Without `--force`, a different existing `SKILL.md` is left alone - never silently overwritten.
+- An `AGENTS.md` that already has a Cinder section (found by its own marker, not guessed) is **always** left untouched, regardless of `--force`. Edit it directly if you need to change that section.
+
+## What gets installed
+
+- `.claude/skills/cinder/SKILL.md` - a self-contained skill (it doesn't rely on this repo's own internal prompt docs, since a third-party repo won't have those).
+- A marker-delimited section appended to `AGENTS.md`, so re-running this command is always safe to repeat.
+
+## Related
+
+- <a href="/docs/cli/integrate">cinder integrate</a>
+- The agent-fetchable onboarding entry point at `/get-started/prompt.md` runs this command as its last step - see <a href="/docs/get-started">Agent Onboarding</a>.

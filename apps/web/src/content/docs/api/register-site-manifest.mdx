@@ -1,0 +1,53 @@
+export const meta = {
+  title: 'Cinder.registerSiteManifest',
+  description: 'Register a higher-level site manifest so Cinder can derive cold graph structure without hand-building low-level graph nodes.',
+  group: 'API Reference',
+  order: 10.42,
+  navTitle: 'Cinder.registerSiteManifest',
+};
+
+Use `registerSiteManifest()` when your app can declare routes, groups, and nested semantic nodes in a high-level manifest shape.
+
+## Example
+
+```ts
+Cinder.registerSiteManifest({
+  id: 'docs-site',
+  routes: [
+    {
+      key: 'docs-quick-start',
+      path: '/docs/quick-start',
+      title: 'Quick Start',
+      aliases: ['quick start', 'getting started'],
+      nodes: [
+        {
+          type: 'context',
+          key: 'page',
+          label: 'Quick Start Page',
+          children: [
+            {
+              type: 'output',
+              key: 'first-win',
+              label: 'First Win',
+            },
+          ],
+        },
+      ],
+    },
+  ],
+});
+```
+
+## Why use it
+
+Use a site manifest when:
+
+- the app can describe whole-site structure outside the current DOM
+- you want more convenience than `registerColdGraph()`
+- you want Cinder to compile route/page/group declarations into a cold graph for you
+
+## Related pages
+
+- <a href="/docs/api/unregister-site-manifest">Cinder.unregisterSiteManifest</a>
+- <a href="/docs/api/get-site-manifests">Cinder.getSiteManifests</a>
+- <a href="/docs/api/register-cold-graph">Cinder.registerColdGraph</a>

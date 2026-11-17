@@ -1,0 +1,34 @@
+export const meta = {
+  title: 'Cinder.graph',
+  description: 'Read the current graph snapshot after the application surface has been scanned.',
+  group: 'API Reference',
+  order: 4,
+  navTitle: 'Cinder.graph',
+};
+
+`graph()` returns the current semantic application graph snapshot.
+
+## Example
+
+```ts
+const graph = Cinder.graph();
+console.log(graph.nodes, graph.edges, graph.indexes, graph.runtime, graph.meta);
+```
+
+## What it contains
+
+The graph snapshot includes:
+
+- `nodes`
+- `edges`
+- `indexes`
+- `runtime`
+- `meta`
+
+## Use it for
+
+- debugging scan results
+- inspecting route and context scoping
+- checking active route and active context state
+- understanding how local resolution sees the app
+- inspecting scan timing and mutation rescan metadata

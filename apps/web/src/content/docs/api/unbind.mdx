@@ -1,0 +1,36 @@
+export const meta = {
+  title: 'Cinder.unbind',
+  description: 'Remove a previously registered binding handler from the runtime.',
+  group: 'API Reference',
+  order: 10.1,
+  navTitle: 'Cinder.unbind',
+};
+
+Use `unbind()` when a route, action, field, filter, or output binding should no longer be active.
+
+## Example
+
+```ts
+const handler = () => {
+  console.log('search action triggered');
+};
+
+Cinder.bind('action', 'search', handler);
+Cinder.unbind('action', 'search');
+```
+
+## Parameters
+
+- binding type: `route`, `action`, `field`, `filter`, or `output`
+- key: the semantic key that was bound
+
+## When to use it
+
+- cleaning up app-specific integration state
+- replacing one binding strategy with another
+- preventing bindings from surviving longer than the page or feature region they belong to
+
+## Related pages
+
+- <a href="/docs/api/bind">Cinder.bind</a>
+- <a href="/docs/concepts/dispatch-and-feedback">Dispatch and Feedback</a>

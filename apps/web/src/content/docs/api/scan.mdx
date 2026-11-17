@@ -1,0 +1,42 @@
+export const meta = {
+  title: 'Cinder.scan',
+  description: 'Scan a document or parent node for semantic tags and produce normalized scan results.',
+  group: 'API Reference',
+  order: 3,
+  navTitle: 'Cinder.scan',
+};
+
+`scan()` is how the runtime discovers semantic structure in the DOM and refreshes the current graph snapshot.
+
+## Example
+
+```ts
+const scanResult = await Cinder.scan(document);
+console.log(scanResult.entries, scanResult.warnings, scanResult.summary);
+```
+
+## Why it matters
+
+The scan result is the bridge between tagged UI and graph construction.
+
+## Root parameter
+
+You can pass a document or a parent node when you want to limit scanning to a smaller surface.
+
+## What to inspect
+
+Check:
+
+- `entries`
+- `warnings`
+- `summary`
+- route/context assignment
+- the refreshed `Cinder.graph()` output right after scan
+
+## Practical timing note
+
+<Callout variant="info" title="Scan after the UI exists">
+  If the page has not rendered its tagged surface yet, the scan result will be incomplete. In most integrations, scan after the real semantic UI is present.
+</Callout>
+
+If mutation observation is enabled, later DOM changes can also trigger rescans automatically.

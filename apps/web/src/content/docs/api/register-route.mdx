@@ -1,0 +1,52 @@
+export const meta = {
+  title: 'Cinder.registerRoute',
+  description: 'Register explicit route activation and active-state behavior for a semantic route key.',
+  group: 'API Reference',
+  order: 10.2,
+  navTitle: 'Cinder.registerRoute',
+};
+
+Use `registerRoute()` when a tagged route needs explicit navigation or active-state logic beyond standard anchor, selector, or path metadata.
+
+## Example
+
+```ts
+Cinder.registerRoute({
+  key: 'reports',
+  path: '/reports',
+  navigate: () => router.navigate('/reports'),
+  isActive: () => window.location.pathname === '/reports',
+});
+```
+
+## Route definition shape
+
+```ts
+{
+  key: string;
+  path?: string;
+  selector?: string;
+  aliases?: string[];
+  navigate?: () => void | Promise<void>;
+  isActive?: () => boolean;
+}
+```
+
+## When to use it
+
+Use route registration when:
+
+- route activation is not just an anchor click
+- your router needs explicit app-side navigation
+- active-state logic is more complex than path or `aria-current` hints
+- you want aliases or selector hints attached to a route definition directly
+
+## Tag-only note
+
+You do **not** need route registration for every app. Standard anchor/path-based navigation should still work tag-only where the browser surface already exposes enough route information.
+
+## Related pages
+
+- <a href="/docs/api/unregister-route">Cinder.unregisterRoute</a>
+- <a href="/docs/api/get-routes">Cinder.getRoutes</a>
+- <a href="/docs/concepts/dispatch-and-feedback">Dispatch and Feedback</a>

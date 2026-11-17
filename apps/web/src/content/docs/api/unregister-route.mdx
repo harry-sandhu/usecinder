@@ -1,0 +1,26 @@
+export const meta = {
+  title: 'Cinder.unregisterRoute',
+  description: 'Remove a registered route definition by semantic route key.',
+  group: 'API Reference',
+  order: 10.3,
+  navTitle: 'Cinder.unregisterRoute',
+};
+
+Use `unregisterRoute()` to remove a previously registered route definition.
+
+## Example
+
+```ts
+Cinder.unregisterRoute('reports');
+```
+
+## When to use it
+
+- cleaning up SPA integration state
+- swapping route definitions dynamically
+- removing temporary route hooks in tests or embedded surfaces
+
+## Related pages
+
+- <a href="/docs/api/register-route">Cinder.registerRoute</a>
+- <a href="/docs/api/get-routes">Cinder.getRoutes</a>

@@ -1,0 +1,35 @@
+export const meta = {
+  title: 'Cinder.getContext',
+  description: 'Resolve and return the current normalized runtime context from the installed provider.',
+  group: 'API Reference',
+  order: 10.94,
+  navTitle: 'Cinder.getContext',
+};
+
+Use `getContext()` when you want to inspect the current injected runtime context explicitly.
+
+## Example
+
+```ts
+const context = await Cinder.getContext();
+console.log(context);
+```
+
+## What it returns
+
+A promise that resolves to a normalized plain object.
+
+If no provider is installed, it resolves to `{}`.
+
+## Why it helps
+
+Use it for:
+
+- debugging context injection
+- verifying async provider behavior
+- integration tests around context-aware commands
+
+## Related pages
+
+- <a href="/docs/api/set-context-provider">Cinder.setContextProvider</a>
+- <a href="/docs/api/clear-context-provider">Cinder.clearContextProvider</a>

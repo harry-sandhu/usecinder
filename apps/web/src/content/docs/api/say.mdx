@@ -1,0 +1,30 @@
+export const meta = {
+  title: 'Cinder.say',
+  description: 'Speak text through browser speech synthesis when supported.',
+  group: 'API Reference',
+  order: 10.99,
+  navTitle: 'Cinder.say',
+};
+
+Use `say()` when you want explicit speech synthesis outside the full reflex pipeline.
+
+## Example
+
+```ts
+const spoken = Cinder.say('Reports are ready.');
+console.log(spoken);
+```
+
+## What it returns
+
+- `true` when browser speech synthesis was available and speech was started
+- `false` when the environment does not support speech synthesis
+
+## Typical use
+
+Most integrations should let `respond()` or `run()` decide when to speak. Use `say()` directly only when you want explicit application-side speech output.
+
+## Related pages
+
+- <a href="/docs/api/respond">Cinder.respond</a>
+- <a href="/docs/api/listen">Cinder.listen</a>

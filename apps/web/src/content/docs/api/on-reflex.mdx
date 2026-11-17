@@ -1,0 +1,40 @@
+export const meta = {
+  title: 'Cinder.onReflex',
+  description: 'Subscribe to reflex results emitted by the response layer.',
+  group: 'API Reference',
+  order: 10.97,
+  navTitle: 'Cinder.onReflex',
+};
+
+Use `onReflex()` when you want to observe or augment user-facing response behavior after a command completes.
+
+## Example
+
+```ts
+Cinder.onReflex((result) => {
+  console.log(result.kind, result.message);
+});
+```
+
+## What the handler receives
+
+A `CinderReflexResult` containing:
+
+- `ok`
+- `kind`
+- `message`
+- `spoken`
+- `intent`
+- optional `dispatch`
+
+## When to use it
+
+- analytics or logging
+- custom UI notifications
+- integration tests
+- application-side reaction to reflex outcomes
+
+## Related pages
+
+- <a href="/docs/api/off-reflex">Cinder.offReflex</a>
+- <a href="/docs/api/respond">Cinder.respond</a>

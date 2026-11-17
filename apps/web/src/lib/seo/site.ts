@@ -1,0 +1,7 @@
+export const SITE_NAME = 'Cinder';
+export const SITE_DESCRIPTION = 'Cinder is a semantic runtime for applications with semantic tags, local-first graph-based resolution, and optional hybrid fallback.';
+export const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://usecinder.dev').replace(/\/$/, '');
+export const SITE_OG_IMAGE = '/og-image.svg';
+export const SITE_GITHUB_URL = 'https://github.com/harry-sandhu/usecinder';
+export const SITE_THEME_COLOR_LIGHT = '#2563eb';
+export const SITE_THEME_COLOR_DARK = '#020617';

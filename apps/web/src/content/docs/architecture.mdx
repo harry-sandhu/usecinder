@@ -1,0 +1,249 @@
+export const meta = {
+  title: 'Architecture',
+  description: 'Understand the full path from semantic tags to scan, graph, planners, dispatch, and optional bounded fallback.',
+  group: 'Reference',
+  order: 0,
+};
+
+<Badge tone="brand">Local first</Badge>
+
+Cinder is a semantic runtime for websites you control. The browser runtime is the product core. The optional server exists to help only when local understanding is unknown or weak.
+
+## The real runtime flow
+
+At a high level, the browser runtime now does this:
+
+1. scan semantic tags from the DOM
+2. build a scoped application graph
+3. resolve active route and active context
+4. normalize input and run local planners
+5. dispatch the resulting steps into the app
+6. produce reflex feedback
+7. optionally attempt bounded fallback only when local resolution is not enough
+
+## Core product rule
+
+<Callout variant="tip" title="Deterministic first">
+  Use semantic structure, graph state, route/context awareness, and local planners first. Known commands should not depend on cloud inference when the app already contains enough structure to act locally.
+</Callout>
+
+## Main layers
+
+### CSR — Cinder Semantic Runtime
+The runtime owns configuration, scanning, graph refresh, local execution, speech integration, fallback wiring, and public SDK methods.
+
+### Semantic scan
+Tagged DOM becomes normalized semantic entries with metadata such as:
+
+- route hints
+- context ancestry
+- labels and placeholders
+- submit/control hints
+- selector hints
+- path hints
+
+### CAG — Cinder Application Graph
+Scan results become scoped graph nodes and edges.
+
+The graph is now responsible for:
+
+- unique scoped node identity
+- route/context relationships
+- indexes by type, route, and context
+- runtime state such as active route, active context, focused node, and selections
+
+### CGE — Cinder Graph Query Engine
+Graph queries now use:
+
+- key and alias indexing
+- active-subgraph-first narrowing
+- scoped preference scoring
+- snapshot-level candidate caching
+
+### CIE — Cinder Intent Engine
+Local resolution now runs through planner modules rather than one monolithic resolver.
+
+That includes planners for:
+
+- navigation
+- actions
+- outputs
+- fields and filters
+- composite flows
+
+It also supports:
+
+- custom intent matchers
+- graph-aware ambiguity handling
+- runtime context injection
+- explicit domain presets instead of hidden domain logic in the core
+
+### Dispatcher
+Dispatch turns structured steps into actual app behavior through:
+
+- registered route activators
+- standard DOM navigation
+- native field/filter updates
+- form submit behavior
+- action clicks
+- output reveal/focus flows
+- optional DOM adapters
+- optional bindings
+
+### CRE — Reflex engine
+The reflex layer turns execution results into deterministic user-facing feedback.
+
+## Runtime state matters now
+
+The runtime is no longer just “scan then click.”
+It uses active state materially.
+
+Important runtime state includes:
+
+- `activeRouteId`
+- `activeContextId`
+- `focusedNodeId`
+- runtime selections
+- injected runtime context
+
+This state affects:
+
+- candidate scoring
+- ambiguity handling
+- fallback request context
+- dispatch updates after actions complete
+
+## Route and context awareness
+
+Cinder now resolves active route and context more honestly.
+
+That can use:
+
+- location/path matching
+- route metadata hints
+- `aria-current`
+- visible route/context heuristics
+- focused element ancestry
+- previous active-state bias where appropriate
+
+This is one of the reasons repeated app structures are now much safer than the earlier MVP.
+
+## Ambiguity behavior
+
+A key architectural rule is:
+
+> ambiguous duplicates should degrade safely, not silently choose the first match.
+
+That applies to both:
+
+- local planner selection
+- cloud fallback normalization
+
+This matters whenever the app has repeated structures like:
+
+- `filters`
+- `toolbar`
+- `details`
+- repeated `save` actions
+- repeated `price` outputs
+
+## Fallback role in the architecture
+
+Fallback is explicitly secondary.
+
+### When fallback can happen
+
+Fallback is only considered when:
+
+- AI is enabled
+- mode allows fallback
+- endpoint exists
+- local result is unknown or low-confidence
+
+### What fallback sends
+
+The client sends normalized request data including:
+
+- input text
+- runtime context
+- active route and context
+- graph summary
+- runtime selections
+
+### What fallback returns
+
+The response must still normalize back into the same local execution model:
+
+- structured intent
+- structured steps when needed
+- real graph grounding
+- safe ambiguity handling
+
+### What fallback now guarantees
+
+Fallback transport is now bounded and observable through:
+
+- timeout
+- error classification
+- provider metadata
+- auth mode
+- normalized/unusable result state
+- `fallback:start` and `fallback:end` runtime events
+
+## Extension points are part of the architecture
+
+The current SDK now has real first-class extension points:
+
+- route registry
+- DOM adapter registry
+- custom intent matcher registry
+- runtime context provider
+- runtime event bus
+- speech hooks
+- reflex hooks
+
+These are important because they keep app-specific behavior explicit instead of leaking domain assumptions into the SDK core.
+
+## Failure handling philosophy
+
+The hardened runtime follows a simple rule:
+
+> fail clearly, preserve scope, and avoid silent wrong execution.
+
+That means:
+
+- duplicate scope collisions are not tolerated
+- ambiguous local targets degrade to clarification
+- ambiguous cloud targets are rejected
+- extension callback failures are isolated
+- mutation churn is backpressured
+- cross-realm DOM access is safer
+
+## What this architecture is good at
+
+It is strongest for:
+
+- dashboards
+- admin tools
+- structured forms
+- search/filter/result flows
+- multi-route internal apps
+- websites where developers can add semantic tags intentionally
+
+## What this architecture is not trying to be
+
+It is not trying to be:
+
+- a universal web agent for arbitrary pages
+- a prompt-only automation layer
+- a hidden domain rules engine pretending to be generic
+
+That focus is one of the strengths of the architecture.
+
+## Good next pages
+
+<CardGrid>
+  <PageLinkCard href="/docs/concepts/application-graph" title="Application Graph" description="Go deeper into graph nodes, indexes, route/context scoping, and why graph structure powers local understanding." />
+  <PageLinkCard href="/docs/concepts/local-resolution" title="Local Resolution" description="See how planners, graph queries, active state, and ambiguity handling now work before fallback is even considered." />
+  <PageLinkCard href="/docs/concepts/ai-fallback" title="AI Fallback" description="Understand the current bounded fallback model, transport telemetry, and normalization responsibilities." />
+</CardGrid>

@@ -1,0 +1,30 @@
+export const meta = {
+  title: 'Cinder.getColdGraphs',
+  description: 'Inspect the currently registered cold-graph catalogs that feed the hybrid graph.',
+  group: 'API Reference',
+  order: 10.47,
+  navTitle: 'Cinder.getColdGraphs',
+};
+
+Use `getColdGraphs()` when you want to inspect what durable graph catalogs are currently registered.
+
+## Example
+
+```ts
+const catalogs = Cinder.getColdGraphs();
+console.log(catalogs.map((catalog) => catalog.id));
+```
+
+## Why it helps
+
+This is useful for:
+
+- debugging hybrid graph setup
+- verifying whole-site semantic catalogs were registered
+- integration tests
+- runtime inspection in dogfooding environments
+
+## Related pages
+
+- <a href="/docs/api/register-cold-graph">Cinder.registerColdGraph</a>
+- <a href="/docs/api/unregister-cold-graph">Cinder.unregisterColdGraph</a>

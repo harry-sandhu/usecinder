@@ -1,0 +1,43 @@
+export const meta = {
+  title: 'Cinder.setLlmCore',
+  description: 'Swap the single installed llm-core slot that run() escalates to when local resolution is unknown or low-confidence.',
+  group: 'API Reference',
+  order: 16,
+  navTitle: 'Cinder.setLlmCore',
+};
+
+Use `setLlmCore()` when the default built-in HTTP fallback core isn't the right fit - for example, a client-side embedding model, a chain of local-then-cloud cores, or a custom provider integration.
+
+## Example
+
+```ts
+Cinder.setLlmCore({
+  async infer(input, localIntent, snapshot, config, runtimeContext) {
+    // Your own resolution logic - return undefined to decline and let the
+    // existing fallback/decline behavior apply instead.
+    return undefined;
+  },
+});
+```
+
+## The `requiresNetwork` option
+
+```ts
+Cinder.setLlmCore(myLocalEmbeddingCore, { requiresNetwork: false });
+```
+
+`requiresNetwork` defaults to `true` - the safe default. A core that doesn't explicitly declare itself local-safe follows the exact same `ai.mode`/`endpoint` gating the built-in HTTP core always has, so installing an unmarked custom core can never accidentally make `ai.mode: 'local'` start reaching the network.
+
+Pass `{ requiresNetwork: false }` only when your core genuinely makes no network call (e.g. a local embedding model) - doing so lets it run even in `ai.mode: 'local'` and without an `endpoint` configured, since there's nothing network-related to gate.
+
+## Important behavior
+
+- Only one llm-core is installed at a time - calling `setLlmCore()` again replaces the previous one.
+- The installed core runs when either the existing network-fallback conditions are met (`ai.enabled`, `ai.mode !== 'local'`, an `endpoint` configured), **or** the core declared itself local-safe via `requiresNetwork: false`.
+- Returning `undefined` from `infer()` means "decline" - the same behavior as the built-in core finding no fallback result.
+
+## Related pages
+
+- <a href="/docs/api/reset-llm-core">Cinder.resetLlmCore</a>
+- <a href="/docs/concepts/ai-fallback">AI Fallback</a>
+- <a href="/docs/api/run">Cinder.run</a>

@@ -1,0 +1,42 @@
+export const meta = {
+  title: 'Using Route Registry',
+  description: 'Add explicit route activation and active-state behavior when standard anchor or path hints are not enough.',
+  group: 'Guides',
+  order: 7,
+};
+
+Use the route registry when route activation needs explicit application-side logic.
+
+## Typical example
+
+```ts
+Cinder.registerRoute({
+  key: 'reports',
+  path: '/reports',
+  navigate: () => router.navigate('/reports'),
+  isActive: () => window.location.pathname === '/reports',
+});
+```
+
+## When to use it
+
+Use route registration when:
+
+- your router is not driven by standard anchors
+- route activation should call framework navigation directly
+- active-state detection needs application-specific logic
+- path or selector hints alone are not enough
+
+## When not to use it
+
+If a tagged route already has enough standard DOM information, prefer tag-only behavior first:
+
+- anchors with `href`
+- `data-cinder-path`
+- `data-cinder-route-selector`
+- `aria-current`
+
+## Related pages
+
+- <a href="/docs/api/register-route">Cinder.registerRoute</a>
+- <a href="/docs/api/get-routes">Cinder.getRoutes</a>

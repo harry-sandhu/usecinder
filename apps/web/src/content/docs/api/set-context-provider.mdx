@@ -1,0 +1,40 @@
+export const meta = {
+  title: 'Cinder.setContextProvider',
+  description: 'Register a runtime context provider so local resolution and fallback can use application state explicitly.',
+  group: 'API Reference',
+  order: 10.92,
+  navTitle: 'Cinder.setContextProvider',
+};
+
+Use `setContextProvider()` when command resolution needs explicit app state that does not live in semantic tags alone.
+
+## Example
+
+```ts
+Cinder.setContextProvider(() => ({
+  accountId: currentAccount.id,
+  region: currentRegion,
+}));
+```
+
+You can also return a promise:
+
+```ts
+Cinder.setContextProvider(async () => {
+  return {
+    accountId: await getSelectedAccountId(),
+  };
+});
+```
+
+## Important behavior
+
+- `resolve()` uses a synchronous provider result when available, otherwise it uses cached context
+- `run()` awaits fresh async context before local resolution happens
+- fallback requests can also include the injected runtime context
+
+## Related pages
+
+- <a href="/docs/api/clear-context-provider">Cinder.clearContextProvider</a>
+- <a href="/docs/api/get-context">Cinder.getContext</a>
+- <a href="/docs/concepts/local-resolution">Local Resolution</a>

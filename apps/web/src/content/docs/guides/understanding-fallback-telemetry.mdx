@@ -1,0 +1,57 @@
+export const meta = {
+  title: 'Understanding Fallback Telemetry',
+  description: 'Inspect fallback reasons, timeout/error classification, and usable vs unusable normalized results.',
+  group: 'Guides',
+  order: 11,
+};
+
+Fallback should be observable, not mysterious.
+
+## Subscribe to fallback events
+
+```ts
+Cinder.on('fallback:start', (payload) => {
+  console.log(payload.reason, payload.provider, payload.timeoutMs);
+});
+
+Cinder.on('fallback:end', (payload) => {
+  console.log(payload.errorCode, payload.used, payload.latencyMs);
+});
+```
+
+## What to inspect
+
+### `fallback:start`
+
+Look at:
+
+- `reason`
+- `provider`
+- `authMode`
+- `timeoutMs`
+
+### `fallback:end`
+
+Look at:
+
+- `used`
+- `normalized`
+- `errorCode`
+- `statusCode`
+- `latencyMs`
+- `errorMessage`
+
+## Why this matters
+
+Telemetry helps you tell the difference between:
+
+- local unknowns
+- provider/network failures
+- timeout failures
+- invalid provider responses
+- normalization failures against the real graph
+
+## Related pages
+
+- <a href="/docs/api/on">Cinder.on</a>
+- <a href="/docs/concepts/ai-fallback">AI Fallback</a>

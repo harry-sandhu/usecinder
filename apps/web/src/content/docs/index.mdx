@@ -1,0 +1,107 @@
+export const meta = {
+  title: 'Cinder documentation',
+  description: 'Start here for installation, quick start, semantic tags, architecture, and the real local-first SDK path.',
+  group: 'Getting Started',
+  order: 0,
+  navTitle: 'Docs Home',
+};
+
+<Badge tone="brand">Websites you control</Badge>
+
+Cinder is a semantic runtime for websites you control. These docs are organized to get you from first install to first real command flow as quickly as possible.
+
+## Start with the shortest useful path
+
+If you are evaluating the SDK, start here first.
+
+<CardGrid>
+  <PageLinkCard
+    href="/docs/installation"
+    title="Installation"
+    description="Install the browser SDK, use a local-first configuration, and add the server package only if you want bounded fallback."
+  />
+  <PageLinkCard
+    href="/docs/quick-start"
+    title="Quick Start"
+    description="Tag one route, scan the page, inspect the graph, and run a first command through the full runtime path."
+  />
+  <PageLinkCard
+    href="/docs/concepts/semantic-tags"
+    title="Semantic Tags"
+    description="Learn the V1 tag system that gives the runtime stable application meaning instead of prompt glue."
+  />
+  <PageLinkCard
+    href="/docs/concepts/application-graph"
+    title="Application Graph"
+    description="See how semantic scan results become scoped graph nodes, indexes, and runtime state used by local reasoning."
+  />
+  <PageLinkCard
+    href="/docs/api"
+    title="API Overview"
+    description="Browse the public SDK surface for scan, graph, run, speech, extension points, and lifecycle control."
+  />
+  <PageLinkCard
+    href="/docs/architecture"
+    title="Architecture"
+    description="Understand the full flow from semantic tags to graph, planners, DOM execution, and optional fallback."
+  />
+</CardGrid>
+
+## Beyond the core SDK
+
+<CardGrid>
+  <PageLinkCard
+    href="/docs/relay"
+    title="Relay Overview"
+    description="A hosted, metered tier-3 proxy - tier 1 and tier 2 stay free, tier 3 AI fallback is usage-based."
+  />
+  <PageLinkCard
+    href="/docs/cli"
+    title="CLI Overview"
+    description="Crawl a real running app, audit every page for tagging gaps, and teach your coding agent to keep up."
+  />
+  <PageLinkCard
+    href="/docs/get-started"
+    title="Agent Onboarding"
+    description="A single, agent-fetchable prompt that installs, tags, audits, and verifies Cinder end to end."
+  />
+</CardGrid>
+
+## Recommended reading paths
+
+Choose the path that matches your immediate goal.
+
+<CardGrid>
+  <Card title="I want a first working integration">
+    <p>Read <a href="/docs/installation">Installation</a>, <a href="/docs/quick-start">Quick Start</a>, and <a href="/docs/guides/tagging-a-page">Tagging a Page</a>.</p>
+  </Card>
+  <Card title="I want to understand how it works">
+    <p>Read <a href="/docs/concepts/semantic-tags">Semantic Tags</a>, <a href="/docs/concepts/application-graph">Application Graph</a>, <a href="/docs/concepts/local-resolution">Local Resolution</a>, and <a href="/docs/architecture">Architecture</a>.</p>
+  </Card>
+  <Card title="I need to debug or extend it">
+    <p>Read <a href="/docs/guides/debugging">Debugging</a>, <a href="/docs/api">API Overview</a>, and <a href="/docs/concepts/dispatch-and-feedback">Dispatch and Feedback</a>.</p>
+  </Card>
+</CardGrid>
+
+## What the docs assume
+
+<Callout variant="tip" title="The core product promise">
+  These docs assume the V1 promise is: install Cinder, tag a website you control, resolve common navigation/action/field/output flows locally, and use custom bindings or adapters only when the standard DOM path is not enough.
+</Callout>
+
+## What is true about the current SDK
+
+- the browser runtime is the product core
+- semantic tags and graph structure are primary, not prompt tricks
+- local-first resolution is the default path
+- fallback is optional, bounded, and secondary
+- ambiguity is handled more honestly than earlier MVP versions
+- extension points now exist for routes, DOM adapters, custom intents, runtime context, and runtime events
+
+## Suggested next pages
+
+1. <a href="/docs/installation">Installation</a>
+2. <a href="/docs/quick-start">Quick Start</a>
+3. <a href="/docs/concepts/semantic-tags">Semantic Tags</a>
+4. <a href="/docs/guides/scanning-the-app">Scanning the App</a>
+5. <a href="/docs/api/run">Cinder.run</a>

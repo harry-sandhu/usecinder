@@ -1,0 +1,28 @@
+export const meta = {
+  title: 'Cinder.off',
+  description: 'Unsubscribe a previously registered runtime event handler.',
+  group: 'API Reference',
+  order: 10.96,
+  navTitle: 'Cinder.off',
+};
+
+Use `off()` to remove a runtime event handler that was previously registered with `Cinder.on()`.
+
+## Example
+
+```ts
+const handler = (payload) => {
+  console.log(payload);
+};
+
+Cinder.on('dispatch:end', handler);
+Cinder.off('dispatch:end', handler);
+```
+
+## Important note
+
+Pass the same handler reference you originally registered.
+
+## Related pages
+
+- <a href="/docs/api/on">Cinder.on</a>

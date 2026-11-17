@@ -1,0 +1,16 @@
+export const meta = {
+  title: 'Cinder.speechStatus',
+  description: 'Read the current state of the browser speech engine surface.',
+  group: 'API Reference',
+  order: 13,
+  navTitle: 'Cinder.speechStatus',
+};
+
+Use `speechStatus()` to inspect listening or unsupported states.
+
+## Example
+
+```ts
+const status = Cinder.speechStatus();
+console.log(status);
+```

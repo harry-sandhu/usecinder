@@ -1,0 +1,35 @@
+export const meta = {
+  title: 'Guides Overview',
+  description: 'Practical guides for tagging, scanning, debugging, extending, speech, and enabling bounded fallback.',
+  group: 'Guides',
+  order: 0,
+  navTitle: 'Overview',
+};
+
+Use the guides section when you already understand the product direction and want practical implementation help.
+
+## Recommended guide order
+
+<CardGrid>
+  <PageLinkCard href="/docs/guides/tagging-a-page" title="Tagging a Page" description="Mark a real UI with route, context, field, filter, action, and output semantics that help local resolution." />
+  <PageLinkCard href="/docs/guides/scanning-the-app" title="Scanning the App" description="Understand when to scan, how mutation observation behaves, and what the runtime discovered." />
+  <PageLinkCard href="/docs/guides/debugging" title="Debugging" description="Inspect scan output, graph state, route/context state, dispatch output, and fallback telemetry in a useful order." />
+</CardGrid>
+
+## Extension and advanced guides
+
+<CardGrid>
+  <PageLinkCard href="/docs/guides/using-route-registry" title="Using Route Registry" description="Add explicit navigation and active-state behavior when anchors and path hints are not enough." />
+  <PageLinkCard href="/docs/guides/using-dom-adapters" title="Using DOM Adapters" description="Handle custom controls and framework widgets when standard DOM execution does not fit." />
+  <PageLinkCard href="/docs/guides/writing-custom-intents" title="Writing Custom Intents" description="Extend local resolution with explicit app-side matchers instead of hiding domain logic in the SDK core." />
+  <PageLinkCard href="/docs/guides/injecting-runtime-context" title="Injecting Runtime Context" description="Pass application state into local resolution and fallback in a deliberate, inspectable way." />
+  <PageLinkCard href="/docs/guides/understanding-fallback-telemetry" title="Understanding Fallback Telemetry" description="Inspect fallback reasons, timeout/error classification, and usable vs unusable normalized results." />
+  <PageLinkCard href="/docs/guides/tag-only-integration-patterns" title="Tag-Only Integration Patterns" description="Prove the product promise on standard browser surfaces before reaching for bindings or adapters." />
+</CardGrid>
+
+## Other guides
+
+- <a href="/docs/guides/binding-actions">Binding Actions</a>
+- <a href="/docs/guides/setting-up-the-server">Setting Up the Server</a>
+- <a href="/docs/guides/using-speech">Using Speech</a>
+- <a href="/docs/guides/auditing-and-enrichment-tools">Auditing and Enrichment Tools</a>

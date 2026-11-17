@@ -1,0 +1,26 @@
+export const meta = {
+  title: 'Cinder.unregisterColdGraph',
+  description: 'Remove a previously registered cold-graph catalog from the runtime.',
+  group: 'API Reference',
+  order: 10.46,
+  navTitle: 'Cinder.unregisterColdGraph',
+};
+
+Use `unregisterColdGraph()` when a cold catalog should no longer participate in hybrid graph construction.
+
+## Example
+
+```ts
+Cinder.unregisterColdGraph('docs-catalog');
+```
+
+## When to use it
+
+- hot-reload or teardown paths
+- feature areas that mount and unmount separately
+- tests that need precise graph setup/cleanup
+
+## Related pages
+
+- <a href="/docs/api/register-cold-graph">Cinder.registerColdGraph</a>
+- <a href="/docs/api/get-cold-graphs">Cinder.getColdGraphs</a>

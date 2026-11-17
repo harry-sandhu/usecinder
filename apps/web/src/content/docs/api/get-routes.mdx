@@ -1,0 +1,31 @@
+export const meta = {
+  title: 'Cinder.getRoutes',
+  description: 'Read the currently registered route definitions from the runtime.',
+  group: 'API Reference',
+  order: 10.4,
+  navTitle: 'Cinder.getRoutes',
+};
+
+Use `getRoutes()` when you want to inspect the current route registry.
+
+## Example
+
+```ts
+const routes = Cinder.getRoutes();
+console.log(routes);
+```
+
+## What it returns
+
+An array of registered `CinderRouteDefinition` values.
+
+This is useful for:
+
+- debugging route activation strategy
+- verifying route registration happened as expected
+- integration tests
+
+## Related pages
+
+- <a href="/docs/api/register-route">Cinder.registerRoute</a>
+- <a href="/docs/api/unregister-route">Cinder.unregisterRoute</a>

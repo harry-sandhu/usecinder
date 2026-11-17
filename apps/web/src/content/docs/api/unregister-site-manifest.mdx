@@ -1,0 +1,20 @@
+export const meta = {
+  title: 'Cinder.unregisterSiteManifest',
+  description: 'Remove a previously registered site manifest from the runtime.',
+  group: 'API Reference',
+  order: 10.43,
+  navTitle: 'Cinder.unregisterSiteManifest',
+};
+
+Use `unregisterSiteManifest()` when a high-level site manifest should stop contributing cold graph structure.
+
+## Example
+
+```ts
+Cinder.unregisterSiteManifest('docs-site');
+```
+
+## Related pages
+
+- <a href="/docs/api/register-site-manifest">Cinder.registerSiteManifest</a>
+- <a href="/docs/api/get-site-manifests">Cinder.getSiteManifests</a>

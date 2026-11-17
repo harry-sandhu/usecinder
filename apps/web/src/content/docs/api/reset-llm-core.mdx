@@ -1,0 +1,22 @@
+export const meta = {
+  title: 'Cinder.resetLlmCore',
+  description: 'Restore the default built-in HTTP llm core, undoing a prior setLlmCore() call.',
+  group: 'API Reference',
+  order: 16.1,
+  navTitle: 'Cinder.resetLlmCore',
+};
+
+Use `resetLlmCore()` to undo a `setLlmCore()` call and go back to the default behavior.
+
+## Example
+
+```ts
+Cinder.resetLlmCore();
+```
+
+This restores the built-in HTTP fallback core and resets `requiresNetwork` back to its default (`true`) - the exact state the runtime starts in before any `setLlmCore()` call.
+
+## Related pages
+
+- <a href="/docs/api/set-llm-core">Cinder.setLlmCore</a>
+- <a href="/docs/concepts/ai-fallback">AI Fallback</a>

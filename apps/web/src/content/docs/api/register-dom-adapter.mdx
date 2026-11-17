@@ -1,0 +1,60 @@
+export const meta = {
+  title: 'Cinder.registerDomAdapter',
+  description: 'Register a DOM adapter for custom controls or execution paths that are not covered well by standard browser behavior.',
+  group: 'API Reference',
+  order: 10.5,
+  navTitle: 'Cinder.registerDomAdapter',
+};
+
+Use `registerDomAdapter()` when a custom widget cannot be handled reliably through standard DOM execution.
+
+## Example
+
+```ts
+Cinder.registerDomAdapter({
+  id: 'custom-combobox',
+  match(context) {
+    return context.element.getAttribute('role') === 'combobox';
+  },
+  execute(context) {
+    context.element.dispatchEvent(new Event('click', { bubbles: true }));
+    return true;
+  },
+});
+```
+
+## Adapter shape
+
+```ts
+{
+  id: string;
+  match(context): boolean;
+  execute(context): boolean | Promise<boolean>;
+}
+```
+
+The adapter context includes:
+
+- `intent`
+- `step`
+- `snapshot`
+- `node`
+- `element`
+- `root`
+
+## When to use it
+
+- framework-specific inputs
+- headless UI components
+- custom comboboxes, menus, or toggles
+- any surface where tag-only standard DOM behavior is not enough
+
+## Safety note
+
+Adapter failures are isolated by the runtime and returned as dispatch errors instead of crashing the pipeline.
+
+## Related pages
+
+- <a href="/docs/api/unregister-dom-adapter">Cinder.unregisterDomAdapter</a>
+- <a href="/docs/api/get-dom-adapters">Cinder.getDomAdapters</a>
+- <a href="/docs/concepts/dispatch-and-feedback">Dispatch and Feedback</a>

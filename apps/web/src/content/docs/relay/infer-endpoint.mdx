@@ -1,0 +1,56 @@
+export const meta = {
+  title: 'Relay Infer Endpoint',
+  description: 'The actual metered tier-3 call - request shape, the end-user key header, and exactly what gets billed.',
+  group: 'Relay',
+  order: 3,
+};
+
+This is the endpoint your app's Cinder config points at for tier-3 fallback, once you have a project's `apiKey`.
+
+## Endpoint
+
+```http
+POST /v1/relay/infer
+Authorization: Bearer <project apiKey>
+Content-Type: application/json
+```
+
+The request body is the same normalized fallback shape `@cinder/server`'s own `/v1/llm/infer` accepts - see the [Server Infer Endpoint](/docs/server/infer-endpoint) docs for the full shape.
+
+## Order of operations
+
+Before spending anything on a real provider call, Relay:
+
+1. Resolves the project from the `apiKey`.
+2. Checks the project's balance is positive. **A project at zero balance never reaches the provider at all - not even once.**
+3. Only then runs the real call, then charges for exactly what it cost.
+
+A failed provider call is never billed - you don't pay for an error.
+
+## If the project's keyPolicy is "end_user"
+
+Pass the end user's own provider key with each request - it is never stored:
+
+```http
+POST /v1/relay/infer
+Authorization: Bearer <project apiKey>
+x-end-user-ai-key: sk-ant-...
+Content-Type: application/json
+
+{ "text": "...", "graph": { "routes": ["..."] } }
+```
+
+Omitting this header on an `end_user`-policy project is rejected with `400`, not silently resolved some other way.
+
+## Response
+
+```json
+{
+  "intent": "navigate",
+  "target": "loans-overdue",
+  "confidence": 0.9,
+  "_relay": { "estimatedCostCents": 0.01, "balanceCents": 449.99 }
+}
+```
+
+The `_relay` field is Relay's own addition on top of the normal infer response - your app can ignore it, or surface the running balance to a user if that's useful.

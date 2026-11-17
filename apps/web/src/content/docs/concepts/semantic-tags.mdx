@@ -1,0 +1,144 @@
+export const meta = {
+  title: 'Semantic Tags',
+  description: 'Cinder learns the application from explicit semantic structure in the UI.',
+  group: 'Concepts',
+  order: 1,
+};
+
+<Badge tone="brand">Core concept</Badge>
+
+Semantic tags are the foundation of the runtime. They let developers describe application meaning directly instead of building fragile prompt glue or one-off command maps for every surface.
+
+## Why tags exist
+
+The runtime needs stable semantic structure to understand:
+
+- where a user is
+- which route is active
+- which controls belong together
+- which actions operate inside which context
+- which outputs matter in the current region
+
+That structure becomes the base for local-first resolution.
+
+## V1 tag set
+
+| Tag | Purpose | Typical usage |
+| --- | --- | --- |
+| `cinder-route` | navigation destination | page, screen, tab |
+| `cinder-context` | semantic boundary | form, section, workflow region |
+| `cinder-entity` | business-domain entity | crop, farmer, invoice |
+| `cinder-field` | editable/readable field | input, select, textarea |
+| `cinder-filter` | query narrowing control | dropdown filter, date filter |
+| `cinder-action` | executable action | button, menu item |
+| `cinder-output` | result surface | summary, result region, metric |
+| `cinder-data` | data surface or dataset | list, table, data block |
+
+## Choosing good keys
+
+Use keys that are:
+
+- short
+- stable
+- lowercase
+- domain meaningful
+- reusable across UI refactors
+
+Good examples:
+
+- `reports`
+- `crop-prices`
+- `search`
+- `district`
+- `price`
+
+Bad examples:
+
+- `green-button`
+- `component-4`
+- `left-panel`
+- `select-2`
+
+<Callout variant="warning" title="Meaning over styling">
+  Tag values should describe business meaning, not presentation details, CSS classes, or implementation accidents.
+</Callout>
+
+## Tag routes and contexts first
+
+The highest-value structure usually starts with route and context boundaries.
+
+```html
+<section cinder-route="reports" data-cinder-path="/reports">
+  <div cinder-context="crop-prices">
+    ...
+  </div>
+</section>
+```
+
+### Why this matters
+
+Routes and contexts give the runtime:
+
+- navigation targets
+- active route/context reasoning
+- scoped candidate ranking
+- safer duplicate handling across repeated app regions
+
+## Add controls and outputs inside the right context
+
+```html
+<section cinder-route="reports" data-cinder-path="/reports">
+  <div cinder-context="crop-prices">
+    <label for="crop-filter">Crop</label>
+    <select id="crop-filter" cinder-filter="crop"></select>
+
+    <button cinder-action="search">Search</button>
+    <div tabindex="0" cinder-output="price"></div>
+  </div>
+</section>
+```
+
+## Useful metadata hints
+
+The current scanner also uses practical metadata when present, such as:
+
+- `href`
+- `data-cinder-path`
+- `data-cinder-route-selector`
+- `aria-current`
+- `aria-label`
+- `placeholder`
+- `data-cinder-submit`
+- `data-cinder-control`
+- `data-cinder-option-selector`
+
+These help route activation, labeling, and DOM execution without changing the core tag set.
+
+## Practical rules
+
+- tag semantically important surfaces, not every element
+- keep the first integration small and inspectable
+- use `cinder-context` to create meaningful boundaries
+- use `cinder-filter` for query/result narrowing, not record editing
+- use `cinder-field` for values the user directly sets or reads
+- prefer one clear output over many vague output surfaces in the same region
+
+## Common mistakes
+
+- tagging visual wrappers instead of meaningful app regions
+- reusing vague keys like `panel` or `button`
+- forgetting route or context boundaries on repeated structures
+- expecting a route container to navigate without anchor/path/route registry help
+- using bindings to mask weak tagging instead of improving the semantic surface first
+
+## What tags unlock
+
+Once the app surface is tagged, Cinder can:
+
+- scan the DOM into semantic records
+- build the application graph
+- resolve active route and context more honestly
+- rank candidates locally with scoped graph reasoning
+- dispatch many common flows without app-specific bindings
+
+Next, read <a href="/docs/concepts/application-graph">Application Graph</a> to see how scan results become local graph structure.

@@ -1,0 +1,16 @@
+export const meta = {
+  title: 'Cinder.respond',
+  description: 'Produce reflex output and optionally route it through speech or other response handlers.',
+  group: 'API Reference',
+  order: 8,
+  navTitle: 'Cinder.respond',
+};
+
+`respond()` sits above `feedback()` when you want the response layer to run with its configured output behavior.
+
+## Example
+
+```ts
+const reflex = await Cinder.respond(intent, dispatch);
+console.log(reflex);
+```

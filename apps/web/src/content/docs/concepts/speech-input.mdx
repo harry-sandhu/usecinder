@@ -1,0 +1,57 @@
+export const meta = {
+  title: 'Speech Input',
+  description: 'Browser speech support exists in the runtime, but it should be understood as one input layer over the same local-first execution model.',
+  group: 'Concepts',
+  order: 5,
+};
+
+Cinder includes a browser-first speech layer, but speech is only one way to enter the runtime.
+
+## What speech does
+
+Speech ultimately feeds the same command pipeline used by text input.
+
+That means speech still ends up at:
+
+- local resolution
+- optional fallback
+- dispatch
+- reflex output
+
+## Main speech APIs
+
+- `Cinder.listen()`
+- `Cinder.stopListening()`
+- `Cinder.speechStatus()`
+- `Cinder.onTranscript()`
+- `Cinder.onSpeechError()`
+
+## Honest expectation
+
+<Callout variant="warning" title="Platform dependency">
+  Browser speech depends on Web Speech API availability. For browsers with none at all (Firefox, older Safari), setting `speech.engine: "auto"` with a configured fallback endpoint enables a server-side recording-and-transcription path instead - it reuses the same endpoint text tier-3 fallback already uses, not a separate config surface. It can't stream interim results the way native `SpeechRecognition` can. See <a href="/docs/guides/using-speech">Using Speech</a> for setup.
+</Callout>
+
+## Why text still matters
+
+Text commands remain first-class because they are useful for:
+
+- unsupported browsers
+- testing and debugging
+- command palettes
+- explicit application command bars
+- reproducible integration checks
+
+## Practical usage pattern
+
+A common flow is:
+
+1. start listening
+2. observe final transcripts
+3. auto-run them or handle them manually
+4. fall back to text whenever the browser does not support speech cleanly
+
+## Related pages
+
+- <a href="/docs/guides/using-speech">Using Speech</a>
+- <a href="/docs/api/listen">Cinder.listen</a>

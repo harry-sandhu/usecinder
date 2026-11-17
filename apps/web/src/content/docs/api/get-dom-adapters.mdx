@@ -1,0 +1,29 @@
+export const meta = {
+  title: 'Cinder.getDomAdapters',
+  description: 'Inspect the DOM adapters currently registered with the runtime.',
+  group: 'API Reference',
+  order: 10.7,
+  navTitle: 'Cinder.getDomAdapters',
+};
+
+Use `getDomAdapters()` when you want to inspect the current DOM adapter registry.
+
+## Example
+
+```ts
+const adapters = Cinder.getDomAdapters();
+console.log(adapters.map((adapter) => adapter.id));
+```
+
+## Why it helps
+
+This is mostly useful for:
+
+- debugging custom control integration
+- verifying adapter registration in tests
+- understanding which adapters are active in the current app shell
+
+## Related pages
+
+- <a href="/docs/api/register-dom-adapter">Cinder.registerDomAdapter</a>
+- <a href="/docs/api/unregister-dom-adapter">Cinder.unregisterDomAdapter</a>

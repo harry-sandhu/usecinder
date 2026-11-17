@@ -1,0 +1,21 @@
+export const meta = {
+  title: 'Cinder.getSiteManifests',
+  description: 'Inspect the currently registered high-level site manifests.',
+  group: 'API Reference',
+  order: 10.44,
+  navTitle: 'Cinder.getSiteManifests',
+};
+
+Use `getSiteManifests()` when you want to verify which site manifests are currently registered.
+
+## Example
+
+```ts
+const manifests = Cinder.getSiteManifests();
+console.log(manifests.map((manifest) => manifest.id));
+```
+
+## Related pages
+
+- <a href="/docs/api/register-site-manifest">Cinder.registerSiteManifest</a>
+- <a href="/docs/api/unregister-site-manifest">Cinder.unregisterSiteManifest</a>

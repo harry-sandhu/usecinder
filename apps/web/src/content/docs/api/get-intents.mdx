@@ -1,0 +1,29 @@
+export const meta = {
+  title: 'Cinder.getIntents',
+  description: 'Inspect the custom intent matchers currently registered with the runtime.',
+  group: 'API Reference',
+  order: 10.91,
+  navTitle: 'Cinder.getIntents',
+};
+
+Use `getIntents()` when you want to inspect the custom matcher registry.
+
+## Example
+
+```ts
+const matchers = Cinder.getIntents();
+console.log(matchers.map((matcher) => matcher.id));
+```
+
+## Why it helps
+
+This is mostly useful for:
+
+- debugging local resolution extensions
+- test assertions
+- confirming domain presets or custom matchers were installed
+
+## Related pages
+
+- <a href="/docs/api/register-intent">Cinder.registerIntent</a>
+- <a href="/docs/api/unregister-intent">Cinder.unregisterIntent</a>

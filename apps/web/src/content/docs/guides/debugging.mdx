@@ -1,0 +1,233 @@
+export const meta = {
+  title: 'Debugging',
+  description: 'Inspect scan results, graph state, active route/context, resolved intents, dispatch output, and fallback telemetry in a practical order.',
+  group: 'Guides',
+  order: 6,
+};
+
+Good debugging in Cinder starts with structure, not guesswork.
+
+The fastest way to lose time is to jump straight to fallback or prompt speculation before confirming the semantic surface and graph state are correct.
+
+## Recommended debugging order
+
+1. inspect `Cinder.lastScan()`
+2. inspect `Cinder.graph()`
+3. inspect `Cinder.resolve('your command')`
+4. inspect `await Cinder.dispatch(intent, document)`
+5. inspect `await Cinder.run(...)`
+6. inspect runtime events and fallback metadata only if needed
+
+## 1. Check the semantic surface first
+
+Start with the scan result.
+
+```ts
+const scanResult = await Cinder.scan(document);
+console.log(scanResult);
+console.log(scanResult.entries);
+console.log(scanResult.warnings);
+```
+
+### What to verify
+
+- expected tagged elements were found
+- keys were normalized the way you expect
+- route and context assignment look correct
+- labels/placeholders/metadata hints were captured where relevant
+- warnings are understandable and not being ignored
+
+If the scan surface is wrong, everything later in the pipeline becomes harder to trust.
+
+## 2. Check the graph next
+
+```ts
+const graph = Cinder.graph();
+console.log(graph.nodes);
+console.log(graph.edges);
+console.log(graph.indexes);
+console.log(graph.runtime);
+console.log(graph.meta);
+```
+
+### What to verify in the graph
+
+- node ids are uniquely scoped
+- repeated structures do not collide
+- route and context relationships look correct
+- `activeRouteId` and `activeContextId` make sense
+- selections and focused node state are reasonable
+- last scan metadata reflects what just happened
+
+## 3. Inspect active route and active context specifically
+
+A lot of “wrong target” bugs are really active-state bugs.
+
+Check:
+
+- current browser location
+- active route id in `graph.runtime`
+- active context id in `graph.runtime`
+- whether focus is inside the context you think it is
+- whether repeated controls live in multiple routes/contexts
+
+If two `save` or `price` nodes exist in different regions, active state and graph scoping matter a lot.
+
+## 4. Resolve before dispatching
+
+```ts
+const intent = Cinder.resolve('show price');
+console.log(intent);
+```
+
+### What to verify
+
+- the intent type is correct
+- the target key is correct
+- `matchedNodeIds` look reasonable
+- the reason explains ambiguity or unknown results honestly
+- local resolution is not silently picking the wrong duplicate
+
+If resolution already looks wrong, do not debug dispatch yet.
+
+## 5. Dispatch separately when needed
+
+```ts
+const intent = Cinder.resolve('search');
+const dispatch = await Cinder.dispatch(intent, document);
+console.log(dispatch);
+```
+
+### What to verify
+
+- was dispatch handled?
+- did it use DOM behavior, bindings, or a composite flow?
+- were there dispatch errors?
+- did DOM execution affect the right route/context region?
+
+This is especially helpful when debugging:
+
+- route navigation
+- form submit behavior
+- custom widget behavior
+- output reveal behavior
+- adapter or binding failures
+
+## 6. Use `run()` only after lower layers make sense
+
+```ts
+const result = await Cinder.run('open reports', document);
+console.log(result.intent, result.dispatch, result.reflex);
+```
+
+`run()` is the best high-level integration path, but it is not the best first debugging entry point when the behavior is surprising.
+
+## 7. Observe runtime events when you need pipeline visibility
+
+The runtime now emits useful events for:
+
+- `scan:start`
+- `scan:end`
+- `graph:updated`
+- `resolve:start`
+- `resolve:end`
+- `dispatch:start`
+- `dispatch:end`
+- `fallback:start`
+- `fallback:end`
+- speech lifecycle events
+
+```ts
+Cinder.on('scan:end', (payload) => console.log('scan:end', payload));
+Cinder.on('dispatch:end', (payload) => console.log('dispatch:end', payload));
+Cinder.on('fallback:end', (payload) => console.log('fallback:end', payload));
+```
+
+### Why this helps
+
+Runtime events are the best way to inspect:
+
+- mutation-driven rescans
+- scan duration
+- fallback reason and error classification
+- whether fallback produced a usable result
+- whether graph state is being refreshed when you expect
+
+## 8. Debug fallback separately from local resolution
+
+Fallback should not be the first thing you inspect.
+
+First confirm whether the local result is actually:
+
+- `unknown`, or
+- low-confidence enough to trigger fallback
+
+Then inspect fallback metadata such as:
+
+- provider
+- auth mode
+- timeout
+- error code
+- status code
+- whether normalization succeeded
+- whether the fallback intent was actually usable
+
+If fallback fails, the right fix may still be to improve tags, graph shape, or route/context clues rather than changing the provider.
+
+## Common causes of problems
+
+## Tagging problems
+
+- vague keys like `button-2` or `left-panel`
+- missing route/context boundaries
+- tagging too many cosmetic elements
+- using `field` and `filter` interchangeably
+
+## Scan timing problems
+
+- scanning before the real app surface exists
+- assuming a dynamic page will stay accurate without rescans
+- not understanding mutation observation behavior
+
+## Graph/active-state problems
+
+- repeated structures across routes or app regions
+- incorrect assumptions about active context
+- debugging the wrong route when the location has changed
+
+## Dispatch problems
+
+- expecting custom widgets to behave like native controls
+- assuming a route container click should navigate
+- needing a DOM adapter for framework-specific controls
+- relying on bindings when tag-only DOM behavior could work
+
+## Fallback problems
+
+- enabling fallback before the local path is correct
+- expecting fallback to resolve fundamentally ambiguous duplicate targets
+- assuming invalid provider output will still dispatch
+
+## A practical debugging snippet
+
+```ts
+await Cinder.scan(document);
+console.log('scan', Cinder.lastScan());
+console.log('graph', Cinder.graph());
+
+const intent = Cinder.resolve('show price');
+console.log('intent', intent);
+
+const dispatch = await Cinder.dispatch(intent, document);
+console.log('dispatch', dispatch);
+```
+
+That four-step sequence will explain most real integration issues faster than jumping directly to `run()` or fallback.
+
+## Best next pages
+
+<CardGrid>
+  <PageLinkCard href="/docs/guides/scanning-the-app" title="Scanning the App" description="See when to scan, how mutation observation behaves, and what scan output is supposed to tell you." />
+  <PageLinkCard href="/docs/concepts/application-graph" title="Application Graph" description="Understand node scoping, indexes, runtime state, and why the graph is central to local-first behavior." />
+  <PageLinkCard href="/docs/concepts/ai-fallback" title="AI Fallback" description="Learn when fallback should happen, what metadata it exposes, and how normalization failure behaves." />
+</CardGrid>

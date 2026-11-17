@@ -1,0 +1,24 @@
+export const meta = {
+  title: 'Cinder.offReflex',
+  description: 'Remove a previously registered reflex handler.',
+  group: 'API Reference',
+  order: 10.98,
+  navTitle: 'Cinder.offReflex',
+};
+
+Use `offReflex()` to remove a handler that was registered with `Cinder.onReflex()`.
+
+## Example
+
+```ts
+const handler = (result) => {
+  console.log(result.message);
+};
+
+Cinder.onReflex(handler);
+Cinder.offReflex(handler);
+```
+
+## Related pages
+
+- <a href="/docs/api/on-reflex">Cinder.onReflex</a>

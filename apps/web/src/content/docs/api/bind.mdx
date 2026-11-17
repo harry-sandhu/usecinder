@@ -1,0 +1,40 @@
+export const meta = {
+  title: 'Cinder.bind',
+  description: 'Register route, action, field, filter, or output handlers inside the runtime.',
+  group: 'API Reference',
+  order: 10,
+  navTitle: 'Cinder.bind',
+};
+
+Use `bind()` when you want resolved runtime actions to call explicit application logic instead of standard DOM execution.
+
+## Example
+
+```ts
+Cinder.bind('action', 'search', ({ intent, snapshot }) => {
+  console.log(intent.target, snapshot.runtime.activeContextId);
+});
+```
+
+## Supported binding types
+
+- `route`
+- `action`
+- `field`
+- `filter`
+- `output`
+
+## When to use it
+
+Bindings are useful when:
+
+- the app already has imperative handlers you want to call directly
+- route activation is app-specific
+- you want explicit app-side logic for an otherwise matched target
+
+For standard browser flows, tag-only DOM execution should still be the first thing to try.
+
+## Related pages
+
+- <a href="/docs/api/unbind">Cinder.unbind</a>
+- <a href="/docs/concepts/dispatch-and-feedback">Dispatch and Feedback</a>

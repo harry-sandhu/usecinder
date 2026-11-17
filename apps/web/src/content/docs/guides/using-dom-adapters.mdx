@@ -1,0 +1,41 @@
+export const meta = {
+  title: 'Using DOM Adapters',
+  description: 'Handle custom controls and framework widgets when standard DOM execution is not enough.',
+  group: 'Guides',
+  order: 8,
+};
+
+Use DOM adapters for controls that do not behave like normal browser inputs, buttons, or forms.
+
+## Typical example
+
+```ts
+Cinder.registerDomAdapter({
+  id: 'custom-combobox',
+  match(context) {
+    return context.element.getAttribute('role') === 'combobox';
+  },
+  async execute(context) {
+    context.element.dispatchEvent(new Event('click', { bubbles: true }));
+    return true;
+  },
+});
+```
+
+## Good adapter use cases
+
+- headless UI widgets
+- custom dropdowns
+- design-system components that hide native inputs
+- framework-specific surfaces that need explicit interaction logic
+
+## Bad adapter use cases
+
+Do not reach for an adapter when standard browser behavior already works. The first question should be:
+
+> can this be solved through better tags or the normal DOM path first?
+
+## Related pages
+
+- <a href="/docs/api/register-dom-adapter">Cinder.registerDomAdapter</a>
+- <a href="/docs/concepts/dispatch-and-feedback">Dispatch and Feedback</a>

@@ -1,0 +1,104 @@
+export const meta = {
+  title: 'Dispatch and Feedback',
+  description: 'Resolved intents still need to execute in the app and produce understandable, deterministic feedback back to the user.',
+  group: 'Concepts',
+  order: 4,
+};
+
+After an intent is resolved, Cinder dispatches it into the application and then produces reflex output.
+
+## Dispatch is more than clicking things
+
+Dispatch turns a structured intent into real app behavior.
+
+That may mean:
+
+- navigating to a route
+- activating a registered route callback
+- triggering a button or action
+- setting a field or filter value
+- submitting a form
+- revealing or focusing an output
+- running a DOM adapter for a custom control
+- executing a composite flow across multiple steps
+
+## Dispatch order matters
+
+The current runtime now has a more explicit execution order.
+
+For example, navigation can use:
+
+1. registered route activation
+2. route anchors
+3. path hints
+4. selector-based activation
+5. fallback click behavior
+
+This is one of the reasons tag-only route behavior is stronger than earlier MVP versions.
+
+## DOM execution is now richer
+
+The dispatcher now handles more than naive clicks.
+
+It can work with:
+
+- native setters for fields and filters
+- checkbox and radio behavior
+- select controls
+- textarea and contenteditable surfaces
+- submit flows for standard forms
+- reveal/focus behavior for outputs
+
+## Bindings are optional, not the product core
+
+Bindings are still useful, but they are not the main promise.
+
+Use bindings when:
+
+- the app already has imperative behavior you want to call directly
+- route execution is application-specific
+- custom side effects must happen outside normal DOM behavior
+
+For standard browser flows, tag-only DOM execution should still be the first thing to try.
+
+## DOM adapters exist for custom controls
+
+When standard DOM execution is not enough, use `registerDomAdapter()`.
+
+That is the right home for:
+
+- custom widget interaction
+- framework-specific controls
+- non-native comboboxes, toggles, or menus
+
+## Feedback is deterministic
+
+The reflex layer can produce:
+
+- success output
+- error output
+- clarification output
+- informational output
+
+## Why deterministic feedback matters
+
+<Callout variant="info" title="No fallback required for feedback">
+  Reflex output does not require cloud inference. Deterministic feedback keeps core actions understandable even when AI is disabled or fallback fails.
+</Callout>
+
+## Run combines everything
+
+`run()` is the high-level API because it combines:
+
+- local resolution
+- optional fallback
+- dispatch
+- reflex output
+
+But when debugging, inspect `resolve()` and `dispatch()` separately first.
+
+## Related pages
+
+- <a href="/docs/api/dispatch">Cinder.dispatch</a>
+- <a href="/docs/api/respond">Cinder.respond</a>
+- <a href="/docs/api/register-dom-adapter">Cinder.registerDomAdapter</a>

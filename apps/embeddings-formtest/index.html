@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Cinder embeddings form-test bed</title>
+  </head>
+  <body>
+    <div id="status">not started</div>
+    <section cinder-route="pricing" data-cinder-path="/pricing">Pricing</section>
+    <div cinder-context="c">
+      <div cinder-output="weather-forecast" aria-label="Weather forecast">Weather</div>
+      <button cinder-action="submit-order" aria-label="Submit order">Submit Order</button>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

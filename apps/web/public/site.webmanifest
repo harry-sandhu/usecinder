@@ -1,0 +1,17 @@
+{
+  "name": "Cinder",
+  "short_name": "Cinder",
+  "description": "Semantic runtime for applications with local-first graph-based resolution and optional hybrid fallback.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#2563eb",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "64x64",
+      "type": "image/svg+xml"
+    }
+  ],
+  "categories": ["developer", "documentation", "productivity"]
+}

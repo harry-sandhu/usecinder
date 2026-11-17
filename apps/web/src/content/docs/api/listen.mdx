@@ -1,0 +1,37 @@
+export const meta = {
+  title: 'Cinder.listen',
+  description: 'Start browser speech capture when the environment supports it.',
+  group: 'API Reference',
+  order: 11,
+  navTitle: 'Cinder.listen',
+};
+
+`listen()` starts browser speech capture and may optionally auto-run final transcripts through the runtime.
+
+## Example
+
+```ts
+const result = await Cinder.listen({
+  root: document,
+  autoRun: true,
+  speakFeedback: false,
+});
+console.log(result);
+```
+
+## Options
+
+You can pass:
+
+- `root`
+- `autoRun`
+- `speakFeedback`
+- `continuous`
+- `interimResults`
+- `lang`
+
+## Important note
+
+Unsupported browsers should return a clear unsupported result rather than failing silently.
+
+If you want transcript events without auto-executing them, use `listen({ autoRun: false })` with `Cinder.onTranscript()`.

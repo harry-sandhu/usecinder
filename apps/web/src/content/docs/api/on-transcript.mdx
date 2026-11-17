@@ -1,0 +1,36 @@
+export const meta = {
+  title: 'Cinder.onTranscript',
+  description: 'Subscribe to browser speech transcript events emitted by the speech engine.',
+  group: 'API Reference',
+  order: 11.1,
+  navTitle: 'Cinder.onTranscript',
+};
+
+Use `onTranscript()` when you want direct access to speech transcript events.
+
+## Example
+
+```ts
+Cinder.onTranscript((event) => {
+  console.log(event.transcript, event.isFinal);
+});
+```
+
+## What the handler receives
+
+A transcript event containing:
+
+- `transcript`
+- `isFinal`
+- `timestamp`
+
+## When to use it
+
+- custom voice UX
+- manual transcript display
+- integrations using `listen({ autoRun: false })`
+
+## Related pages
+
+- <a href="/docs/api/off-transcript">Cinder.offTranscript</a>
+- <a href="/docs/api/listen">Cinder.listen</a>

@@ -1,0 +1,45 @@
+export const meta = {
+  title: 'Tag-Only Integration Patterns',
+  description: 'Prove the product promise on standard browser surfaces before reaching for bindings, adapters, or custom matchers.',
+  group: 'Guides',
+  order: 12,
+};
+
+Tag-only integration is the best first proof for the SDK.
+
+## Start with standard browser behavior
+
+Good tag-only targets include:
+
+- anchors and path-based route activation
+- native inputs and selects
+- normal buttons
+- standard forms
+- outputs that can be focused or revealed
+
+## Good first commands
+
+- `open reports`
+- `search`
+- `show price`
+- `set crop to soybean`
+- `save changes`
+
+## Add complexity only when needed
+
+Reach for extensions only after the standard path is proven:
+
+1. tags first
+2. inspect scan and graph
+3. prove local run/dispatch
+4. only then add bindings, route registry, adapters, or custom matchers
+
+## Why this order matters
+
+It keeps the product promise honest and prevents app-specific code from masking weak semantic structure.
+
+## Related pages
+
+- <a href="/docs/quick-start">Quick Start</a>
+- <a href="/docs/guides/tagging-a-page">Tagging a Page</a>
+- <a href="/docs/guides/binding-actions">Binding Actions</a>

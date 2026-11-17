@@ -1,0 +1,44 @@
+export const meta = {
+  title: 'Cinder.run',
+  description: 'The main high-level runtime method resolves input, dispatches the action, and produces feedback.',
+  group: 'API Reference',
+  order: 9,
+  navTitle: 'Cinder.run',
+};
+
+<Badge tone="brand">Core API</Badge>
+
+`Cinder.run()` is the easiest way to use the full runtime without manually calling each lower-level step.
+
+## Purpose
+
+Use `run()` when you want the complete pipeline:
+
+- inject runtime context if configured
+- resolve intent locally first
+- optionally attempt bounded fallback
+- dispatch the final intent
+- produce reflex output
+
+## Example
+
+```ts
+const result = await Cinder.run('show weather', document);
+console.log(result.intent);
+console.log(result.dispatch);
+console.log(result.reflex);
+```
+
+## Local-first behavior
+
+<Callout variant="tip" title="Primary path">
+  `run()` still resolves locally first. If AI is disabled, unknown requests remain local unknowns and should degrade clearly.
+</Callout>
+
+`run()` still resolves locally first. If AI is disabled, unknown requests stay local unknowns and should degrade clearly.
+
+## Fallback note
+
+If AI is enabled and local confidence is too low, fallback can occur inside `run()` without changing the rest of your application-side dispatch handling.
+
+Runtime events like `fallback:start` and `fallback:end` are the best observability hooks for understanding whether fallback was attempted, timed out, normalized successfully, or produced a usable intent.

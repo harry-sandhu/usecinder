@@ -1,0 +1,35 @@
+export const meta = {
+  title: 'Cinder.configure',
+  description: 'Update runtime configuration after initialization when needed.',
+  group: 'API Reference',
+  order: 2,
+  navTitle: 'Cinder.configure',
+};
+
+Use `configure()` when you need to update runtime behavior after initialization without rebuilding your integration.
+
+## Example
+
+```ts
+Cinder.configure({
+  ai: {
+    enabled: true,
+    mode: 'hybrid',
+    endpoint: 'http://127.0.0.1:8093/v1/llm/infer',
+    apiKey: '',
+    provider: 'custom',
+    timeoutMs: 10000,
+  },
+});
+```
+
+## Use cases
+
+- enabling fallback later
+- changing endpoint, provider, or timeout configuration
+- adjusting semantic mutation observation settings
+- updating runtime behavior without re-initializing the app shell
+
+## Practical note
+
+If the runtime is already ready, `configure()` refreshes mutation observation with the new settings.

@@ -1,0 +1,43 @@
+export const meta = {
+  title: 'Injecting Runtime Context',
+  description: 'Pass application state into local resolution and fallback in a deliberate, inspectable way.',
+  group: 'Guides',
+  order: 10,
+};
+
+Runtime context is the right place for app state that matters to intent selection but does not belong in semantic tags.
+
+## Typical example
+
+```ts
+Cinder.setContextProvider(() => ({
+  accountId: selectedAccountId,
+  region: selectedRegion,
+}));
+```
+
+## Async example
+
+```ts
+Cinder.setContextProvider(async () => {
+  return {
+    accountId: await getSelectedAccountId(),
+  };
+});
+```
+
+## Good use cases
+
+- current account or tenant
+- selected region
+- workflow state
+- app-specific environment values
+
+## Practical note
+
+Use `Cinder.getContext()` to inspect what the runtime currently sees.
+
+## Related pages
+
+- <a href="/docs/api/set-context-provider">Cinder.setContextProvider</a>
+- <a href="/docs/api/get-context">Cinder.getContext</a>

@@ -1,0 +1,87 @@
+export const meta = {
+  title: 'Accounts and Projects',
+  description: 'Sign up, log in, and create a project to get a real relay API key - and the two credentials Relay keeps deliberately separate.',
+  group: 'Relay',
+  order: 1,
+};
+
+Relay has two credentials, for two different purposes. Mixing them up is the most common integration mistake.
+
+| Credential | Belongs to | Used for |
+| --- | --- | --- |
+| Account `secretKey` | You, the developer | Creating and listing projects |
+| Project `apiKey` | One app/project | Making actual relay calls (`/v1/relay/infer`, `/v1/relay/topup`, `/v1/relay/balance`) |
+
+## Sign up and log in
+
+```http
+POST /v1/relay/accounts/signup
+Content-Type: application/json
+
+{ "email": "you@example.com", "password": "at least 8 characters" }
+```
+
+```http
+POST /v1/relay/accounts/login
+Content-Type: application/json
+
+{ "email": "you@example.com", "password": "..." }
+```
+
+Both return:
+
+```json
+{ "id": "acct_...", "email": "you@example.com", "secretKey": "sk_..." }
+```
+
+Passwords are hashed with Node's built-in `scrypt` and never stored or logged in plain text. A login against a non-existent email still runs a real (dummy) hash computation, specifically so "no such account" and "wrong password" can't be told apart by response timing.
+
+## Create a project
+
+```http
+POST /v1/relay/projects
+Authorization: Bearer <account secretKey>
+Content-Type: application/json
+
+{
+  "provider": "anthropic",
+  "keyPolicy": "developer",
+  "providerApiKey": "sk-ant-...",
+  "providerModel": "claude-haiku-5-5"
+}
+```
+
+- `provider` - `"anthropic"` or `"openai"`.
+- `keyPolicy` - `"developer"` (requires `providerApiKey`, stored once) or `"end_user"` (never stored - see [Infer Endpoint](/docs/relay/infer-endpoint)).
+- `providerModel` - optional; falls back to the server's default for that provider.
+
+Returns the project's real, usable `apiKey`:
+
+```json
+{ "id": "proj_...", "apiKey": "ck_...", "provider": "anthropic", "keyPolicy": "developer", "balanceCents": 0 }
+```
+
+## List your projects
+
+```http
+GET /v1/relay/projects
+Authorization: Bearer <account secretKey>
+```
+
+```json
+{
+  "projects": [
+    {
+      "id": "proj_...",
+      "provider": "anthropic",
+      "keyPolicy": "developer",
+      "hasProviderApiKey": true,
+      "balanceCents": 500,
+      "createdAt": "2026-11-16T00:00:00.000Z",
+      "apiKey": "ck_..."
+    }
+  ]
+}
+```
+
+This never returns a project's raw `providerApiKey` - only whether one is stored (`hasProviderApiKey`). Only your own projects are ever returned; a different account's `secretKey` sees only its own list.

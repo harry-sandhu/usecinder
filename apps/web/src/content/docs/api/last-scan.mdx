@@ -1,0 +1,45 @@
+export const meta = {
+  title: 'Cinder.lastScan',
+  description: 'Read the most recent semantic scan result without running a new scan.',
+  group: 'API Reference',
+  order: 3.5,
+  navTitle: 'Cinder.lastScan',
+};
+
+Use `lastScan()` when you want to inspect the latest semantic scan output without rescanning the DOM.
+
+## Example
+
+```ts
+await Cinder.scan(document);
+console.log(Cinder.lastScan());
+```
+
+## What it returns
+
+`lastScan()` returns the current `CinderSemanticScanResult`.
+
+That includes:
+
+- `entries`
+- `warnings`
+- `summary`
+- `scannedAt`
+
+## Why it is useful
+
+Use it when you want to:
+
+- debug scan output quickly
+- compare scan state before and after UI updates
+- inspect mutation-driven rescans without forcing another manual scan
+
+## Important note
+
+If no scan has run yet, the runtime returns its current empty scan result state.
+
+## Related pages
+
+- <a href="/docs/api/scan">Cinder.scan</a>
+- <a href="/docs/api/graph">Cinder.graph</a>
+- <a href="/docs/guides/debugging">Debugging</a>

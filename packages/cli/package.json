@@ -1,0 +1,34 @@
+{
+  "name": "@cinder/cli",
+  "version": "0.1.0",
+  "type": "module",
+  "bin": {
+    "cinder": "./dist/bin/cinder.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "skill-assets"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "usecinder": "0.1.0",
+    "jsdom": "^26.1.0",
+    "playwright": "^1.48.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "@types/jsdom": "^30.0.0"
+  }
+}

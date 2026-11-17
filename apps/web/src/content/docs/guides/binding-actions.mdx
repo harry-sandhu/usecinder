@@ -1,0 +1,52 @@
+export const meta = {
+  title: 'Binding Actions',
+  description: 'Use bindings when resolved intents should trigger explicit application logic instead of relying only on standard DOM execution.',
+  group: 'Guides',
+  order: 3,
+};
+
+Bindings let the runtime call application-specific logic for routes, actions, fields, filters, and outputs.
+
+## Basic binding
+
+```ts
+Cinder.bind('action', 'save', ({ intent, snapshot }) => {
+  console.log(intent.target, snapshot.runtime.activeContextId);
+});
+```
+
+## When to use bindings
+
+Use bindings when:
+
+- the app needs custom state updates
+- a route or action is not represented by a clean DOM interaction
+- you want explicit control over side effects
+- tag-only DOM execution is not the right fit for that target
+
+## When DOM execution may be enough
+
+The current runtime already supports many standard DOM paths, including:
+
+- anchor/path navigation
+- input/select/textarea updates
+- checkbox and radio behavior
+- form submit flows
+- action clicks
+- output reveal/focus behavior
+
+So bindings should usually be the second step, not the first one.
+
+## Cleaning up bindings
+
+Use `Cinder.unbind()` when a binding should no longer participate in dispatch.
+
+```ts
+Cinder.unbind('action', 'save');
+```
+
+## Related pages
+
+- <a href="/docs/api/bind">Cinder.bind</a>
+- <a href="/docs/api/unbind">Cinder.unbind</a>
+- <a href="/docs/concepts/dispatch-and-feedback">Dispatch and Feedback</a>

@@ -1,0 +1,87 @@
+export const meta = {
+  title: 'Tagging a Page',
+  description: 'A practical guide to adding semantic tags to a real browser surface.',
+  group: 'Guides',
+  order: 1,
+};
+
+Semantic tagging should describe business meaning, not visual styling.
+
+## Start with one real route and one real context
+
+```html
+<section cinder-route="reports" data-cinder-path="/reports">
+  <div cinder-context="crop-prices">
+    ...
+  </div>
+</section>
+```
+
+A route gives the runtime a navigation destination and route-aware reasoning anchor.
+A context gives related controls and outputs a shared semantic boundary.
+
+## Add fields, filters, actions, and outputs inside the right region
+
+```html
+<label for="crop-filter">Crop</label>
+<select id="crop-filter" cinder-filter="crop"></select>
+
+<button cinder-action="search">Search</button>
+<div tabindex="0" cinder-output="price"></div>
+```
+
+## Full small example
+
+```html
+<section cinder-route="reports" data-cinder-path="/reports">
+  <div cinder-context="crop-prices">
+    <label for="crop-filter">Crop</label>
+    <select id="crop-filter" cinder-filter="crop"></select>
+
+    <label for="state-filter">State</label>
+    <select id="state-filter" cinder-filter="state"></select>
+
+    <button cinder-action="search">Search</button>
+    <div tabindex="0" cinder-output="price"></div>
+  </div>
+</section>
+```
+
+## Practical tagging rules
+
+- use stable lowercase semantic keys
+- prefer meaning over implementation names
+- keep the first tagged surface small and understandable
+- tag important app surfaces, not every node
+- give repeated regions distinct route/context boundaries
+- use standard DOM semantics where possible so tag-only execution stays strong
+
+## Useful metadata hints
+
+You can strengthen tag-only behavior with practical DOM hints like:
+
+- `data-cinder-path`
+- `data-cinder-route-selector`
+- `aria-current`
+- `data-cinder-submit="true"`
+- accessible labels and placeholders
+
+## Common mistakes
+
+<Callout variant="warning" title="Avoid vague keys and weak boundaries">
+  Do not use unstable names like `component-4` or styling names like `green-button`. Also avoid repeated action/output keys across app regions without clear route/context structure.
+</Callout>
+
+## After tagging
+
+Once the page is tagged:
+
+1. call `await Cinder.scan(document)`
+2. inspect `Cinder.lastScan()`
+3. inspect `Cinder.graph()`
+4. run a first command before adding bindings or fallback
+
+## Related pages
+
+- <a href="/docs/guides/scanning-the-app">Scanning the App</a>
+- <a href="/docs/guides/tag-only-integration-patterns">Tag-Only Integration Patterns</a>

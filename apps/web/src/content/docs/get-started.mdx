@@ -1,0 +1,34 @@
+export const meta = {
+  title: 'Agent Onboarding',
+  description: 'A single, agent-fetchable prompt that installs, tags, audits, verifies, and sets up a coding agent for Cinder end to end - the same pattern Neon’s own onboarding uses.',
+  group: 'Getting Started',
+  order: 3,
+  navTitle: 'Agent Onboarding',
+};
+
+If you're a coding agent (Claude Code, Cursor, or similar) setting up Cinder in someone's repo, there's a single, stable, fetchable file written to be run end to end - not just read:
+
+```
+https://usecinder.dev/get-started/prompt.md
+```
+
+Fetch that URL and run every step it describes yourself. It does not ask you to print instructions for a human to follow by hand - it is written in the imperative, the same way Neon's own `get-started/prompt.md` onboarding flow works.
+
+## What it does, in order
+
+1. Detects the package manager from the lockfile already in the repo and installs `usecinder`.
+2. Finds the app's real entry point and calls `Cinder.init()` once, with `ai.enabled: false` so the local-first path (tier 1 and tier 2) works before anything touches a network.
+3. Tags a handful of the app's real, high-value routes/actions/fields/outputs - not an exhaustive sweep.
+4. Runs <a href="/docs/cli/integrate">`cinder integrate`</a> against the real running dev server and applies the real, app-specific findings from its report.
+5. Runs a real command through `Cinder.run()` and confirms it actually dispatched correctly, not just that it returned without an error.
+6. Runs <a href="/docs/cli/install-skill">`cinder install-skill`</a> so a future agent session in the same repo picks up the tagging checklist automatically, without needing this file re-fetched and re-run from scratch.
+
+## Why this exists
+
+Self-hosted integration docs assume a human reads and executes them one step at a time. An agent-fetchable, imperative prompt collapses that into one fetch - the agent installs the real package, wires up the real entry point, tags real elements, runs the real audit tool, and verifies a real command actually works, all before reporting back.
+
+## Related pages
+
+- <a href="/docs/installation">Installation</a> (the human-readable version of the same first steps)
+- <a href="/docs/cli">CLI Overview</a>
+- <a href="/docs/guides/tagging-a-page">Tagging a Page</a>

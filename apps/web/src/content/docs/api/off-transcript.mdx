@@ -1,0 +1,24 @@
+export const meta = {
+  title: 'Cinder.offTranscript',
+  description: 'Remove a previously registered transcript handler.',
+  group: 'API Reference',
+  order: 11.2,
+  navTitle: 'Cinder.offTranscript',
+};
+
+Use `offTranscript()` to remove a transcript handler that was registered with `Cinder.onTranscript()`.
+
+## Example
+
+```ts
+const handler = (event) => {
+  console.log(event.transcript);
+};
+
+Cinder.onTranscript(handler);
+Cinder.offTranscript(handler);
+```
+
+## Related pages
+
+- <a href="/docs/api/on-transcript">Cinder.onTranscript</a>

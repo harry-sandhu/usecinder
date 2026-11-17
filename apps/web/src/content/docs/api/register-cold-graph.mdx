@@ -1,0 +1,63 @@
+export const meta = {
+  title: 'Cinder.registerColdGraph',
+  description: 'Register a durable cold-graph catalog so Cinder knows app structure beyond the currently rendered DOM.',
+  group: 'API Reference',
+  order: 10.45,
+  navTitle: 'Cinder.registerColdGraph',
+};
+
+Use `registerColdGraph()` when your app can describe semantic structure that is not always present in the current DOM.
+
+## Example
+
+```ts
+Cinder.registerColdGraph({
+  id: 'docs-catalog',
+  nodes: [
+    {
+      type: 'route',
+      key: 'docs-quick-start',
+      label: 'Quick Start',
+      aliases: ['quick start', 'getting started'],
+      metadata: { routePath: '/docs/quick-start' },
+    },
+    {
+      type: 'context',
+      key: 'quick-start-page',
+      routeKey: 'docs-quick-start',
+      label: 'Quick Start Page',
+    },
+  ],
+});
+```
+
+## What it adds
+
+A cold graph catalog can define:
+
+- routes
+- contexts
+- actions
+- fields
+- filters
+- outputs
+- entities
+- data nodes
+- explicit edges between known nodes
+
+The runtime merges that durable graph knowledge with the current hot DOM graph.
+
+## When to use it
+
+Use cold graph registration when:
+
+- the app knows routes or page structure before those pages are rendered
+- you want whole-site semantic memory, not only current DOM memory
+- route-level knowledge is not enough and you want broader cold graph coverage
+- a controlled app can describe stable semantic structure from app metadata
+
+## Related pages
+
+- <a href="/docs/api/unregister-cold-graph">Cinder.unregisterColdGraph</a>
+- <a href="/docs/api/get-cold-graphs">Cinder.getColdGraphs</a>
+- <a href="/docs/concepts/application-graph">Application Graph</a>

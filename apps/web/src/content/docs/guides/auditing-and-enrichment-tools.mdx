@@ -1,0 +1,56 @@
+export const meta = {
+  title: 'Auditing and Enrichment Tools',
+  description: 'Three developer-run tools - auditUntaggedElements, auditLabelQuality, and exportGraphForEnrichment - for finding tagging gaps and improving graph labels offline, never at runtime.',
+  group: 'Guides',
+  order: 13,
+};
+
+These three functions are exported from `usecinder` alongside the main runtime, but they're developer-run tools, not part of the live command pipeline - nothing here runs automatically, and nothing here is a live AI call against your users' traffic.
+
+<Callout variant="tip" title="cinder integrate runs these for you">
+  If you have `@cinder/cli` installed, <a href="/docs/cli/integrate">`cinder integrate`</a> already runs the untagged-element and weak-label audits across your whole app and writes one consolidated report - you only need these functions directly for a single page, a custom script, or the graph-enrichment step below.
+</Callout>
+
+## `auditUntaggedElements(root?)`
+
+```ts
+import { auditUntaggedElements } from 'usecinder';
+
+const findings = auditUntaggedElements(document);
+```
+
+Scans a live page (or a subtree) for real interactive elements that look like they should have a `cinder-*` tag but don't. Call it on a real running app - via a browser console or Playwright's `page.evaluate()` - not on a static snapshot; untagged elements never appear in a Cinder graph snapshot at all, since they were never scanned as semantic nodes.
+
+Each finding includes a `selectorHint` (where to find the real element), the element's `accessibleText`, and a `suggestedTag` - a starting point, not a verdict. Confirm an element's real purpose before tagging it: a cosmetic toggle or an external link is correctly *not* a Cinder candidate.
+
+## `auditLabelQuality(snapshot)`
+
+```ts
+import { auditLabelQuality } from 'usecinder';
+
+const findings = auditLabelQuality(Cinder.graph());
+```
+
+Scans a real (or synthetic) graph snapshot for nodes whose label carries no real information beyond their own key (e.g. a label that's just the key with dashes replaced by spaces) - the same "weak label" check `cinder integrate` runs across every page. A weak label hurts tier 3's prompt quality and tier 2's embedding ranking equally, since both ultimately read from the same label text.
+
+## `exportGraphForEnrichment(snapshot)`
+
+```ts
+import { exportGraphForEnrichment } from 'usecinder';
+
+const summary = exportGraphForEnrichment(Cinder.graph());
+```
+
+The producer half of a developer-run, **offline** analysis step: turns a real, live snapshot into a plain, LLM-readable summary (every real node's key/type/current label/aliases/position, every real semantically-meaningful edge) that a coding agent or model can read and suggest alias/relationship improvements against - following a prompt like the one in this repo's [`docs/prompts/`](https://github.com/harry-sandhu/usecinder/tree/main/docs/prompts) directory, or your own equivalent.
+
+<Callout variant="warning" title="Human review required">
+  Suggestions produced this way are never activated automatically. They go through `Cinder.registerColdGraph()` like any other cold-graph catalog entry - review them, then register them, the same way you would hand-written aliases. Call `exportGraphForEnrichment` against a live, scanned snapshot (`Cinder.graph()`), not a cold/synthetic one - the whole point is analyzing what the real app actually has.
+</Callout>
+
+A catalog entry must echo the exact `routeKey`/`contextPath` the export reports for that node - a bare key with no scope targets a *different*, root-scoped node ID and silently creates a duplicate instead of enriching the real one, rather than erroring. This is the one sharp edge worth knowing about before writing suggestions by hand.
+
+## Related pages
+
+- <a href="/docs/cli/integrate">cinder integrate</a>
+- <a href="/docs/api/register-cold-graph">Cinder.registerColdGraph</a>
+- <a href="/docs/guides/tagging-a-page">Tagging a Page</a>

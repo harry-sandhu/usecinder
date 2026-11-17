@@ -1,0 +1,138 @@
+export const meta = {
+  title: 'API Overview',
+  description: 'The public SDK surface now covers scan, graph, execution, runtime events, extension points, speech, and lifecycle control.',
+  group: 'API Reference',
+  order: 0,
+  navTitle: 'API Overview',
+};
+
+<Callout variant="info" title="Use the high-level path first">
+  Most integrations should start with `init`, `scan`, `graph`, and `run`. Move to lower-level APIs only when you need more control, debugging, or explicit extension hooks.
+</Callout>
+
+The public API is still intentionally compact, but it now covers more than the earliest MVP. The runtime supports setup, scanning, graph inspection, execution, speech, extension points, runtime context injection, and runtime events.
+
+## Recommended learning order
+
+<CardGrid>
+  <PageLinkCard href="/docs/api/init" title="Cinder.init" description="Set up the runtime with a local-first baseline and optional fallback settings." />
+  <PageLinkCard href="/docs/api/scan" title="Cinder.scan" description="Discover semantic structure in the DOM and refresh the runtime graph." />
+  <PageLinkCard href="/docs/api/graph" title="Cinder.graph" description="Inspect the scoped application graph, indexes, and runtime state used by local resolution." />
+  <PageLinkCard href="/docs/api/run" title="Cinder.run" description="Use the full resolve → dispatch → reflex pipeline through one high-level method." />
+  <PageLinkCard href="/docs/api/resolve" title="Cinder.resolve" description="Inspect the local intent selected for a command before dispatch happens." />
+  <PageLinkCard href="/docs/api/dispatch" title="Cinder.dispatch" description="Execute a resolved intent against the DOM, bindings, routes, or adapters." />
+</CardGrid>
+
+## Main API groups
+
+## Setup and lifecycle
+
+- `Cinder.init()`
+- `Cinder.configure()`
+- `Cinder.status()`
+- `Cinder.destroy()`
+
+Use these to bootstrap the runtime, change config, inspect lifecycle state, and tear the runtime down cleanly.
+
+## Scan, graph, and execution
+
+- `Cinder.scan()`
+- `Cinder.lastScan()`
+- `Cinder.graph()`
+- `Cinder.resolve()`
+- `Cinder.dispatch()`
+- `Cinder.feedback()`
+- `Cinder.respond()`
+- `Cinder.run()`
+
+This is the core browser runtime path.
+
+## Optional bindings and explicit handlers
+
+- `Cinder.bind()`
+- `Cinder.unbind()`
+
+Bindings are still useful, but they are not the core product promise. Standard DOM flows should work tag-only where normal browser behavior is enough.
+
+## Route, site-manifest, cold-graph, and DOM extension points
+
+- `Cinder.registerRoute()`
+- `Cinder.unregisterRoute()`
+- `Cinder.getRoutes()`
+- `Cinder.registerSiteManifest()`
+- `Cinder.unregisterSiteManifest()`
+- `Cinder.getSiteManifests()`
+- `Cinder.registerColdGraph()`
+- `Cinder.unregisterColdGraph()`
+- `Cinder.getColdGraphs()`
+- `Cinder.registerDomAdapter()`
+- `Cinder.unregisterDomAdapter()`
+- `Cinder.getDomAdapters()`
+
+Use these when:
+
+- route activation is more complex than anchor/path metadata
+- the app can describe whole-site semantic structure beyond the current DOM
+- you want Cinder to derive cold graph structure from a higher-level site manifest
+- app controls are custom and do not behave like standard inputs/buttons/forms
+
+## Intent and runtime-context extension points
+
+- `Cinder.registerIntent()`
+- `Cinder.unregisterIntent()`
+- `Cinder.getIntents()`
+- `Cinder.setContextProvider()`
+- `Cinder.clearContextProvider()`
+- `Cinder.getContext()`
+
+Use these when local resolution needs explicit application state or custom domain matching without hiding that logic inside the SDK core.
+
+## AI fallback core extension point
+
+- `Cinder.setLlmCore()`
+- `Cinder.resetLlmCore()`
+
+Swap the single installed llm-core slot that `run()` escalates to when local resolution is unknown or low-confidence - the default is the built-in HTTP core, but a custom core (a local embedding model, a chain of local-then-cloud cores, a different provider integration) can take that slot instead.
+
+## Runtime events and reflex hooks
+
+- `Cinder.on()` / `Cinder.off()`
+- `Cinder.onReflex()` / `Cinder.offReflex()`
+
+Runtime events are the main observability hook for scan, resolve, dispatch, fallback, and speech activity.
+
+## Speech and voice hooks
+
+- `Cinder.say()`
+- `Cinder.listen()`
+- `Cinder.stopListening()`
+- `Cinder.speechStatus()`
+- `Cinder.onTranscript()` / `Cinder.offTranscript()`
+- `Cinder.onSpeechError()` / `Cinder.offSpeechError()`
+
+Text commands still remain first-class even when speech is enabled.
+
+## What is documented deeply today
+
+The current docs already cover the main first-run path well:
+
+- <a href="/docs/api/init">Cinder.init</a>
+- <a href="/docs/api/scan">Cinder.scan</a>
+- <a href="/docs/api/graph">Cinder.graph</a>
+- <a href="/docs/api/resolve">Cinder.resolve</a>
+- <a href="/docs/api/dispatch">Cinder.dispatch</a>
+- <a href="/docs/api/run">Cinder.run</a>
+- <a href="/docs/api/bind">Cinder.bind</a>
+- <a href="/docs/api/listen">Cinder.listen</a>
+
+## What the runtime now also supports
+
+The current SDK also includes route registry, DOM adapter, custom intent, runtime context, and runtime event APIs. Those are part of the real public surface and should be understood as first-class extension points, not hidden internal hooks.
+
+## Best next pages
+
+<CardGrid>
+  <PageLinkCard href="/docs/api/run" title="Cinder.run" description="Start with the highest-level execution path before diving into lower-level methods." />
+  <PageLinkCard href="/docs/concepts/dispatch-and-feedback" title="Dispatch and Feedback" description="Understand how resolved intents become route navigation, DOM execution, and user-facing reflex output." />
+  <PageLinkCard href="/docs/guides/debugging" title="Debugging" description="Inspect scan output, graph state, resolution, dispatch, and fallback behavior in a practical order." />
+</CardGrid>

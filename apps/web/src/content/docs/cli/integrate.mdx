@@ -1,0 +1,56 @@
+export const meta = {
+  title: 'cinder integrate',
+  description: 'Crawl a real running instance of your app, audit every page for untagged elements and weak labels, and write one consolidated report.',
+  group: 'CLI',
+  order: 1,
+};
+
+```bash
+npx cinder integrate <url> [options]
+```
+
+Crawls a real running instance of your app (same-origin pages only, starting from `<url>`), runs both of Cinder's tagging-checklist audits on every page it finds, and writes one consolidated report - meant to be handed to a coding agent (Claude Code, Cursor, or similar) to apply.
+
+## Options
+
+| Option | Default | Description |
+| --- | --- | --- |
+| `--max-pages <n>` | `25` | Stop after this many pages. |
+| `--settle-ms <n>` | `400` | Pause after each page load before auditing it. Real testing found rapid sequential navigation can catch a page before its accessible name settles - don't lower this unless you've verified it's still accurate. |
+| `--storage-state <f>` | - | Path to a Playwright storage-state JSON file (cookies + localStorage) for an already-authenticated session. |
+| `--out <file>` | `cinder-integration-report.md` | Where to write the report. |
+
+## Authenticated apps
+
+Without `--storage-state`, any page behind a login wall just redirects to your login page and audits **that** instead of the real app - found by actually running this against a real app, not a guess. Export a storage-state file once after logging in:
+
+```ts
+await context.storageState({ path: 'storage-state.json' });
+```
+
+or via:
+
+```bash
+npx playwright open <url>
+```
+
+Then pass it:
+
+```bash
+npx cinder integrate https://app.example.com --storage-state storage-state.json
+```
+
+## What you get
+
+```
+Crawling https://app.example.com (up to 25 pages)...
+  [1/12] https://app.example.com/
+  [2/12] https://app.example.com/reports
+  ...
+
+Scanned 12 page(s): 4 untagged element finding(s), 2 weak-label finding(s).
+Report written to cinder-integration-report.md
+Hand that file to your coding agent to review and apply.
+```
+
+The report is meant to be read by a coding agent, not applied automatically - the same honest boundary every other Cinder audit tool keeps: this reads your app, it never edits it.

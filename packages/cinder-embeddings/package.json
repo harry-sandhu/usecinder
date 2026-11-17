@@ -1,0 +1,30 @@
+{
+  "name": "@cinder/embeddings",
+  "version": "0.1.0",
+  "description": "Optional tier-2 local fallback for Cinder: a small client-side embedding model recovers typos/paraphrases that the deterministic graph engine couldn't resolve, before ever making a network call. Plugs into Cinder.setLlmCore() - the core usecinder package stays zero-dependency; this package is opt-in.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "usecinder": "0.1.0"
+  },
+  "dependencies": {
+    "@huggingface/transformers": "^4.3.2",
+    "compromise": "^14.20.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  }
+}

@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build-and-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run typecheck -w @cinder/embeddings
+      - run: npm run build
+      - run: npm run build -w @cinder/embeddings
+      - run: npm run validate:mvp
+      - run: npm run validate:red-team
+      - run: npm run validate:cloud-adapter
+      - run: npm run validate:semantic-cache
+      - run: npm run validate:alias-learning
+      - run: npm run validate:label-audit
+      - run: npm run validate:route-label-fallback
+      - run: npm run validate:untagged-element-audit
+      - run: npm run benchmark:local-engine
+      # validate:embeddings is intentionally NOT run here - it downloads a real ~23MB model
+      # on first run, which doesn't belong in a fast CI loop. Run it explicitly when working
+      # on @cinder/embeddings (npm run validate:embeddings).

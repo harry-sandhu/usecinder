@@ -1,0 +1,49 @@
+export const meta = {
+  title: 'Cinder.init',
+  description: 'Initialize the runtime with app, semantic, speech, and AI configuration.',
+  group: 'API Reference',
+  order: 1,
+  navTitle: 'Cinder.init',
+};
+
+`Cinder.init()` prepares the runtime with its initial configuration.
+
+## Typical usage
+
+```ts
+await Cinder.init({
+  semantic: {
+    scanOnInit: false,
+    observeMutations: true,
+  },
+  ai: {
+    enabled: false,
+    mode: 'local',
+    endpoint: '',
+    apiKey: '',
+  },
+});
+```
+
+## What it controls
+
+Configuration covers:
+
+- semantic scanning and mutation observation behavior
+- speech mode and language
+- AI mode, endpoint, provider, and timeout
+- app-level runtime settings
+
+## Recommended first setup
+
+<Callout variant="tip" title="Start local-first">
+  Keep AI disabled at first. Get scanning, graph creation, and local command execution working before adding hybrid fallback.
+</Callout>
+
+## Typical sequence
+
+1. call `Cinder.init()`
+2. render or load tagged UI
+3. call `Cinder.scan()`
+4. inspect `Cinder.graph()` if needed
+5. use `Cinder.run()`

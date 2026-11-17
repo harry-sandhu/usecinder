@@ -1,0 +1,20 @@
+export const meta = {
+  title: 'Cinder.resolve',
+  description: 'Resolve a text command locally into a structured intent without dispatching it yet.',
+  group: 'API Reference',
+  order: 5,
+  navTitle: 'Cinder.resolve',
+};
+
+Use `resolve()` when you want insight into the intent step before execution.
+
+## Example
+
+```ts
+const intent = Cinder.resolve('open reports');
+console.log(intent);
+```
+
+## Important note
+
+`resolve()` is the local path. Use it when you want to inspect or test resolution directly.

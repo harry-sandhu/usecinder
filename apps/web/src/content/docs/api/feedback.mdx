@@ -1,0 +1,18 @@
+export const meta = {
+  title: 'Cinder.feedback',
+  description: 'Produce deterministic reflex output from an intent and dispatch result.',
+  group: 'API Reference',
+  order: 7,
+  navTitle: 'Cinder.feedback',
+};
+
+Use `feedback()` when you want reflex output without invoking speech or the full `run()` pipeline.
+
+## Example
+
+```ts
+const intent = Cinder.resolve('show weather');
+const dispatch = await Cinder.dispatch(intent, document);
+const reflex = Cinder.feedback(intent, dispatch);
+console.log(reflex);
+```

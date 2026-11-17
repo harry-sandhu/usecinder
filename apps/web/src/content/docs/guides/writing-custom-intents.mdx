@@ -1,0 +1,42 @@
+export const meta = {
+  title: 'Writing Custom Intents',
+  description: 'Extend local resolution with explicit app-side matchers instead of hiding domain logic inside the SDK core.',
+  group: 'Guides',
+  order: 9,
+};
+
+Use custom intent matchers when the default local planners are not enough for your app.
+
+## Typical example
+
+```ts
+Cinder.registerIntent({
+  id: 'open-dashboard-shortcut',
+  match({ normalizedInput }) {
+    if (normalizedInput.normalized !== 'open dashboard') {
+      return undefined;
+    }
+
+    return {
+      intent: 'navigate',
+      target: 'dashboard',
+      confidence: 0.95,
+      source: 'local',
+      normalizedInput,
+      steps: [{ type: 'navigate', target: 'dashboard' }],
+    };
+  },
+});
+```
+
+## Good use cases
+
+- explicit command shortcuts
+- app-specific composite behaviors
+- domain-specific local rules
+- preserving domain logic as opt-in, not hidden core behavior
+
+## Related pages
+
+- <a href="/docs/api/register-intent">Cinder.registerIntent</a>
+- <a href="/docs/concepts/local-resolution">Local Resolution</a>

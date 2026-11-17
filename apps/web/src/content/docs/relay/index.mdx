@@ -1,0 +1,58 @@
+export const meta = {
+  title: 'Relay Overview',
+  description: 'Relay is a hosted, metered tier-3 proxy: tier 1 and tier 2 stay free, tier 3 AI fallback is usage-based, and you choose who supplies the AI provider key.',
+  group: 'Relay',
+  order: 0,
+  navTitle: 'Relay Overview',
+};
+
+<Callout variant="warning" title="Honest status">
+  `@cinder/relay` is a real, working prototype of this billing/metering model, not a hands-off managed service yet. See [known limitations](/docs/known-limitations) before putting real money behind it.
+</Callout>
+
+`@cinder/relay` exists to remove the friction of self-hosting `@cinder/server` for tier-3 fallback. It reuses - not modifies - the existing `createCloudAdapter`/prompt-builder/response-parser pipeline from `@cinder/server`, wrapped with real accounts, metering, and billing.
+
+## The model
+
+- **Tier 1 and tier 2 stay free.** They run entirely in the browser SDK - nothing to meter, nothing to pay for.
+- **Tier 3 is usage-based.** A project tops up a wallet, and every real fallback call deducts exactly what it cost, priced from the provider's own real token usage. A project at zero balance never reaches the real AI provider at all, not even once.
+- **A failed call is never billed.** The balance is only debited after a real, successful response.
+- **Who supplies the AI provider key is a per-project choice**, made once when the project is created:
+  - `"developer"` - your own key, stored once, reused for every call.
+  - `"end_user"` - never stored. Arrives with each request via the `x-end-user-ai-key` header, since it belongs to whoever is using the app, not to the developer's account.
+
+## Run it yourself, or point at a hosted instance
+
+Relay ships as its own package with a `cinder-relay` bin entry point:
+
+```bash
+DATABASE_URL="postgres://..." npx cinder-relay
+```
+
+Omitting `DATABASE_URL` falls back to an in-memory store - fine for local development, but every project and balance is lost on restart. See the pages in this section for the full setup, including real Razorpay payments.
+
+Once a server is running, point your app's Cinder config at it the same way you'd point at any `@cinder/server` instance - Relay speaks the same `/v1/llm/infer`-shaped fallback contract, just gated behind a project API key instead of a flat bearer secret.
+
+## Key pages
+
+<CardGrid>
+  <PageLinkCard
+    href="/docs/relay/accounts-and-projects"
+    title="Accounts and Projects"
+    description="Sign up, log in, and create a project to get a real relay API key."
+  />
+  <PageLinkCard
+    href="/docs/relay/billing-and-usage"
+    title="Billing and Usage"
+    description="Top up a project's wallet, read its balance, and inspect its usage history."
+  />
+  <PageLinkCard
+    href="/docs/relay/infer-endpoint"
+    title="Infer Endpoint"
+    description="The metered call itself - request shape, the end-user key header, and what gets billed."
+  />
+</CardGrid>
+
+## Dashboard
+
+There's a real UI for all of this at [`/relay`](/relay) - sign up, create projects, see real API keys and balances, top up, and watch usage history, without touching `curl`.

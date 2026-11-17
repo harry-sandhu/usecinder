@@ -1,0 +1,96 @@
+export const meta = {
+  title: 'Billing and Usage',
+  description: 'Top up a project’s wallet, read its balance, and inspect its real usage history.',
+  group: 'Relay',
+  order: 2,
+};
+
+Every project has a prepaid wallet, not a subscription. Top it up, and every real tier-3 call deducts exactly what it cost.
+
+## Top up (development / stub payments)
+
+```http
+POST /v1/relay/topup
+Authorization: Bearer <project apiKey>
+Content-Type: application/json
+
+{ "amountCents": 500 }
+```
+
+```json
+{ "creditedCents": 500, "balanceCents": 500 }
+```
+
+On a server with no real payment provider configured, this credits the wallet immediately - useful for local development, but **never safe on a public deployment** without a real payment gateway behind it, since anyone with a project's `apiKey` could top themselves up for free.
+
+## Top up (real payments, Razorpay)
+
+When the server is configured with real Razorpay credentials, two more routes become available:
+
+```http
+POST /v1/relay/topup/razorpay
+Authorization: Bearer <project apiKey>
+Content-Type: application/json
+
+{ "amountCents": 500 }
+```
+
+This creates a real Razorpay order for your frontend to open in Razorpay Checkout. The wallet is **not** credited here - only once Razorpay's webhook confirms a real, signature-verified payment:
+
+```http
+POST /v1/relay/webhooks/razorpay
+```
+
+<Callout variant="warning" title="Unverified against a real account">
+  The Razorpay integration's order-creation and webhook-signature-verification logic is real and tested, but has not been verified against a live Razorpay account. Test it against a real test-mode account before trusting it with a real payment.
+</Callout>
+
+## Read the balance
+
+```http
+GET /v1/relay/balance
+Authorization: Bearer <project apiKey>
+```
+
+```json
+{
+  "balanceCents": 450,
+  "keyPolicy": "developer",
+  "provider": "anthropic",
+  "usageCount": 3,
+  "totalSpentCents": 50
+}
+```
+
+## Read usage history
+
+```http
+GET /v1/relay/projects/:id/usage
+Authorization: Bearer <account secretKey>
+```
+
+```json
+{
+  "project": { "id": "proj_...", "balanceCents": 450, "..." : "..." },
+  "usage": [
+    { "id": "use_...", "timestamp": "2026-11-16T00:00:01.000Z", "estimatedCostCents": 0.01, "keyPolicy": "developer" }
+  ]
+}
+```
+
+This is account-scoped, like the project list: a different account's `secretKey` reading another project's ID gets a `404`, not a `403` - confirming the ID exists but belongs to someone else is itself a (minor) information leak.
+
+## Cost is real, token-based billing
+
+Both Anthropic and OpenAI report real `usage` (input/output token counts) on every response. Relay prices those tokens against its own rate table, not a character-count guess:
+
+| Model | Input (per 1M tokens) | Output (per 1M tokens) |
+| --- | --- | --- |
+| `claude-haiku-5-5` | $0.10 | $0.50 |
+| `gpt-4o-mini` | $0.15 | $0.60 |
+
+A model not in this table, or a custom provider that never reports usage, falls back to a character-count estimate rather than silently billing zero.
+
+<Callout variant="warning" title="Re-check before relying on this for a real bill">
+  These rates are sourced from third-party pricing trackers, not pulled live from Anthropic/OpenAI's own pricing pages, and model pricing changes independently of this codebase - re-verify against the providers' current pricing before trusting this for a real bill, and periodically after. The source of truth is Relay's own `MODEL_TOKEN_RATES` table.
+</Callout>

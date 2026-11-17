@@ -1,0 +1,39 @@
+export const meta = {
+  title: 'Cinder.dispatch',
+  description: 'Dispatch a resolved intent into the app through routes, DOM execution, adapters, bindings, or composite steps.',
+  group: 'API Reference',
+  order: 6,
+  navTitle: 'Cinder.dispatch',
+};
+
+`dispatch()` executes a structured intent against the current runtime graph and browser surface.
+
+## Example
+
+```ts
+const intent = Cinder.resolve('open reports');
+const result = await Cinder.dispatch(intent, document);
+console.log(result);
+```
+
+## It can use
+
+- registered route activation
+- standard DOM navigation
+- native field and filter updates
+- form submit behavior
+- output reveal and focus behavior
+- DOM adapters
+- bindings
+- composite multi-step flows
+
+## What to inspect
+
+Look at:
+
+- `handled`
+- `mode`
+- `executedSteps`
+- `errors`
+
+These tell you whether dispatch succeeded through DOM behavior, bindings, or a multi-step path.

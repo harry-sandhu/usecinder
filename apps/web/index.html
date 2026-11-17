@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cinder — Semantic runtime for applications</title>
+    <meta
+      name="description"
+      content="Cinder is a semantic runtime for applications with semantic tags, local-first graph-based resolution, and optional hybrid fallback."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="Cinder — Semantic runtime for applications" />
+    <meta
+      property="og:description"
+      content="Describe your application, not your prompts. Build local-first app control with semantic tags, graph resolution, and optional fallback AI."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://usecinder.dev/" />
+    <meta property="og:site_name" content="Cinder" />
+    <meta property="og:image" content="https://usecinder.dev/og-image.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Cinder — Semantic runtime for applications" />
+    <meta
+      name="twitter:description"
+      content="Describe your application, not your prompts. Build local-first app control with semantic tags, graph resolution, and optional fallback AI."
+    />
+    <meta name="twitter:image" content="https://usecinder.dev/og-image.svg" />
+    <meta name="theme-color" content="#2563eb" />
+    <link rel="canonical" href="https://usecinder.dev/" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <script>
+      (() => {
+        const key = 'cinder-theme';
+        const stored = localStorage.getItem(key);
+        const theme = stored === 'light' || stored === 'dark'
+          ? stored
+          : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.classList.toggle('dark', theme === 'dark');
+        document.documentElement.dataset.theme = theme;
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/app/main.tsx"></script>
+  </body>
+</html>

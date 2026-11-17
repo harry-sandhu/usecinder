@@ -1,0 +1,33 @@
+export const meta = {
+  title: 'Cinder.onSpeechError',
+  description: 'Subscribe to browser speech error events emitted by the speech engine.',
+  group: 'API Reference',
+  order: 11.3,
+  navTitle: 'Cinder.onSpeechError',
+};
+
+Use `onSpeechError()` when you want to observe speech failures explicitly.
+
+## Example
+
+```ts
+Cinder.onSpeechError((error) => {
+  console.error(error.code, error.message);
+});
+```
+
+## What the handler receives
+
+A speech error object containing:
+
+- `code`
+- `message`
+
+## Why it matters
+
+Speech support depends on browser APIs and environment support. Error hooks are the clean way to surface unsupported or failed speech behavior to the application.
+
+## Related pages
+
+- <a href="/docs/api/off-speech-error">Cinder.offSpeechError</a>
+- <a href="/docs/api/listen">Cinder.listen</a>

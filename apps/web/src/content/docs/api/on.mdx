@@ -1,0 +1,54 @@
+export const meta = {
+  title: 'Cinder.on',
+  description: 'Subscribe to typed runtime events for scan, graph, resolve, dispatch, fallback, and speech activity.',
+  group: 'API Reference',
+  order: 10.95,
+  navTitle: 'Cinder.on',
+};
+
+Use `on()` when you want structured runtime observability without patching internal code.
+
+## Example
+
+```ts
+Cinder.on('scan:end', (payload) => {
+  console.log(payload.durationMs, payload.mutationRescanCount);
+});
+
+Cinder.on('fallback:end', (payload) => {
+  console.log(payload.errorCode, payload.used, payload.latencyMs);
+});
+```
+
+## Event names
+
+- `scan:start`
+- `scan:end`
+- `graph:updated`
+- `resolve:start`
+- `resolve:end`
+- `dispatch:start`
+- `dispatch:end`
+- `fallback:start`
+- `fallback:end`
+- `speech:start`
+- `speech:end`
+- `speech:error`
+
+## Why it is useful
+
+Use runtime events for:
+
+- debugging scan timing and mutation rescans
+- tracing route/context updates
+- monitoring fallback classification and usage
+- observing speech lifecycle state
+
+## Safety note
+
+Throwing event handlers are isolated so they do not crash runtime execution.
+
+## Related pages
+
+- <a href="/docs/api/off">Cinder.off</a>
+- <a href="/docs/guides/debugging">Debugging</a>

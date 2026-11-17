@@ -1,0 +1,25 @@
+export const meta = {
+  title: 'Cinder.clearContextProvider',
+  description: 'Remove the current runtime context provider and clear cached injected context state.',
+  group: 'API Reference',
+  order: 10.93,
+  navTitle: 'Cinder.clearContextProvider',
+};
+
+Use `clearContextProvider()` when injected runtime context should no longer participate in resolution or fallback.
+
+## Example
+
+```ts
+Cinder.clearContextProvider();
+```
+
+## What it does
+
+- removes the current provider
+- resets cached context back to an empty object
+
+## Related pages
+
+- <a href="/docs/api/set-context-provider">Cinder.setContextProvider</a>
+- <a href="/docs/api/get-context">Cinder.getContext</a>

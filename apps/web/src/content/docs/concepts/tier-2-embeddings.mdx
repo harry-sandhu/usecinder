@@ -1,0 +1,51 @@
+export const meta = {
+  title: 'Tier 2: Embeddings',
+  description: 'An optional, free, client-side embedding model that recovers typos and paraphrases of a page’s own routes/outputs/actions before any network call.',
+  group: 'Concepts',
+  order: 3.5,
+};
+
+Tier 1 (the deterministic graph engine) resolves most commands. `@cinder/embeddings` is tier 2: a small client-side model that catches what tier 1 couldn't, still before any network call - no server, no account, no cost.
+
+## Install
+
+```bash
+npm install @cinder/embeddings
+```
+
+```ts
+import { Cinder } from 'usecinder';
+import { createEmbeddingLlmCore } from '@cinder/embeddings';
+
+Cinder.setLlmCore(createEmbeddingLlmCore(), { requiresNetwork: false });
+```
+
+It plugs into the same <a href="/docs/api/set-llm-core">`Cinder.setLlmCore()`</a> slot a custom tier-3 integration would use - `requiresNetwork: false` tells the runtime this core makes no network call, so it's allowed to run even in `ai.mode: 'local'`.
+
+## What it actually does
+
+`all-MiniLM-L6-v2`, run locally via Transformers.js (WebGPU with automatic CPU/WASM fallback, ~23MB), ranks a page's own route/output/action nodes against the input text by cosine similarity. A separate, cheaper path (a grammar-shape match via `compromise.js`, escalating to a small extractive question-answering model only when that finds nothing) handles `set_field`/`set_filter` commands specifically, since those need the *value* extracted, not just a node matched.
+
+A tier-2 match is never reported at the top "resolved exact" confidence level - it's always a best guess among known candidates, reported honestly as such, never full certainty.
+
+## Scope today
+
+Route, output, and action nodes for the similarity-ranking path; field and filter nodes only through the separate value-extraction path above. This is a deliberate phase-1 boundary, not an oversight.
+
+## Related tools in the same package
+
+- **`createSemanticCachingLlmCore`** - wraps any other `CinderLlmCore` (typically your tier-3 core) with a persisted, similarity-matched cache, so a repeated or paraphrased command doesn't re-spend a real network call.
+- **`createAliasLearningLlmCore`** - teaches the tier-2 core new aliases from confirmed past resolutions, re-verified with extra cross-encoder scoring before a learned alias is trusted (found necessary by real testing - without it, repeat-variant resolutions were wrong 51-62% of the time).
+- **`prefetchEmbeddingModel`** - call once at app startup to warm the model in the background (idle-time only, skipped on a slow/metered connection by default) so it's ready before a user's first command needs it.
+
+## Honest expectation
+
+<Callout variant="warning" title="A best guess, not a certainty">
+  Every tier-2 match is reported at a confidence ceiling below "resolved exact," by design - it's a similarity match among known candidates, never full certainty, even when the similarity score itself is very high.
+</Callout>
+
+## Related pages
+
+- <a href="/docs/concepts/local-resolution">Local Resolution</a>
+- <a href="/docs/api/set-llm-core">Cinder.setLlmCore</a>
+- <a href="/docs/concepts/ai-fallback">AI Fallback</a> (tier 3)

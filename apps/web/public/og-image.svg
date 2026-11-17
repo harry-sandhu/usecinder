@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#F8FAFC"/>
+  <rect x="80" y="80" width="160" height="160" rx="40" fill="#2563EB"/>
+  <path d="M189 128.75C178.6 119.4 165.4 114.5 148.6 114.5C107 114.5 79 141.7 79 178.5C79 215.3 107 242.5 148.6 242.5C165.8 242.5 179 237.6 189 228.25L174.2 213.45C167.8 219.05 159.8 222.25 149.8 222.25C124.2 222.25 107 203.85 107 178.5C107 153.15 124.2 134.75 149.8 134.75C159.8 134.75 167.8 137.95 174.2 143.55L189 128.75Z" fill="white"/>
+  <text x="300" y="210" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="68" font-weight="700">Cinder</text>
+  <text x="300" y="286" fill="#334155" font-family="Inter, Arial, sans-serif" font-size="34">Semantic runtime for applications</text>
+  <text x="80" y="390" fill="#475569" font-family="Inter, Arial, sans-serif" font-size="28">Describe your application, not your prompts.</text>
+  <text x="80" y="446" fill="#475569" font-family="Inter, Arial, sans-serif" font-size="28">Local-first graph-based resolution with optional hybrid fallback.</text>
+</svg>

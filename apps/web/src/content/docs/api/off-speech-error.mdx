@@ -1,0 +1,24 @@
+export const meta = {
+  title: 'Cinder.offSpeechError',
+  description: 'Remove a previously registered speech error handler.',
+  group: 'API Reference',
+  order: 11.4,
+  navTitle: 'Cinder.offSpeechError',
+};
+
+Use `offSpeechError()` to remove a handler that was registered with `Cinder.onSpeechError()`.
+
+## Example
+
+```ts
+const handler = (error) => {
+  console.error(error.message);
+};
+
+Cinder.onSpeechError(handler);
+Cinder.offSpeechError(handler);
+```
+
+## Related pages
+
+- <a href="/docs/api/on-speech-error">Cinder.onSpeechError</a>

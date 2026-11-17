@@ -1,0 +1,20 @@
+export const meta = {
+  title: 'Cinder.unregisterDomAdapter',
+  description: 'Remove a registered DOM adapter by id.',
+  group: 'API Reference',
+  order: 10.6,
+  navTitle: 'Cinder.unregisterDomAdapter',
+};
+
+Use `unregisterDomAdapter()` when a DOM adapter should no longer participate in dispatch.
+
+## Example
+
+```ts
+Cinder.unregisterDomAdapter('custom-combobox');
+```
+
+## Related pages
+
+- <a href="/docs/api/register-dom-adapter">Cinder.registerDomAdapter</a>
+- <a href="/docs/api/get-dom-adapters">Cinder.getDomAdapters</a>

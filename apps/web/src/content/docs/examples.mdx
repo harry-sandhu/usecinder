@@ -1,0 +1,95 @@
+export const meta = {
+  title: 'Examples',
+  description: 'Use these example integration shapes to decide where to start with a real Cinder rollout.',
+  group: 'Reference',
+  order: 0,
+};
+
+<Badge tone="brand">Practical examples</Badge>
+
+Examples are most useful when they map directly to the runtime path you are trying to prove.
+
+## Recommended example order
+
+<CardGrid>
+  <Card title="Tag-only route + action flow">
+    <p>One route, one context, and one action. This is the best first proof for tag-only scan → graph → run.</p>
+  </Card>
+  <Card title="Filter + result flow">
+    <p>Add filters and one output surface to validate local scoped matching and graph-aware execution.</p>
+  </Card>
+  <Card title="Form + save flow">
+    <p>Use fields, submit behavior, and a save action to prove standard DOM execution before adding bindings.</p>
+  </Card>
+  <Card title="Custom widget flow">
+    <p>Add a DOM adapter only after standard browser controls are already working cleanly.</p>
+  </Card>
+  <Card title="Custom intent flow">
+    <p>Register an explicit matcher when app-specific local commands do not belong in the generic core planners.</p>
+  </Card>
+  <Card title="Hybrid fallback flow">
+    <p>Enable the server only after the local-first path is already working on the real tagged surface.</p>
+  </Card>
+</CardGrid>
+
+## Good first examples to build
+
+### 1. Dashboard/reporting app
+Use:
+
+- one route
+- one filters context
+- one search action
+- one output surface
+
+### 2. CRUD form flow
+Use:
+
+- one route
+- one form context
+- fields
+- one save action
+- native submit behavior
+
+### 3. Table/filter/result flow
+Use:
+
+- one route
+- repeated data regions
+- filters
+- output or data surfaces
+- active context awareness
+
+### 4. Speech-enabled field entry flow
+Use:
+
+- text-first path proven already
+- `listen({ autoRun: false })`
+- transcript/error hooks
+
+### 5. Hybrid local + fallback flow
+Use:
+
+- local-first path already working
+- server health verified
+- infer endpoint wired
+- fallback telemetry observed
+
+## Example design rules
+
+A good example should include:
+
+- one real route
+- one semantic context
+- at least one action
+- one output or data surface
+- easy-to-inspect DOM structure
+- no unnecessary fallback dependency in the first proof
+
+## Suggested reading path
+
+1. <a href="/docs/installation">Installation</a>
+2. <a href="/docs/quick-start">Quick Start</a>
+3. <a href="/docs/guides/tag-only-integration-patterns">Tag-Only Integration Patterns</a>
+4. <a href="/docs/guides/debugging">Debugging</a>
+5. <a href="/docs/guides/setting-up-the-server">Setting Up the Server</a>

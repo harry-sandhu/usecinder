@@ -1,0 +1,63 @@
+export const meta = {
+  title: 'Changelog',
+  description: 'Track major public SDK, validation, and docs/frontend milestones during the current pre-1.0 cycle.',
+  group: 'Reference',
+  order: 1,
+};
+
+<Badge tone="brand">Pre-1.0</Badge>
+
+This changelog tracks major public-facing milestones for the current Cinder cycle.
+
+## 0.2.x — hosted tier 3, tier 2 embeddings, and agent-native tooling
+
+### New packages
+
+- `@cinder/relay` - a hosted, metered tier-3 proxy: tier 1/tier 2 stay free, tier 3 is usage-based (prepaid wallet, real token-based cost metering), with a choice of who supplies the AI provider key per project. Backed by a real, persistent Postgres store, real account authentication, and a working dashboard UI at `/relay`. Razorpay payments exist but are not yet verified against a real account.
+- `@cinder/cli` - `cinder integrate` crawls a real running app and audits every page for tagging gaps; `cinder install-skill` installs a Claude Code Skill and an `AGENTS.md` section so a coding agent keeps up with new UI automatically.
+- `@cinder/embeddings` - tier 2: an optional, free, client-side embedding model that recovers typos/paraphrases of a page's routes/outputs/actions before any network call, plus semantic caching and alias-learning utilities.
+
+### SDK additions
+
+- `Cinder.setLlmCore()`/`Cinder.resetLlmCore()` - swap the single installed llm-core slot `run()` escalates to, so tier 2, tier 3, or a fully custom core can take that slot without any other part of the pipeline changing.
+- Server-side speech transcription fallback (`speech.engine: "auto"`) for browsers with no Web Speech API at all, reusing the same fallback endpoint text tier-3 already uses.
+- Bounded tier-1 extensions: negation (clearing a filter) and numeric comparisons, gated on real field metadata rather than guessed.
+- `exportGraphForEnrichment()` - a developer-run, offline export that turns a real graph snapshot into something an LLM or coding agent can read and suggest alias/relationship improvements against, for human review before anything activates.
+- An agent-fetchable onboarding entry point (`/get-started/prompt.md`) that a coding agent can fetch and run end to end.
+
+## 0.1.x — runtime hardening and docs refresh
+
+### SDK maturity work
+
+- graph scoping and duplicate-safe node identity improved
+- tag-only validation isolated and proven explicitly
+- fallback normalization made scope-aware for duplicates
+- public extension callbacks made safer against user-code failure
+- local graph reasoning strengthened
+- domain-specific composite flow moved out of SDK core into an opt-in preset
+- fallback transport gained timeout, classification, and telemetry
+- mutation-driven rescans gained backpressure and timing metadata
+- raw builder runtime state stopped guessing active route/context
+- cross-realm DOM handling was hardened
+- query candidate search gained indexes, active narrowing, and caching
+- focused red-team validation suite completed
+
+### Docs and frontend work
+
+- homepage and onboarding docs were rewritten around the real product wedge
+- API reference now reflects the modern public SDK surface
+- concepts and guides were refreshed for local-first, graph-aware behavior
+- server and reference docs were updated for bounded fallback and current product scope
+
+### Website infrastructure
+
+- Vite + React + TypeScript + Tailwind + MDX docs frontend remains the base
+- navigation, search, sitemap generation, TOC, and metadata remain in place
+- docs validation continues to check internal link integrity
+
+## Next public milestones
+
+- deeper examples built around real app patterns
+- a production-grade ledger for Relay (integer micro-cents) and real Razorpay verification
+- an admin/analytics view beyond the current per-developer Relay dashboard
+- optional docs performance and loading improvements

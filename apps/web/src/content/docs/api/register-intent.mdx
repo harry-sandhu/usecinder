@@ -1,0 +1,57 @@
+export const meta = {
+  title: 'Cinder.registerIntent',
+  description: 'Register a custom local intent matcher that can participate in resolution before fallback is considered.',
+  group: 'API Reference',
+  order: 10.8,
+  navTitle: 'Cinder.registerIntent',
+};
+
+Use `registerIntent()` when the default local planners are not enough and you want explicit app-side matching logic.
+
+## Example
+
+```ts
+Cinder.registerIntent({
+  id: 'open-dashboard-shortcut',
+  match({ normalizedInput }) {
+    if (normalizedInput.normalized !== 'open dashboard') {
+      return undefined;
+    }
+
+    return {
+      intent: 'navigate',
+      target: 'dashboard',
+      confidence: 0.95,
+      source: 'local',
+      normalizedInput,
+      steps: [{ type: 'navigate', target: 'dashboard' }],
+    };
+  },
+});
+```
+
+## Matcher context
+
+Your matcher receives:
+
+- `input`
+- `normalizedInput`
+- `snapshot`
+- `runtimeContext`
+
+## When to use it
+
+- explicit shortcuts
+- domain-specific local commands
+- custom composite behavior that should stay outside the SDK core
+- app-specific intent patterns that do not belong in generic planners
+
+## Safety note
+
+Throwing custom matchers are isolated so they do not crash runtime resolution.
+
+## Related pages
+
+- <a href="/docs/api/unregister-intent">Cinder.unregisterIntent</a>
+- <a href="/docs/api/get-intents">Cinder.getIntents</a>
+- <a href="/docs/concepts/local-resolution">Local Resolution</a>

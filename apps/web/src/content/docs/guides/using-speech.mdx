@@ -1,0 +1,74 @@
+export const meta = {
+  title: 'Using Speech',
+  description: 'Practical browser speech setup, transcript handling, and unsupported-environment expectations.',
+  group: 'Guides',
+  order: 4,
+};
+
+Use browser speech as an input layer over the same runtime pipeline used by text commands.
+
+## Start listening
+
+```ts
+const result = await Cinder.listen({
+  root: document,
+  autoRun: true,
+  speakFeedback: false,
+});
+console.log(result);
+```
+
+## Stop listening
+
+```ts
+Cinder.stopListening();
+```
+
+## Handle transcripts and errors explicitly
+
+```ts
+Cinder.onTranscript((event) => console.log(event));
+Cinder.onSpeechError((error) => console.error(error));
+```
+
+## When to disable auto-run
+
+Use `autoRun: false` when you want to:
+
+- inspect transcripts before execution
+- build your own voice UX layer
+- confirm transcript quality in a noisy environment
+
+## Server-side fallback for browsers with no Web Speech API
+
+Firefox and older Safari have no native `SpeechRecognition` at all. Set `speech.engine: "auto"` and configure the same `ai.endpoint`/`ai.apiKey` already used for text tier-3 fallback, and the runtime automatically records audio and uploads it for transcription instead - no separate speech-specific config:
+
+```ts
+await Cinder.init({
+  speech: { engine: 'auto', lang: 'en-US' },
+  ai: {
+    enabled: true,
+    mode: 'hybrid',
+    endpoint: 'http://127.0.0.1:8093/v1/llm/infer',
+    apiKey: '',
+  },
+});
+```
+
+This only activates when the browser itself has no native `SpeechRecognition` - a browser that supports Web Speech natively always uses that first. The server needs a transcription provider configured (currently OpenAI Whisper) behind the sibling `/v1/speech/transcribe` route - see <a href="/docs/server">Server Overview</a>.
+
+<Callout variant="warning" title="No interim results over the server path">
+  Unlike native `SpeechRecognition`, the server-side path can't stream a partial transcript while the user is still speaking - there's a transcript only once recording stops and the upload finishes. That's an honest UX difference, not a bug.
+</Callout>
+
+## Honest expectation
+
+<Callout variant="warning" title="Unsupported browsers without a fallback endpoint configured">
+  With `speech.engine: "browser"` (or no fallback endpoint configured at all), unsupported cases fail clearly and leave text commands fully usable.
+</Callout>
+
+## Related pages
+
+- <a href="/docs/concepts/speech-input">Speech Input</a>
+- <a href="/docs/api/listen">Cinder.listen</a>
+- <a href="/docs/guides/setting-up-the-server">Setting Up the Server</a>

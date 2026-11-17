@@ -1,0 +1,143 @@
+export const meta = {
+  title: 'Quick Start',
+  description: 'Go from zero to first successful command with the minimum useful tagged app surface.',
+  group: 'Getting Started',
+  order: 2,
+};
+
+<Callout variant="info" title="Keep the first proof small">
+  Start with one route, one context, and one or two meaningful controls. The easiest first success is a route plus an action or output on a page you already understand well.
+</Callout>
+
+This quick start is intentionally narrow. The goal is to prove the real local-first path on a website you control:
+
+1. tag a small page
+2. scan the DOM
+3. inspect the graph
+4. run a command
+5. confirm dispatch happened where you expected
+
+## 1. Tag a small page
+
+Start with a real route, one semantic context, one action, one field, and one output.
+
+```html
+<section cinder-route="reports" data-cinder-path="/reports">
+  <div cinder-context="crop-prices">
+    <label for="crop-filter">Crop</label>
+    <select id="crop-filter" cinder-filter="crop">
+      <option value="soybean">Soybean</option>
+      <option value="paddy">Paddy</option>
+    </select>
+
+    <button cinder-action="search">Search</button>
+    <div tabindex="0" cinder-output="price">Price output</div>
+  </div>
+</section>
+```
+
+## 2. Initialize the runtime
+
+```ts
+import { Cinder } from 'usecinder';
+
+await Cinder.init({
+  semantic: {
+    scanOnInit: false,
+    observeMutations: true,
+  },
+  ai: {
+    enabled: false,
+    mode: 'local',
+    endpoint: '',
+    apiKey: '',
+  },
+});
+```
+
+## 3. Scan the page and inspect structure
+
+Once the tagged UI is in the DOM, scan it and inspect both scan output and graph state.
+
+```ts
+const scanResult = await Cinder.scan(document);
+const graph = Cinder.graph();
+
+console.log(scanResult);
+console.log(graph);
+console.log(graph.runtime.activeRouteId, graph.runtime.activeContextId);
+```
+
+### What to verify immediately
+
+- the route node exists
+- the context node exists
+- the action / filter / output nodes exist
+- active route and active context look reasonable
+- there are no surprising warnings in `scanResult.warnings`
+
+## 4. Run a first command through the full runtime path
+
+Use `run()` first so you can inspect intent, dispatch, and reflex output together.
+
+```ts
+const result = await Cinder.run('open reports', document);
+console.log(result.intent, result.dispatch, result.reflex);
+```
+
+Then try an output or action command:
+
+```ts
+await Cinder.run('show price', document);
+await Cinder.run('search', document);
+```
+
+## 5. Inspect the result honestly
+
+<CardGrid>
+  <Card title="Intent">
+    <p>Check whether local resolution selected the right route, action, field, filter, or output.</p>
+  </Card>
+  <Card title="Dispatch">
+    <p>Confirm whether dispatch was handled through DOM behavior, bindings, or a composite multi-step flow.</p>
+  </Card>
+  <Card title="Reflex">
+    <p>Use reflex output to see the user-facing result without guessing what the runtime thought happened.</p>
+  </Card>
+</CardGrid>
+
+## 6. Keep the first path tag-only if possible
+
+For standard browser behavior, the best first proof is still tag-only:
+
+- route navigation by anchor/path metadata
+- field or filter updates by standard inputs
+- actions by button or form submit behavior
+- outputs by focus/reveal behavior
+
+Add bindings, DOM adapters, or custom intent matchers only when the app needs them.
+
+## Good next commands to try
+
+- `open reports`
+- `search`
+- `show price`
+- `set crop to soybean`
+
+## What to do if something looks wrong
+
+1. inspect `Cinder.lastScan()`
+2. inspect `Cinder.graph()`
+3. inspect `Cinder.resolve('your command')`
+4. inspect `await Cinder.dispatch(intent, document)`
+5. only then debug `run()` as the full pipeline
+
+Read <a href="/docs/guides/debugging">Debugging</a> for the full inspection path.
+
+## Next pages
+
+<CardGrid>
+  <PageLinkCard href="/docs/concepts/semantic-tags" title="Semantic Tags" description="Choose stable, meaningful tag keys that improve graph quality and local resolution." />
+  <PageLinkCard href="/docs/guides/scanning-the-app" title="Scanning the App" description="Learn when to scan, how mutation observation behaves, and what scan output is telling you." />
+  <PageLinkCard href="/docs/api/run" title="Cinder.run" description="See the high-level full runtime method that resolves, dispatches, and returns reflex feedback in one call." />
+</CardGrid>
