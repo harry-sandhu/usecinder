@@ -1,0 +1,27 @@
+# Cinder
+
+> Cinder is a semantic runtime for websites you control. Tag real routes, actions,
+> fields, and outputs with plain HTML attributes (cinder-route, cinder-action, etc.),
+> and Cinder resolves text or voice commands against that structure entirely in the
+> browser, before ever reaching an AI model.
+
+Cinder runs in three tiers: a deterministic local graph (Tier 1, free, in-browser),
+a client-side embedding model for typo/paraphrase recovery (Tier 2, free, in-browser),
+and an optional AI fallback for genuinely open-ended requests (Tier 3, paid, via
+Cinder Relay) that only runs when the first two tiers cannot resolve a command.
+Most user commands never leave the browser and never call an AI model.
+
+Install: `npm install usecinder`
+
+## Docs
+
+- [Get started](https://usecinder.dev/get-started): installation and first integration
+- [Documentation](https://usecinder.dev/docs): full reference for routes, actions, fields, and tiers
+- [Agent setup prompt](https://usecinder.dev/get-started/prompt.md): a copy-paste prompt for coding agents to integrate Cinder automatically
+- [Blog](https://usecinder.dev/blog): design rationale and updates
+- [Cinder Relay](https://usecinder.dev/docs/relay): the hosted AI-fallback billing product (Tier 3)
+
+## Source
+
+- [GitHub repository](https://github.com/harry-sandhu/usecinder): source code, license (Elastic License 2.0), issues, and discussions
+- [npm package](https://www.npmjs.com/package/usecinder)
