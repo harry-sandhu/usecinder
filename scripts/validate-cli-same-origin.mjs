@@ -1,6 +1,6 @@
 // Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
 // See LICENSE and NOTICE in the repository root. Do not remove this notice.
-// Coverage for @cinder/cli's same-origin link resolver (packages/cli/src/core/sameOrigin.ts) -
+// Coverage for @usecinder/cli's same-origin link resolver (packages/cli/src/core/sameOrigin.ts) -
 // the crawler's own "don't guess, don't wander off" boundary: cross-origin links, non-http(s)
 // links, and fragment-only duplicates must never reach the crawl queue.
 import { resolveSameOriginLinks } from '../packages/cli/dist/index.js';
@@ -36,7 +36,7 @@ function main() {
   const malformed = resolveSameOriginLinks(pageUrl, ['http://', '/valid-page']);
   assert(malformed.includes('http://localhost:5174/valid-page') && malformed.length === 1, 'Expected a malformed href to be skipped without affecting the rest.');
 
-  console.log('All @cinder/cli same-origin link resolver validations passed.');
+  console.log('All @usecinder/cli same-origin link resolver validations passed.');
 }
 
 main();

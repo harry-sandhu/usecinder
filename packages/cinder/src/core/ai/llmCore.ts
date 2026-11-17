@@ -6,7 +6,7 @@ import {
   type CinderResolutionStep,
   type InferIntentRequest,
   type InferIntentResponse,
-} from "@cinder/shared";
+} from "@usecinder/shared";
 import type {
   CinderConfig,
   CinderFallbackAuthMode,
@@ -96,7 +96,7 @@ function getNodeContextPath(node: CinderGraphNode): string[] | undefined {
 
 /**
  * Richer per-candidate description for tier 3's prompt - see CinderInferGraphNodeDetail's doc
- * comment in @cinder/shared for why (a bare key like "dashboard-tile-disbursed-count" can't be
+ * comment in @usecinder/shared for why (a bare key like "dashboard-tile-disbursed-count" can't be
  * told apart from "dashboard-tile-disbursed-amount" the way their real labels, "Loans disbursed"
  * vs. "Amount disbursed," can). Purely additive - normalizeInferResponseToIntent still
  * re-validates the model's returned key against the real graph regardless of what the prompt

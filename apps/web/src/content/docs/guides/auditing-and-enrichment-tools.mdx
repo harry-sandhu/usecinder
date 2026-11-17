@@ -8,7 +8,7 @@ export const meta = {
 These three functions are exported from `usecinder` alongside the main runtime, but they're developer-run tools, not part of the live command pipeline - nothing here runs automatically, and nothing here is a live AI call against your users' traffic.
 
 <Callout variant="tip" title="cinder integrate runs these for you">
-  If you have `@cinder/cli` installed, <a href="/docs/cli/integrate">`cinder integrate`</a> already runs the untagged-element and weak-label audits across your whole app and writes one consolidated report - you only need these functions directly for a single page, a custom script, or the graph-enrichment step below.
+  If you have `@usecinder/cli` installed, <a href="/docs/cli/integrate">`cinder integrate`</a> already runs the untagged-element and weak-label audits across your whole app and writes one consolidated report - you only need these functions directly for a single page, a custom script, or the graph-enrichment step below.
 </Callout>
 
 ## `auditUntaggedElements(root?)`

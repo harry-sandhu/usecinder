@@ -41,12 +41,12 @@ export interface CinderResolvedIntent {
   steps?: CinderResolutionStep[];
   confidence: number;
   /**
-   * "embedding" is a client-side small-model match (tier 2: @cinder/embeddings) - distinct
+   * "embedding" is a client-side small-model match (tier 2: @usecinder/embeddings) - distinct
    * from "local" (the deterministic graph engine, tier 1) and "cloud" (a real network LLM
    * call, tier 3), since it's neither a graph match nor a network round-trip.
    *
    * "cache" marks a result replayed from the semantic cache
-   * (@cinder/embeddings' createSemanticCachingLlmCore) rather than freshly resolved - a
+   * (@usecinder/embeddings' createSemanticCachingLlmCore) rather than freshly resolved - a
    * previous tier-3 (or other fallback) answer reused because the current input embedded
    * close enough to one already resolved for the same graph state. Kept distinct from
    * "cloud"/"embedding" so callers can tell a replayed answer from a freshly-computed one

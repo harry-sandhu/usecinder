@@ -44,7 +44,7 @@ export interface CinderAliasLearningOptions {
    */
   verifyLearnedMatches?: boolean;
   /** Override for the cross-encoder scoring call used by `verifyLearnedMatches` - defaults to
-   * @cinder/embeddings' own reranker model, swappable for tests. */
+   * @usecinder/embeddings' own reranker model, swappable for tests. */
   verifyFn?: (input: string, candidateText: string) => Promise<number>;
   /** Minimum cross-encoder score margin required over the best different-target competitor
    * among all real same-type candidates. Defaults to the same empirically-calibrated gap

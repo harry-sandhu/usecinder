@@ -1,7 +1,7 @@
 // Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
 // See LICENSE and NOTICE in the repository root. Do not remove this notice.
 // Types shared with a server and any other consumer of the wire/graph contracts live in
-// @cinder/shared, the single source of truth (docs/known-limitations.md #5/#6) - re-exported
+// @usecinder/shared, the single source of truth (docs/known-limitations.md #5/#6) - re-exported
 // here so every existing "../../types.js" import across this package keeps working unchanged.
 // Everything below this block is local to the cinder client package itself (route/cold-graph
 // definitions, DOM adapters, speech, fallback telemetry, runtime events) and has no shared
@@ -42,7 +42,7 @@ import type {
   CinderReflexResult,
   CinderReflexHandler,
   CinderRunResult,
-} from "@cinder/shared";
+} from "@usecinder/shared";
 
 export type {
   CinderAppConfig,
@@ -267,7 +267,7 @@ export type CinderFallbackErrorCode =
   | "invalid_response"
   | "no_intent"
   | "normalization_failed"
-  /** A local (non-network) llm core, e.g. @cinder/embeddings, failed to load or run its model. */
+  /** A local (non-network) llm core, e.g. @usecinder/embeddings, failed to load or run its model. */
   | "model_error";
 
 export interface CinderFallbackResultMeta {

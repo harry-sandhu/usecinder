@@ -16,9 +16,9 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run typecheck
-      - run: npm run typecheck -w @cinder/embeddings
+      - run: npm run typecheck -w @usecinder/embeddings
       - run: npm run build
-      - run: npm run build -w @cinder/embeddings
+      - run: npm run build -w @usecinder/embeddings
       - run: npm run validate:mvp
       - run: npm run validate:red-team
       - run: npm run validate:semantic-cache
@@ -29,4 +29,4 @@ jobs:
       - run: npm run benchmark:local-engine
       # validate:embeddings is intentionally NOT run here - it downloads a real ~23MB model
       # on first run, which doesn't belong in a fast CI loop. Run it explicitly when working
-      # on @cinder/embeddings (npm run validate:embeddings).
+      # on @usecinder/embeddings (npm run validate:embeddings).

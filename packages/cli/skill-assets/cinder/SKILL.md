@@ -35,11 +35,11 @@ step 2's label check:
 
 ### 1. Find untagged elements
 
-Install `@cinder/cli` if it isn't already, then run it against the app's real running dev
+Install `@usecinder/cli` if it isn't already, then run it against the app's real running dev
 server (start the dev server first if needed):
 
 ```
-npx @cinder/cli integrate <the app's real local dev URL>
+npx @usecinder/cli integrate <the app's real local dev URL>
 ```
 
 If the app requires login, every protected route will otherwise just redirect to the login page

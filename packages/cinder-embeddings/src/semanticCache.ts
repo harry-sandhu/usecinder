@@ -29,7 +29,7 @@ const DEFAULT_MAX_ENTRIES = 200;
  */
 const DEFAULT_VERIFY_SHORTLIST_SIZE = Number.POSITIVE_INFINITY;
 /**
- * Same default as @cinder/embeddings' own tier-2 ambiguity gap (DEFAULT_MIN_GAP in index.ts,
+ * Same default as @usecinder/embeddings' own tier-2 ambiguity gap (DEFAULT_MIN_GAP in index.ts,
  * via classifyMatchOutcome) - reused deliberately, not re-derived, since both are the same
  * underlying problem: a single top cosine score is not safe to trust in isolation.
  *
@@ -70,7 +70,7 @@ export interface CinderSemanticCacheOptions {
    * low-risk) with the real false-reuse risk documented above in mind.
    */
   verify?: boolean;
-  /** Override for the cross-encoder scoring call - defaults to @cinder/embeddings' own reranker model, swappable for tests. */
+  /** Override for the cross-encoder scoring call - defaults to @usecinder/embeddings' own reranker model, swappable for tests. */
   verifyFn?: (input: string, candidateText: string) => Promise<number>;
   /** Minimum cross-encoder score margin the verified top entry must have over its best
    * different-answer competitor within the shortlist. Defaults to the same empirically-
@@ -88,7 +88,7 @@ export interface CinderSemanticCacheOptions {
    * `false` to keep the cache in memory only (cleared on reload) - e.g. for tests or SSR.
    */
   storageKey?: string | false;
-  /** Override for generating an input embedding - defaults to @cinder/embeddings' own model, swappable for tests. */
+  /** Override for generating an input embedding - defaults to @usecinder/embeddings' own model, swappable for tests. */
   embedFn?: (text: string) => Promise<Float32Array>;
 }
 
@@ -340,7 +340,7 @@ function reuseIntent(cached: CinderResolvedIntent, localIntent: CinderResolvedIn
  * `minScoreGap` (embedding-level) and `verify` (cross-encoder-level, against real labels) are
  * both independent gates - a hit must clear both to be trusted.
  *
- * Wraps any CinderLlmCore (the real cloud adapter, @cinder/embeddings' own tier-2 core, or a
+ * Wraps any CinderLlmCore (the real cloud adapter, @usecinder/embeddings' own tier-2 core, or a
  * chain of both) so a resolution it produces gets remembered and reused for future inputs that
  * embed close enough to one already seen against the same graph state - the same
  * semantic-caching pattern production LLM-fallback systems use to avoid re-paying for a model

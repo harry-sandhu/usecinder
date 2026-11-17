@@ -1,6 +1,6 @@
 // Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
 // See LICENSE and NOTICE in the repository root. Do not remove this notice.
-// Coverage for @cinder/embeddings (tier 2: a client-side embedding model recovering
+// Coverage for @usecinder/embeddings (tier 2: a client-side embedding model recovering
 // paraphrases/typos tier 1's deterministic graph engine can't resolve).
 //
 // Deliberately NOT part of validate-red-team-suite.mjs's fast chain: this downloads and

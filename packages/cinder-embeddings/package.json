@@ -1,5 +1,5 @@
 {
-  "name": "@cinder/embeddings",
+  "name": "@usecinder/embeddings",
   "version": "0.1.0",
   "description": "Optional tier-2 local fallback for Cinder: a small client-side embedding model recovers typos/paraphrases that the deterministic graph engine couldn't resolve, before ever making a network call. Plugs into Cinder.setLlmCore() - the core usecinder package stays zero-dependency; this package is opt-in.",
   "type": "module",

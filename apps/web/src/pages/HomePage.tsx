@@ -19,7 +19,7 @@ const capabilityCards = [
   },
   {
     title: 'Optional local embeddings (tier 2)',
-    description: 'A free, client-side model (@cinder/embeddings) recovers typos and paraphrases of a page’s own routes/outputs/actions - still before any network call.',
+    description: 'A free, client-side model (@usecinder/embeddings) recovers typos and paraphrases of a page’s own routes/outputs/actions - still before any network call.',
   },
   {
     title: 'Real DOM execution',

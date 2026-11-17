@@ -19,7 +19,7 @@ function assert(condition, message) {
 // across a scenario's test inputs, known upfront), L2-normalized. Fixed-length vectors avoid
 // any positional-comparison mismatch in the module's cosine similarity. Paraphrases sharing
 // most words land close to 1; unrelated sentences land close to 0. Deterministic and
-// network-free, standing in for the real @cinder/embeddings model.
+// network-free, standing in for the real @usecinder/embeddings model.
 function createFakeEmbedder(vocabWords) {
   const vocab = new Map(vocabWords.map((word, index) => [word, index]));
 

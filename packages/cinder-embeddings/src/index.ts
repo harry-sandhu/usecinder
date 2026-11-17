@@ -47,7 +47,7 @@ export interface CinderEmbeddingFallbackOptions {
    * (reranker.ts) instead of just reporting not_resolved. Default false - opt-in, since this
    * pulls in a second small model (~23MB, see reranker.ts's doc comment for why a
    * cross-encoder replaced the originally-planned generative model) that most apps installing
-   * @cinder/embeddings for its primary job (recovering typos/paraphrases) will never need.
+   * @usecinder/embeddings for its primary job (recovering typos/paraphrases) will never need.
    */
   enableTiebreaker?: boolean;
   /** How many top candidates to present to the tiebreak step when escalating. Default 3. */

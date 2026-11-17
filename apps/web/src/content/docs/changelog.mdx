@@ -14,8 +14,8 @@ This changelog tracks major public-facing milestones for the current Cinder cycl
 ### New packages
 
 - `@cinder/relay` - a hosted, metered tier-3 proxy: tier 1/tier 2 stay free, tier 3 is usage-based (prepaid wallet, real token-based cost metering), with a choice of who supplies the AI provider key per project. Backed by a real, persistent Postgres store, real account authentication, and a working dashboard UI at `/relay`. Razorpay payments exist but are not yet verified against a real account.
-- `@cinder/cli` - `cinder integrate` crawls a real running app and audits every page for tagging gaps; `cinder install-skill` installs a Claude Code Skill and an `AGENTS.md` section so a coding agent keeps up with new UI automatically.
-- `@cinder/embeddings` - tier 2: an optional, free, client-side embedding model that recovers typos/paraphrases of a page's routes/outputs/actions before any network call, plus semantic caching and alias-learning utilities.
+- `@usecinder/cli` - `cinder integrate` crawls a real running app and audits every page for tagging gaps; `cinder install-skill` installs a Claude Code Skill and an `AGENTS.md` section so a coding agent keeps up with new UI automatically.
+- `@usecinder/embeddings` - tier 2: an optional, free, client-side embedding model that recovers typos/paraphrases of a page's routes/outputs/actions before any network call, plus semantic caching and alias-learning utilities.
 
 ### SDK additions
 

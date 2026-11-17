@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "usecinder": "^0.1.0",
-    "@cinder/embeddings": "^0.1.0"
+    "@usecinder/embeddings": "^0.1.0"
   },
   "devDependencies": {
     "typescript": "^5.6.3",

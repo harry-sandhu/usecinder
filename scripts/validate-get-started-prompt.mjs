@@ -37,9 +37,9 @@ async function main() {
   // real - not stale names from an earlier design that got renamed since.
   assert(content.includes('npm install usecinder'), 'Expected the real package name "usecinder" (not a stale/renamed package) in the install step.');
   assert(content.includes('import { Cinder } from "usecinder"'), 'Expected the real, documented singleton import shape.');
-  assert(content.includes('npx @cinder/cli integrate'), 'Expected the real @cinder/cli command this session actually built and tested.');
+  assert(content.includes('npx @usecinder/cli integrate'), 'Expected the real @usecinder/cli command this session actually built and tested.');
   assert(content.includes('--storage-state'), 'Expected the real auth-wall flag found necessary by live testing against rupeey.');
-  assert(content.includes('npx @cinder/cli install-skill'), 'Expected the real install-skill command.');
+  assert(content.includes('npx @usecinder/cli install-skill'), 'Expected the real install-skill command.');
   assert(content.includes('.claude/skills/cinder/SKILL.md') && content.includes('AGENTS.md'), 'Expected the real file paths install-skill actually writes.');
 
   // 2. The exact `Cinder.init` snippet given must be real, valid usage - prove it by actually

@@ -49,7 +49,7 @@ Speech input prefers the Web Speech API when it's available. For browsers with n
 
 ## Tier 2 (embeddings) covers routes, outputs, and actions - not fields or filters, yet
 
-The optional `@cinder/embeddings` package recovers typos and paraphrases of a page's route/output/action nodes before any network call, plus a separate, simpler grammar-shape match (and, as a last resort, a small extractive question-answering model) for `set_field`/`set_filter` commands specifically. It never claims the top resolved-exact confidence level - every tier-2 match is reported honestly as a best guess among known candidates, never full certainty. See <a href="/docs/concepts/tier-2-embeddings">Tier 2: Embeddings</a>.
+The optional `@usecinder/embeddings` package recovers typos and paraphrases of a page's route/output/action nodes before any network call, plus a separate, simpler grammar-shape match (and, as a last resort, a small extractive question-answering model) for `set_field`/`set_filter` commands specifically. It never claims the top resolved-exact confidence level - every tier-2 match is reported honestly as a best guess among known candidates, never full certainty. See <a href="/docs/concepts/tier-2-embeddings">Tier 2: Embeddings</a>.
 
 ## Relay is a real, working prototype of hosted billing - not a finished managed service
 

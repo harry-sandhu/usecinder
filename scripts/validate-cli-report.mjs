@@ -1,6 +1,6 @@
 // Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
 // See LICENSE and NOTICE in the repository root. Do not remove this notice.
-// Coverage for @cinder/cli's report builder (packages/cli/src/core/report.ts) - the single
+// Coverage for @usecinder/cli's report builder (packages/cli/src/core/report.ts) - the single
 // consolidated file `cinder integrate` hands off to a coding agent. Pure string-building logic,
 // no browser/network involved.
 import { buildIntegrationReport } from '../packages/cli/dist/index.js';
@@ -77,7 +77,7 @@ function main() {
   assert(!coldNodeReport.includes('` undefined') && !coldNodeReport.includes('`undefined`'), 'Expected no literal "undefined" in the report for a cold node with no live element.');
   assert(coldNodeReport.includes('no live DOM element'), 'Expected an honest, plain-language explanation for a cold node instead.');
 
-  console.log('All @cinder/cli report builder validations passed.');
+  console.log('All @usecinder/cli report builder validations passed.');
 }
 
 main();

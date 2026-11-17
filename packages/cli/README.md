@@ -1,10 +1,10 @@
-# @cinder/cli
+# @usecinder/cli
 
 Automates the Cinder tagging checklist (`docs/prompts/cinder-tagging-checklist.md`) against a
 real running instance of your app, instead of a developer having to run each audit by hand.
 
 ```sh
-npx @cinder/cli integrate http://localhost:3000
+npx @usecinder/cli integrate http://localhost:3000
 ```
 
 This crawls every same-origin page reachable from that URL (one hard navigation per page, with
@@ -28,7 +28,7 @@ await context.storageState({ path: "auth.json" });
 ```
 
 ```sh
-npx @cinder/cli integrate http://localhost:3000/app --storage-state auth.json
+npx @usecinder/cli integrate http://localhost:3000/app --storage-state auth.json
 ```
 
 ## Options
@@ -49,7 +49,7 @@ Cinder audit tool already requires.
 ## `install-skill`: so this doesn't have to be rediscovered every time
 
 ```sh
-npx @cinder/cli install-skill
+npx @usecinder/cli install-skill
 ```
 
 Installs the real Claude Code Skill into `.claude/skills/cinder/SKILL.md` (so any Claude Code

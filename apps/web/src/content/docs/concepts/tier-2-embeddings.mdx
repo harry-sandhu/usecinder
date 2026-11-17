@@ -5,17 +5,17 @@ export const meta = {
   order: 3.5,
 };
 
-Tier 1 (the deterministic graph engine) resolves most commands. `@cinder/embeddings` is tier 2: a small client-side model that catches what tier 1 couldn't, still before any network call - no server, no account, no cost.
+Tier 1 (the deterministic graph engine) resolves most commands. `@usecinder/embeddings` is tier 2: a small client-side model that catches what tier 1 couldn't, still before any network call - no server, no account, no cost.
 
 ## Install
 
 ```bash
-npm install @cinder/embeddings
+npm install @usecinder/embeddings
 ```
 
 ```ts
 import { Cinder } from 'usecinder';
-import { createEmbeddingLlmCore } from '@cinder/embeddings';
+import { createEmbeddingLlmCore } from '@usecinder/embeddings';
 
 Cinder.setLlmCore(createEmbeddingLlmCore(), { requiresNetwork: false });
 ```

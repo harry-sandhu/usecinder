@@ -1,12 +1,12 @@
 // Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
 // See LICENSE and NOTICE in the repository root. Do not remove this notice.
-// Guards docs/known-limitations.md #5/#6 from regressing: @cinder/shared is the single source
+// Guards docs/known-limitations.md #5/#6 from regressing: @usecinder/shared is the single source
 // of truth for contracts shared across packages. This repo has no ESLint config to carry a real
 // lint rule (checked before writing this), so the guard is a plain validate: script in the same
 // style as every other scripts/validate-*.mjs - it fails the moment a NEW type/interface is
-// declared under a name @cinder/shared already owns, instead of being re-exported from it.
+// declared under a name @usecinder/shared already owns, instead of being re-exported from it.
 //
-// A real "export type { X } from '@cinder/shared'" (or "export type { X };" after an
+// A real "export type { X } from '@usecinder/shared'" (or "export type { X };" after an
 // "import type") is NOT a redeclaration - that's exactly the pattern this guard wants to see -
 // so only a genuine `export interface X` / `export type X =` is flagged.
 import { readdirSync, readFileSync, statSync } from 'fs';
@@ -15,7 +15,7 @@ import { join } from 'path';
 const REPO_ROOT = new URL('..', import.meta.url).pathname;
 const SHARED_SRC = join(REPO_ROOT, 'packages/shared/src');
 
-// Packages that depend on @cinder/shared and could therefore redeclare one of its contracts
+// Packages that depend on @usecinder/shared and could therefore redeclare one of its contracts
 // instead of importing it. apps/web is included even though it currently declares none, so a
 // future regression there is caught too.
 const WATCHED_SRC_DIRS = [
@@ -82,7 +82,7 @@ function main() {
   const sharedNames = collectSharedNames();
 
   if (sharedNames.size === 0) {
-    throw new Error('Expected to find at least one real type/interface declared in @cinder/shared - the scan path may be wrong.');
+    throw new Error('Expected to find at least one real type/interface declared in @usecinder/shared - the scan path may be wrong.');
   }
 
   const violations = [];
@@ -102,11 +102,11 @@ function main() {
       (v) => `  - "${v.name}" redeclared in ${v.filePath} (already a real contract in ${v.sharedFilePath})`,
     );
     throw new Error(
-      `Found ${violations.length} type(s) redeclared outside @cinder/shared instead of imported from it:\n${lines.join('\n')}\n\nImport it from "@cinder/shared" and re-export with "export type { Name } from \\"@cinder/shared\\";" instead.`,
+      `Found ${violations.length} type(s) redeclared outside @usecinder/shared instead of imported from it:\n${lines.join('\n')}\n\nImport it from "@usecinder/shared" and re-export with "export type { Name } from \\"@usecinder/shared\\";" instead.`,
     );
   }
 
-  console.log(`No shared-contract drift: checked ${sharedNames.size} @cinder/shared type(s) against ${WATCHED_SRC_DIRS.length} watched package(s).`);
+  console.log(`No shared-contract drift: checked ${sharedNames.size} @usecinder/shared type(s) against ${WATCHED_SRC_DIRS.length} watched package(s).`);
 }
 
 main();

@@ -1,7 +1,7 @@
 // Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
 // See LICENSE and NOTICE in the repository root. Do not remove this notice.
 // Regression for a real bug found via live testing against apps/web (not a synthetic test
-// alone): @cinder/cli's crawler compared a requested URL against the page's landed URL with
+// alone): @usecinder/cli's crawler compared a requested URL against the page's landed URL with
 // raw string equality, so a bare "http://host" (which every browser normalizes to
 // "http://host/" on navigation - not a redirect at all) was wrongly reported as "redirected
 // elsewhere (likely an auth wall)". normalizeUrl (packages/cli/src/core/normalizeUrl.ts) fixes
@@ -26,7 +26,7 @@ function main() {
   // 3. Query string and path must both be preserved through normalization.
   assert(normalizeUrl('http://localhost:5174/app/loans?status=active') === 'http://localhost:5174/app/loans?status=active', 'Expected path and query string to survive normalization unchanged.');
 
-  console.log('All @cinder/cli URL normalization validations passed.');
+  console.log('All @usecinder/cli URL normalization validations passed.');
 }
 
 main();

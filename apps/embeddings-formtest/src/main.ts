@@ -1,7 +1,7 @@
 // Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
 // See LICENSE and NOTICE in the repository root. Do not remove this notice.
 import { Cinder, classifyRunResult } from "usecinder";
-import { createEmbeddingLlmCore } from "@cinder/embeddings";
+import { createEmbeddingLlmCore } from "@usecinder/embeddings";
 import { pipeline } from "@huggingface/transformers";
 
 declare global {

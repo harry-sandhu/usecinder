@@ -67,11 +67,11 @@ exhaustive sweep. Step 4 finds everything this step missed.
 
 ## 4. Run the real tagging checklist against the running app
 
-Install `@cinder/cli` and run it against this app's own real dev server (start the dev server
+Install `@usecinder/cli` and run it against this app's own real dev server (start the dev server
 first if it isn't already running):
 
 ```
-npx @cinder/cli integrate <this app's real local dev URL>
+npx @usecinder/cli integrate <this app's real local dev URL>
 ```
 
 This crawls every real same-origin page it can reach and writes one consolidated
@@ -103,7 +103,7 @@ tagged, with a real, matching key) before concluding anything is broken in Cinde
 ## 6. Install the Cinder skill, so this doesn't have to be rediscovered next time
 
 ```
-npx @cinder/cli install-skill
+npx @usecinder/cli install-skill
 ```
 
 This writes `.claude/skills/cinder/SKILL.md` (so any Claude Code session opened in this repo

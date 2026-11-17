@@ -1,6 +1,6 @@
 // Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
 // See LICENSE and NOTICE in the repository root. Do not remove this notice.
-// Coverage for @cinder/embeddings' constrained cross-encoder tiebreak stage (reranker.ts +
+// Coverage for @usecinder/embeddings' constrained cross-encoder tiebreak stage (reranker.ts +
 // its wiring into createEmbeddingLlmCore in index.ts) - the rare second stage that only runs
 // when the embedding stage itself reports a genuine near-tie ("ambiguous"), never on a clean
 // win or a clean miss. See reranker.ts's doc comment for why this replaced an originally

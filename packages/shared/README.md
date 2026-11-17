@@ -1,7 +1,7 @@
-# @cinder/shared
+# @usecinder/shared
 
 Shared contracts, graph primitives, tags, intents, and config types used across the Cinder
-ecosystem (`usecinder`, `@cinder/cli`, `@cinder/embeddings`). You almost certainly don't need to
+ecosystem (`usecinder`, `@usecinder/cli`, `@usecinder/embeddings`). You almost certainly don't need to
 install this directly - it's a dependency of the packages above.
 
 Docs and the full product site: **https://usecinder.dev**

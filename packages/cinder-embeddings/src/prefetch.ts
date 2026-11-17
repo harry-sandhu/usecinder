@@ -23,7 +23,7 @@ import { getEmbedder } from "./model.js";
  * Call this once during your app's own startup if you want tier 2 pre-warmed. It is NOT
  * called automatically by createEmbeddingLlmCore() - creating that core has no side
  * effects; starting a background download is a deliberate choice the embedding app makes,
- * not something installing @cinder/embeddings does implicitly.
+ * not something installing @usecinder/embeddings does implicitly.
  */
 
 export interface CinderEmbeddingPrefetchOptions {

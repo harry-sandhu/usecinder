@@ -7,7 +7,7 @@ import { fileURLToPath } from "url";
 /**
  * The Claude Code Skill (and the AGENTS.md section below) ship as a bundled asset inside this
  * package - not generated on the fly - so the installed content is exactly what was reviewed
- * and tested, the same reasoning @cinder/cli's own report-building logic already follows for
+ * and tested, the same reasoning @usecinder/cli's own report-building logic already follows for
  * its own output.
  */
 const AGENTS_MD_MARKER_START = "<!-- cinder:agents-md:start -->";
@@ -36,7 +36,7 @@ function buildAgentsMdBlock(): string {
       "or interactive controls, run the real tagging checklist against the running dev server:",
     "",
     "```",
-    "npx @cinder/cli integrate <the app's real local dev URL>",
+    "npx @usecinder/cli integrate <the app's real local dev URL>",
     "```",
     "",
     "Apply the findings in the resulting `cinder-integration-report.md` with real judgment - " +

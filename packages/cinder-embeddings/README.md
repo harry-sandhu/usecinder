@@ -1,4 +1,4 @@
-# @cinder/embeddings
+# @usecinder/embeddings
 
 Optional tier 2 for Cinder: a free, client-side embedding model that recovers typos and
 paraphrases of a page's own routes/outputs/actions before any network call - no server, no
@@ -9,12 +9,12 @@ Docs and the full product site: **https://usecinder.dev/docs/concepts/tier-2-emb
 ## Install
 
 ```bash
-npm install @cinder/embeddings
+npm install @usecinder/embeddings
 ```
 
 ```ts
 import { Cinder } from 'usecinder';
-import { createEmbeddingLlmCore } from '@cinder/embeddings';
+import { createEmbeddingLlmCore } from '@usecinder/embeddings';
 
 Cinder.setLlmCore(createEmbeddingLlmCore(), { requiresNetwork: false });
 ```
