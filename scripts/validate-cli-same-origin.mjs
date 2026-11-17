@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 // Coverage for @cinder/cli's same-origin link resolver (packages/cli/src/core/sameOrigin.ts) -
 // the crawler's own "don't guess, don't wander off" boundary: cross-origin links, non-http(s)
 // links, and fragment-only duplicates must never reach the crawl queue.

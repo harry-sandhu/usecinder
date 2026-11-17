@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 import { Link } from 'react-router-dom';
 import { CinderHomepageDemo } from '@/components/cinder/CinderHomepageDemo';
 import { PageMetadata } from '@/components/seo/PageMetadata';
@@ -321,7 +323,7 @@ console.log(result.intent, result.dispatch, result.reflex);`}
               {[
                 { title: 'Usage-based, not a subscription', description: 'Priced from the provider’s real token usage, not a flat fee or a character-count guess.' },
                 { title: 'A failed call is never billed', description: 'The balance is only debited after a real, successful response comes back.' },
-                { title: 'Self-host or use a hosted instance', description: 'The same open @cinder/server fallback pipeline, wrapped with real accounts and billing.' },
+                { title: 'A hosted fallback pipeline', description: 'Real accounts, real metering, and real billing, already wired up - point your app at it and go.' },
               ].map((point) => (
                 <div key={point.title} className="rounded-2xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-800 dark:bg-slate-900">
                   <h3 className="text-base font-semibold text-slate-950 dark:text-white">{point.title}</h3>

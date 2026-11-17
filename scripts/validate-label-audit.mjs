@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 // Coverage for auditLabelQuality (packages/cinder/src/core/tools/labelAudit.ts) - the detector
 // behind docs/prompts/fix-weak-cinder-labels.md. Found necessary by real testing
 // (docs/known-limitations.md §27): some real nodes in apps/web turned out to have no real

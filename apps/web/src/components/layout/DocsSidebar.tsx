@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 import { useEffect, useRef } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { getDocsNavigation } from '@/lib/docs/docs';
@@ -26,9 +28,9 @@ const quickPaths = [
     description: 'See runtime methods, hooks, extension points, and lifecycle APIs.',
   },
   {
-    href: '/docs/server',
-    title: 'Add bounded fallback',
-    description: 'Use the server path only after the local-first browser path already works.',
+    href: '/docs/relay',
+    title: 'Add tier-3 AI fallback',
+    description: 'Use Relay only after the local-first browser path (tier 1 + tier 2) already works.',
   },
 ];
 

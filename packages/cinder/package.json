@@ -2,7 +2,7 @@
   "name": "usecinder",
   "version": "0.1.0",
   "type": "module",
-  "license": "MIT",
+  "license": "Elastic-2.0",
   "description": "Cinder: a semantic runtime for websites you control. Tag the app, build a local graph, resolve commands locally, and fall back to AI only when genuinely needed.",
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
+    "postbuild": "node ../../scripts/stamp-dist-banner.mjs ./dist",
     "clean": "rm -rf dist",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   }

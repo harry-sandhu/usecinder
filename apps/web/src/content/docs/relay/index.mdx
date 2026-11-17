@@ -10,7 +10,7 @@ export const meta = {
   `@cinder/relay` is a real, working prototype of this billing/metering model, not a hands-off managed service yet. See [known limitations](/docs/known-limitations) before putting real money behind it.
 </Callout>
 
-`@cinder/relay` exists to remove the friction of self-hosting `@cinder/server` for tier-3 fallback. It reuses - not modifies - the existing `createCloudAdapter`/prompt-builder/response-parser pipeline from `@cinder/server`, wrapped with real accounts, metering, and billing.
+`@cinder/relay` is the only way to add tier-3 AI fallback to a Cinder app: a hosted, metered proxy with real accounts, metering, and billing already built in.
 
 ## The model
 
@@ -21,17 +21,9 @@ export const meta = {
   - `"developer"` - your own key, stored once, reused for every call.
   - `"end_user"` - never stored. Arrives with each request via the `x-end-user-ai-key` header, since it belongs to whoever is using the app, not to the developer's account.
 
-## Run it yourself, or point at a hosted instance
+## Connecting your app
 
-Relay ships as its own package with a `cinder-relay` bin entry point:
-
-```bash
-DATABASE_URL="postgres://..." npx cinder-relay
-```
-
-Omitting `DATABASE_URL` falls back to an in-memory store - fine for local development, but every project and balance is lost on restart. See the pages in this section for the full setup, including real Razorpay payments.
-
-Once a server is running, point your app's Cinder config at it the same way you'd point at any `@cinder/server` instance - Relay speaks the same `/v1/llm/infer`-shaped fallback contract, just gated behind a project API key instead of a flat bearer secret.
+Point your app's `Cinder.init()` config at a hosted Relay instance's `/v1/relay/infer` endpoint, using a project's API key as the bearer token. See the pages in this section for account/project setup and billing.
 
 ## Key pages
 

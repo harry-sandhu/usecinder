@@ -19,9 +19,10 @@ then install the one required package:
 - bun: `bun add usecinder`
 
 `usecinder` is the whole browser runtime (the exported singleton is still called `Cinder` -
-only the npm package name is `usecinder`). Nothing else is required for the local-first path -
-install `@cinder/server` later, and only if this app wants cloud fallback for requests local
-resolution can't handle.
+only the npm package name is `usecinder`). Nothing else is required for the local-first path.
+Tier-3 AI fallback (for requests local resolution can't handle) requires a Cinder Relay
+project - see https://usecinder.dev/docs/relay - and is a separate, later step, not part of
+this first-proof pass.
 
 ## 2. Initialize the runtime once, at the app's real entry point
 

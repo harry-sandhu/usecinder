@@ -45,7 +45,7 @@ A fallback result can still be rejected if it cannot be safely grounded to the r
 
 ## Browser speech still depends on platform support
 
-Speech input prefers the Web Speech API when it's available. For browsers with no Web Speech API at all (Firefox, older Safari), setting `speech.engine: "auto"` and configuring a self-hosted `@cinder/server` endpoint (the same one already used for text tier-3 fallback) enables a server-side recording-and-transcription path instead - see <a href="/docs/concepts/speech-input">Speech Input</a>. This is `@cinder/server`-only today; `@cinder/relay` has no speech-transcription route. It cannot stream interim results the way the Web Speech API can: there's a transcript only once recording stops and the upload finishes, not a running partial transcript while the user is still speaking. That's an honest UX difference, not a bug to chase.
+Speech input prefers the Web Speech API when it's available. For browsers with no Web Speech API at all (Firefox, older Safari), setting `speech.engine: "auto"` with a configured fallback endpoint enables a server-side recording-and-transcription path instead - see <a href="/docs/concepts/speech-input">Speech Input</a>. It cannot stream interim results the way the Web Speech API can: there's a transcript only once recording stops and the upload finishes, not a running partial transcript while the user is still speaking. That's an honest UX difference, not a bug to chase. **Cinder Relay does not implement speech transcription today** - there is currently no publicly available server offering this path.
 
 ## Tier 2 (embeddings) covers routes, outputs, and actions - not fields or filters, yet
 

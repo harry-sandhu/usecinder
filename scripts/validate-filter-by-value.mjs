@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 // Coverage for the "filter by X" planner (core/cie/planners/filterByValue.ts): recognizes
 // value-only filter phrasing ("filter by overdue", "show only active") that matchSetValuePlanner
 // can't ("set X to Y" needs the field named in the sentence). See the module's own doc comment

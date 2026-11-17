@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 import type { CinderSiteManifest } from 'usecinder';
 import { docsPages, getDocsNavigation } from '@/lib/docs/docs';
 import { getWebCinderRoute, webCinderRoutes } from './routes';

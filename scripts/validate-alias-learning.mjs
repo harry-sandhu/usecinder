@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 // Coverage for createAliasLearningLlmCore (packages/cinder-embeddings/src/aliasLearning.ts) -
 // "tier 3 teaches tier 2": once a cloud/tier-3 core resolves something, the input text is taught
 // back as a new REAL alias on the resolved node, so a future similar input is recognized

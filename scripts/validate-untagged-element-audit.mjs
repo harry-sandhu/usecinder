@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 // Coverage for auditUntaggedElements (packages/cinder/src/core/tools/untaggedElementAudit.ts) -
 // the other half of the tagging checklist alongside auditLabelQuality: finds real interactive
 // elements that have NO cinder-* tag at all, which never show up in a Cinder graph snapshot and

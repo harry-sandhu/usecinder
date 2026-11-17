@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 import { Link } from 'react-router-dom';
 import { PageMetadata } from '@/components/seo/PageMetadata';
 import { Badge } from '@/components/ui/Badge';
@@ -43,9 +45,9 @@ const howItWorks = [
       'The balance is only ever debited after a real, successful response comes back. An error on the provider’s side costs you nothing.',
   },
   {
-    title: 'Self-host or let us run it',
+    title: 'A real, hosted AI fallback pipeline',
     description:
-      'Relay is the same open @cinder/server fallback pipeline, wrapped with real accounts, metering, and billing. Run cinder-relay yourself, or point your app at a hosted instance - your data, your choice.',
+      'Relay normalizes real provider output back into your app’s graph, with real accounts, metering, and billing - point your app at a hosted Relay instance and you’re done.',
   },
 ];
 

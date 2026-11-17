@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 // Guards docs/known-limitations.md #5/#6 from regressing: @cinder/shared is the single source
 // of truth for contracts shared across packages. This repo has no ESLint config to carry a real
 // lint rule (checked before writing this), so the guard is a plain validate: script in the same
@@ -18,7 +20,6 @@ const SHARED_SRC = join(REPO_ROOT, 'packages/shared/src');
 // future regression there is caught too.
 const WATCHED_SRC_DIRS = [
   'packages/cinder/src',
-  'packages/server/src',
   'packages/cinder-embeddings/src',
   'apps/web/src',
 ].map((relativePath) => join(REPO_ROOT, relativePath));

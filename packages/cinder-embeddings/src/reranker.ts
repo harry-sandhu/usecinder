@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 /**
  * Constrained tiebreak arbitration - the rare, lazy-loaded second stage of tier 2, invoked
  * only when the embedding stage (similarity.ts) classifies its result as "ambiguous": a

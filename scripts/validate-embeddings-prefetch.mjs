@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 // Coverage for the connection-aware prefetch decision (@cinder/embeddings'
 // shouldSkipPrefetchForConnection, prefetch.ts). This is the one piece of the
 // idle-prefetch/Network-Information-API design (docs/local-engine-fully-fledged-plan.md

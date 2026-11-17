@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 import { useEffect, useMemo, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { getWebCinderRouteAttributes, getWebCinderRouteAttributesForHref } from '@/lib/cinder/routes';
@@ -17,7 +19,7 @@ const suggestedLinks = [
   { href: '/docs/guides/tagging-a-page', title: 'Tagging a Page' },
   { href: '/docs/guides/using-route-registry', title: 'Using Route Registry' },
   { href: '/docs/guides/understanding-fallback-telemetry', title: 'Fallback Telemetry' },
-  { href: '/docs/server', title: 'Server Overview' },
+  { href: '/docs/relay', title: 'Relay Overview' },
 ];
 
 export function DocsSearchDialog({ open, query, onClose, onQueryChange }: DocsSearchDialogProps) {

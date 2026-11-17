@@ -2,7 +2,7 @@
   "name": "@cinder/shared",
   "version": "0.1.0",
   "type": "module",
-  "license": "MIT",
+  "license": "Elastic-2.0",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
@@ -16,6 +16,7 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json",
+    "postbuild": "node ../../scripts/stamp-dist-banner.mjs ./dist",
     "clean": "rm -rf dist",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   }

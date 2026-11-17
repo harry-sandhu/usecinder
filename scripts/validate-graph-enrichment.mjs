@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 // Coverage for the Graph Enrichment AI's producer half (docs/mvp-phase-plan.md Phase 12,
 // docs/known-limitations.md #2/#7): exportGraphForEnrichment (core/tools/graphEnrichment.ts)
 // turns a real scanned snapshot into an LLM-readable summary, and registerColdGraph (the

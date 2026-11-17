@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 /**
  * Resolves a page's raw `<a href>` values against the page's own URL, keeping only real,
  * same-origin, http(s) pages - never cross-origin links (never crawl someone else's site just

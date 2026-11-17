@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 
@@ -55,11 +57,11 @@ const checks = [
     ],
   },
   {
-    path: 'src/content/docs/server/infer-endpoint.mdx',
+    path: 'src/content/docs/relay/infer-endpoint.mdx',
     requiredSnippets: [
-      '400 Bad Request',
-      '502 Bad Gateway',
-      'Authorization: Bearer <API_KEY>',
+      'POST /v1/relay/infer',
+      'x-end-user-ai-key',
+      'Authorization: Bearer <project apikey>',
     ],
   },
   {

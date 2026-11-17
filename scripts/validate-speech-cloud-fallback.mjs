@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 // Coverage for the client-side half of the speech-to-text fallback (docs/known-limitations.md
 // #3): createSpeechEngine's new branch in core/input/speechEngine.ts + the recording/upload
 // logic in core/input/speechCloudFallback.ts. No real browser, no real microphone, no real

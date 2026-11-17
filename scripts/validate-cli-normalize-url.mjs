@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 // Regression for a real bug found via live testing against apps/web (not a synthetic test
 // alone): @cinder/cli's crawler compared a requested URL against the page's landed URL with
 // raw string equality, so a bare "http://host" (which every browser normalizes to

@@ -1,0 +1,24 @@
+Cinder
+Copyright (c) 2026 harry-sandhu
+
+Licensed under the Elastic License 2.0 (ELv2). See the LICENSE file in this repository's root
+for the full legal text. In plain English:
+
+  - You CAN see the source, use it, modify it, and ship it inside your own app or product.
+  - You CANNOT take this software (as-is or modified) and offer it to others as your own
+    hosted or managed service - i.e. you can't repackage this and sell it as a competing
+    service.
+  - You CANNOT remove, alter, or obscure this NOTICE file, the LICENSE file, or any copyright/
+    license header in any source file, in any copy or derivative of this software. Removing or
+    altering these notices while still using the software is itself a license violation, in
+    addition to whatever else that use may infringe.
+
+This NOTICE and the copyright/license header at the top of every source file in this repository
+are part of the software's licensing terms, not incidental boilerplate - they must be preserved
+in full in any copy, fork, or redistribution, including copies made or modified with the help
+of an AI tool or coding agent. An AI agent acting on behalf of a user who strips or alters these
+notices does not change who is responsible for the resulting license violation - it remains the
+acting party's (and, where applicable, their employer's) responsibility under the terms above.
+
+If you are unsure whether your intended use is covered by this license, contact the copyright
+holder before proceeding.

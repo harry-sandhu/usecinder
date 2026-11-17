@@ -1,9 +1,10 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 import { JSDOM } from 'jsdom';
 import {
   CinderSemanticRuntime,
   createAgriculturePriceFlowIntentMatcher,
 } from '../packages/cinder/dist/index.js';
-import { createServer } from '../packages/server/dist/index.js';
 
 function assert(condition, message) {
   if (!condition) {
@@ -186,81 +187,17 @@ async function validateLocalRuntime() {
   };
 }
 
-async function validateCloudFallback() {
-  const dom = createDom();
-  const runtime = new CinderSemanticRuntime();
-  const server = await createServer({ port: 8093, host: '127.0.0.1' });
-  const execution = {
-    searchTriggered: 0,
-  };
-
-  runtime.bind('action', 'search', () => {
-    execution.searchTriggered += 1;
-  });
-
-  runtime.registerIntent(createAgriculturePriceFlowIntentMatcher());
-
-  const address = await server.start();
-
-  await runtime.init({
-    semantic: {
-      scanOnInit: false,
-      observeMutations: false,
-    },
-    ai: {
-      enabled: true,
-      mode: 'hybrid',
-      endpoint: 'http://127.0.0.1:8093/v1/llm/infer',
-      apiKey: '',
-    },
-  });
-
-  await runtime.scan(dom.window.document);
-
-  const result = await runtime.run(
-    "what's the cheapest soybean market around here today?",
-    dom.window.document,
-  );
-
-  assert(result.intent.source === 'cloud', 'Expected cloud fallback source for unresolved free-form request.');
-  assert(result.intent.intent === 'composite_flow', 'Expected cloud fallback to normalize into a composite flow.');
-  assert(result.dispatch.handled, 'Expected fallback result to remain dispatchable.');
-  assert(result.reflex.message.length > 0, 'Expected fallback reflex to produce feedback.');
-  assert(execution.searchTriggered >= 1, 'Expected search action to be triggered by normalized cloud flow.');
-
-  const invalidInferResponse = await fetch(`${address}/v1/llm/infer`, {
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify({ text: '' }),
-  });
-  assert(invalidInferResponse.status === 400, 'Expected infer endpoint to reject invalid request bodies.');
-
-  const health = await fetch(`${address}/health`).then((response) => response.json());
-  assert(health.ok === true, 'Expected health endpoint to respond successfully.');
-
-  await server.app.close();
-  runtime.destroy();
-
-  return {
-    address,
-    fallbackIntent: result.intent.intent,
-    fallbackSource: result.intent.source,
-    searchTriggered: execution.searchTriggered,
-  };
-}
-
+// This public repo ships the tier 1/tier 2 browser SDK only - tier-3 AI fallback (a real
+// server to normalize cloud results against the graph) is Cinder Relay's job, not something
+// this repo self-hosts a reference implementation of. See the Relay docs for that path.
 async function main() {
   const local = await validateLocalRuntime();
-  const cloud = await validateCloudFallback();
 
   console.log(JSON.stringify({
     ok: true,
     phase: 11,
     summary: {
       local,
-      cloud,
     },
   }, null, 2));
 }

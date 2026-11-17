@@ -17,7 +17,7 @@
     "dist",
     "skill-assets"
   ],
-  "license": "MIT",
+  "license": "Elastic-2.0",
   "dependencies": {
     "usecinder": "0.1.0",
     "jsdom": "^26.1.0",
@@ -25,6 +25,7 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
+    "postbuild": "node ../../scripts/stamp-dist-banner.mjs ./dist",
     "clean": "rm -rf dist",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },

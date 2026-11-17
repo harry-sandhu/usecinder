@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 import { Outlet } from 'react-router-dom';
 import { CinderRouteRegistry } from '@/components/cinder/CinderRouteRegistry';
 import { CinderSdkBootstrap } from '@/components/cinder/CinderSdkBootstrap';

@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 // Adversarial coverage for today's new code paths - generic composite splitting,
 // verb synonyms, the "affects"/"depends_on" declared-edge resolution, and confidence
 // calibration - none of which the existing validate-*.mjs/red-team suite exercises,

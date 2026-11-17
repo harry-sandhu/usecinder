@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 import type {
   CinderSpeechError,
   CinderSpeechErrorHandler,
@@ -290,7 +292,7 @@ export function createSpeechEngine(defaultLang = "en-US"): CinderSpeechEngine {
       }
 
       const message =
-        "Speech recognition is not supported in this environment. Check whether SpeechRecognition/webkitSpeechRecognition exists on the page window, or configure speech.engine \"auto\" with a self-hosted @cinder/server endpoint for the cloud fallback (MediaRecorder/getUserMedia are also required for that path).";
+        "Speech recognition is not supported in this environment. Check whether SpeechRecognition/webkitSpeechRecognition exists on the page window, or configure speech.engine \"auto\" with a self-hosted fallback server endpoint for the cloud fallback (MediaRecorder/getUserMedia are also required for that path).";
       status = "unsupported";
       await emitError(createSpeechError("unsupported", message));
       return {

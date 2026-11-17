@@ -49,13 +49,17 @@ await Cinder.init({
   ai: {
     enabled: true,
     mode: 'hybrid',
-    endpoint: 'http://127.0.0.1:8093/v1/llm/infer',
+    endpoint: 'https://your-fallback-host/v1/llm/infer',
     apiKey: '',
   },
 });
 ```
 
-This only activates when the browser itself has no native `SpeechRecognition` - a browser that supports Web Speech natively always uses that first. The server needs a transcription provider configured (currently OpenAI Whisper) behind the sibling `/v1/speech/transcribe` route - see <a href="/docs/server">Server Overview</a>.
+This only activates when the browser itself has no native `SpeechRecognition` - a browser that supports Web Speech natively always uses that first. It needs a server implementing a sibling `/v1/speech/transcribe` route behind that same endpoint, with a transcription provider configured (OpenAI Whisper).
+
+<Callout variant="warning" title="Not currently part of Relay">
+  Cinder Relay does not implement speech transcription today - this path is documented for the underlying mechanism, but there is currently no publicly available server offering it.
+</Callout>
 
 <Callout variant="warning" title="No interim results over the server path">
   Unlike native `SpeechRecognition`, the server-side path can't stream a partial transcript while the user is still speaking - there's a transcript only once recording stops and the upload finishes. That's an honest UX difference, not a bug.
@@ -71,4 +75,4 @@ This only activates when the browser itself has no native `SpeechRecognition` - 
 
 - <a href="/docs/concepts/speech-input">Speech Input</a>
 - <a href="/docs/api/listen">Cinder.listen</a>
-- <a href="/docs/guides/setting-up-the-server">Setting Up the Server</a>
+- <a href="/docs/relay">Relay Overview</a>

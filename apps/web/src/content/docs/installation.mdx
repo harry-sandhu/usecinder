@@ -46,13 +46,10 @@ None of these are required for the local-first path - add them only when you nee
 | Package | Install when you want | More |
 | --- | --- | --- |
 | `@cinder/embeddings` | Tier 2: a free, client-side model that recovers typos/paraphrases before any network call | <a href="/docs/concepts/tier-2-embeddings">Tier 2: Embeddings</a> |
-| `@cinder/server` | Tier 3: self-hosted bounded fallback inference | <a href="/docs/guides/setting-up-the-server">Setting Up the Server</a> |
-| `@cinder/relay` | Tier 3, hosted and metered - skip running your own server | <a href="/docs/relay">Relay Overview</a> |
+| `@cinder/relay` | Tier 3: hosted, metered AI fallback - the only way to add tier-3 fallback | <a href="/docs/relay">Relay Overview</a> |
 | `@cinder/cli` (dev-only) | Crawl your real app and audit every page for tagging gaps | <a href="/docs/cli">CLI Overview</a> |
 
 ```bash
-npm install @cinder/server
-# or
 npm install @cinder/relay
 ```
 
@@ -115,7 +112,7 @@ console.log(result.intent, result.dispatch, result.reflex);
 
 ## When to enable fallback
 
-Enable fallback only after the local path is already working for your common commands.
+Enable fallback only after the local path is already working for your common commands. Tier-3 AI fallback requires a [Relay](/docs/relay) project - create one, then point `ai.endpoint` at it:
 
 ```ts
 await Cinder.init({
@@ -126,8 +123,8 @@ await Cinder.init({
   ai: {
     enabled: true,
     mode: 'hybrid',
-    endpoint: 'http://localhost:8093/v1/llm/infer',
-    apiKey: '',
+    endpoint: 'https://your-relay-host/v1/relay/infer',
+    apiKey: 'ck_your_relay_project_api_key',
     provider: 'custom',
     timeoutMs: 10000,
   },

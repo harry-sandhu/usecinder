@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 import { mergeConfig } from "../../config.js";
 import type {
   CinderBindingHandler,
@@ -677,7 +679,7 @@ export class CinderSemanticRuntime {
 
   /**
    * Wires up CinderSpeechConfig.engine's "auto" value (docs/known-limitations.md #3): reuses
-   * the SAME self-hosted @cinder/server endpoint already configured for text tier-3 fallback
+   * the SAME self-hosted fallback server endpoint already configured for text tier-3 fallback
    * (config.ai), never a separate config surface - an app that already works for text
    * fallback gets speech fallback for free by setting speech.engine to "auto". Returns
    * undefined (no fallback offered) when engine is explicitly "browser", or when no endpoint

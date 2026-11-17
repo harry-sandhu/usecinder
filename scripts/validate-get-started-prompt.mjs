@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 // Coverage for apps/web/public/get-started/prompt.md - the agent-fetchable onboarding file at
 // https://usecinder.dev/get-started/prompt.md, mirroring the same pattern Neon ships at
 // https://neon.com/get-started/prompt.md (fetched and followed directly this session). A

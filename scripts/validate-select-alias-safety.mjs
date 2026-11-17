@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 // Regression for a real bug found via live testing against the rupeey CRM (not anticipated in
 // advance): a <select>-backed filter/field got its ENTIRE textContent (every <option>'s text,
 // concatenated with no separator - real JSX output has no whitespace between sibling elements)

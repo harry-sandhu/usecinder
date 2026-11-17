@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 import { writeFile } from "fs/promises";
 import { resolve } from "path";
 import { crawlAndAudit } from "../core/crawl.js";

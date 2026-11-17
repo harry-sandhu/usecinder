@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 import { useEffect } from 'react';
 import { SITE_NAME, SITE_OG_IMAGE, SITE_THEME_COLOR_DARK, SITE_THEME_COLOR_LIGHT, SITE_URL } from '@/lib/seo/site';
 

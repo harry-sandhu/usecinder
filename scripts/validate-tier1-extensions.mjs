@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 // Coverage for the two bounded tier-1 additions decided in docs/known-limitations.md #1:
 // clearFilter.ts (negation's one free-to-special-case shape - undoing a filter) and
 // numericComparison.ts ("amount over 100" phrasing without "set...to"). Both reuse existing

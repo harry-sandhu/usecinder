@@ -27,16 +27,15 @@ See [the quick start](https://usecinder.dev/docs/quick-start) for a real first i
 - `packages/shared` — shared contracts, graph primitives, tags, intents, and config types
 - `packages/cinder` — core runtime implementation, published to npm as `usecinder`
 - `packages/cinder-embeddings` — optional tier 2: a free, client-side embedding model (`@cinder/embeddings`)
-- `packages/server` — optional, self-hosted tier-3 fallback server (`@cinder/server`)
 - `packages/cli` — developer-run tagging audit and coding-agent integration tool (`@cinder/cli`)
 - `apps/web` — docs/marketing website (usecinder.dev)
 - `apps/react-formtest`, `apps/vue-formtest`, `apps/embeddings-formtest` — minimal real integration examples
 - `docs/prompts/` — agent-runnable tagging/enrichment checklists referenced from the docs site
 
-Cinder Relay (`@cinder/relay`), a separately hosted and metered tier-3 proxy, lives in a private
-repo - see [the Relay docs](https://usecinder.dev/docs/relay) for what it does and how to use it.
-Nothing here depends on it; `config.ai.endpoint` can point at a self-hosted `@cinder/server`
-instance just as well.
+Tier 1 (local graph) and tier 2 (`@cinder/embeddings`) are entirely free and run in the browser.
+Tier-3 AI fallback is available exclusively through **Cinder Relay**, a hosted, metered service -
+see [the Relay docs](https://usecinder.dev/docs/relay). Relay's implementation is not part of
+this repo.
 
 ## Main scripts
 
@@ -50,4 +49,7 @@ From the repo root:
 
 ## License
 
-MIT - see [LICENSE](./LICENSE).
+[Elastic License 2.0](./LICENSE) (ELv2) - see also [NOTICE](./NOTICE). You can see the source,
+use it, and modify it. You cannot repackage this software (as-is or modified) and offer it to
+others as your own hosted/managed service, and you cannot remove or obscure the license headers
+in the source or compiled output.

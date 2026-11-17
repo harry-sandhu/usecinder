@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 import { Link, useLocation } from 'react-router-dom';
 import { PageMetadata } from '@/components/seo/PageMetadata';
 import { mdxComponents } from '@/components/mdx/MdxComponents';

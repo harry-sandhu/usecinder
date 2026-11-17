@@ -84,18 +84,12 @@ A cloud result should not silently choose the wrong duplicate target.
 
 If normalization cannot safely ground the provider output to one real node, the runtime should reject the fallback result instead of guessing.
 
-## Self-host, or use a hosted fallback server
+## Tier 3 is Relay
 
-`config.ai.endpoint` can point at either of two real servers that speak the exact same fallback contract:
-
-- **`@cinder/server`** - run it yourself, with your own provider key and no metering. See <a href="/docs/guides/setting-up-the-server">Setting Up the Server</a>.
-- **`@cinder/relay`** - a hosted, metered alternative if you don't want to run your own server: tier 3 is usage-based, and you choose whether your own key or your app's end user's key is used per call. See <a href="/docs/relay">Relay Overview</a>.
-
-Switching between the two is just a config change - neither one is a dead end if you start with the other.
+`config.ai.endpoint` points at [Cinder Relay](/docs/relay) - a hosted, metered tier-3 proxy: tier 3 is usage-based, and you choose whether your own provider key or your app's end user's key is used per call.
 
 ## Related pages
 
-- <a href="/docs/guides/setting-up-the-server">Setting Up the Server</a>
 - <a href="/docs/relay">Relay Overview</a>
 - <a href="/docs/api/on">Cinder.on</a>
-- <a href="/docs/server/infer-endpoint">Infer Endpoint</a>
+- <a href="/docs/relay/infer-endpoint">Infer Endpoint</a>

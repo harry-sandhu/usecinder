@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 // Coverage for createSemanticCachingLlmCore (packages/cinder-embeddings/src/semanticCache.ts) -
 // the "tier 3 teaches tier 1/2" feature: once any inner CinderLlmCore (tier 2's embedding core,
 // a real tier-3 cloud core, or a chain of both) resolves an input, a future input that embeds

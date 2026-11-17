@@ -1,9 +1,11 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 import { getDefaultView } from "../dom/realm.js";
 
 /**
  * Server-side speech-to-text fallback for browsers with no Web Speech API at all (Firefox,
  * older Safari) - docs/known-limitations.md #3. Deliberately reuses the SAME self-hosted
- * @cinder/server an app already points its text tier-3 fallback at (config.ai.endpoint/apiKey)
+ * the fallback server an app already points its text tier-3 fallback at (config.ai.endpoint/apiKey)
  * rather than inventing a second config surface - this wires up CinderSpeechConfig.engine's
  * "auto" value, which existed in the type for a while with nothing behind it.
  *

@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 // Coverage for @cinder/cli's install-skill command (packages/cli/src/core/installSkill.ts) -
 // installs the real Claude Code Skill into a target repo's .claude/skills/cinder/ and appends
 // a short section to AGENTS.md. The real risk here isn't "does it write a file" - it's "does

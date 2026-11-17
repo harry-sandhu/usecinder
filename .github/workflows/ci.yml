@@ -21,7 +21,6 @@ jobs:
       - run: npm run build -w @cinder/embeddings
       - run: npm run validate:mvp
       - run: npm run validate:red-team
-      - run: npm run validate:cloud-adapter
       - run: npm run validate:semantic-cache
       - run: npm run validate:alias-learning
       - run: npm run validate:label-audit

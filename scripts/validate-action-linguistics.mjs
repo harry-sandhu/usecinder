@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 // Systematic coverage for core/cie/linguistics.ts - the negation/sentence-mood check that
 // matchActionPlanner (planners/action.ts) uses before accepting a fuzzy action match.
 //

@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 /**
  * A thin, real fetch-based client for @cinder/relay's dashboard-facing routes. Deliberately not
  * a generated SDK - this is the exact same shape a developer's own dashboard/CLI would call,

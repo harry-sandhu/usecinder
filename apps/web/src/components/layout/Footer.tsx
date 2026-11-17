@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 import { Link } from 'react-router-dom';
 import { getWebCinderRouteAttributes } from '@/lib/cinder/routes';
 import { SITE_GITHUB_URL } from '@/lib/seo/site';

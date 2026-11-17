@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 // Systematic coverage for narrow reference carryover (core/cie/referenceCarryover.ts) - NOT
 // general anaphora resolution. See the module's own doc comment and
 // docs/local-engine-fully-fledged-plan.md §11 for why this is deliberately scoped to "one

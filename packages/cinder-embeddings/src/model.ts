@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 /**
  * Lazy-loaded sentence-embedding pipeline. See deviceSelection.ts for the WebGPU-first,
  * environment-aware-fallback logic (and the two real bugs, found via real-browser testing,

@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 // Coverage for @cinder/embeddings' value-extraction stage (valueExtraction.ts +
 // qaValueExtraction.ts): recovers set_field/set_filter commands that have a filler word
 // before the verb ("could you please set X to Y"), which core's matchSetValuePlanner /

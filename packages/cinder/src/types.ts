@@ -1,4 +1,6 @@
-// Types shared with @cinder/server and any other consumer of the wire/graph contracts live in
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
+// Types shared with a server and any other consumer of the wire/graph contracts live in
 // @cinder/shared, the single source of truth (docs/known-limitations.md #5/#6) - re-exported
 // here so every existing "../../types.js" import across this package keeps working unchanged.
 // Everything below this block is local to the cinder client package itself (route/cold-graph
@@ -220,7 +222,7 @@ export interface CinderSpeechListenOptions {
   speakFeedback?: boolean;
   root?: ParentNode | Document;
   /**
-   * Set only when speech.engine is "auto" and a self-hosted @cinder/server endpoint is
+   * Set only when speech.engine is "auto" and a self-hosted fallback server endpoint is
    * configured (core/csr/csrRuntime.ts derives this from config.ai) - used ONLY when the
    * browser has no native SpeechRecognition at all. See
    * core/input/speechCloudFallback.ts for why this reuses the text tier-3 endpoint rather

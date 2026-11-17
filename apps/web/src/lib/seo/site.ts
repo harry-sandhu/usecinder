@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 export const SITE_NAME = 'Cinder';
 export const SITE_DESCRIPTION = 'Cinder is a semantic runtime for applications with semantic tags, local-first graph-based resolution, and optional hybrid fallback.';
 export const SITE_URL = (import.meta.env.VITE_SITE_URL || 'https://usecinder.dev').replace(/\/$/, '');

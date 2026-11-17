@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 // Coverage for @cinder/cli's report builder (packages/cli/src/core/report.ts) - the single
 // consolidated file `cinder integrate` hands off to a coding agent. Pure string-building logic,
 // no browser/network involved.

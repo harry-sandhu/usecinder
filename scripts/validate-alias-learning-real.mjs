@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 // Real-model end-to-end proof for createAliasLearningLlmCore - downloads the real embedding
 // model on first run (same reasoning as validate-embeddings.mjs), so this is NOT part of the
 // fast CI chain; run it explicitly when working on aliasLearning.ts. Proves the actual claim

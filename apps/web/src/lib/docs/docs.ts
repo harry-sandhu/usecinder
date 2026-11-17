@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 import type { DocHeading, DocMeta, DocPage, DocsNavGroup, DocsSearchResult } from '@/types/docs';
 
 interface DocModule {
@@ -15,7 +17,7 @@ interface SearchIndexEntry {
   searchText: string;
 }
 
-const GROUP_ORDER = ['Getting Started', 'Concepts', 'Guides', 'API Reference', 'Server', 'Relay', 'CLI', 'Reference', 'Server & Reference'];
+const GROUP_ORDER = ['Getting Started', 'Concepts', 'Guides', 'API Reference', 'Relay', 'CLI', 'Reference'];
 
 const docModules = import.meta.glob('../../content/docs/**/*.mdx', { eager: true }) as Record<string, DocModule>;
 const rawDocModules = import.meta.glob('../../content/docs/**/*.mdx', {

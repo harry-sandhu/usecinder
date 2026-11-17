@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 // Coverage for CinderRouteDefinition.label (packages/cinder/src/types.ts +
 // core/cag/hybridGraph.ts) - the fix for a real gap found via live testing: a route only ever
 // reachable through a JS callback (no real cinder-route-tagged DOM element at all, e.g. a CRM's

@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 // Frozen benchmark set for the local-engine hardening plan (docs/local-engine-fully-fledged-plan.md, §5).
 //
 // This is NOT a pass/fail gate (yet) - it's a measurement. Run it before and after a local-engine

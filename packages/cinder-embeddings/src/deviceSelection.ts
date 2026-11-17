@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 /**
  * Shared device-selection logic for every Transformers.js pipeline this package creates
  * (the embedding pipeline in model.ts, the constrained-choice generative pipeline in

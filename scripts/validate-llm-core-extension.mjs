@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 // Coverage for the swappable llm-core extension point (Cinder.setLlmCore/resetLlmCore,
 // core/csr/csrRuntime.ts) - the hook tier 2 (a client-side embedding model) and, eventually,
 // a real tier 3 cloud fallback are meant to plug into. This is the architecture decision

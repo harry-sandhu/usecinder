@@ -1,3 +1,5 @@
+// Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
+// See LICENSE and NOTICE in the repository root. Do not remove this notice.
 // Coverage for the new "navigates_to" edge (docs/known-limitations.md #2): an action node that
 // declares data-cinder-navigates-to="<route-key>" gets a real graph edge to that route, exposed
 // via getNavigationTargetOf (core/cag/graphBuilder.ts). Same author-declared-only design as
