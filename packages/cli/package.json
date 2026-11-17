@@ -15,7 +15,8 @@
   },
   "files": [
     "dist",
-    "skill-assets"
+    "skill-assets",
+    "NOTICE"
   ],
   "license": "Elastic-2.0",
   "dependencies": {
