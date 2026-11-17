@@ -32,7 +32,7 @@ export function NotFoundPage() {
   return (
     <>
       <PageMetadata
-        title="Page Not Found — Cinder"
+        title="Page Not Found | Cinder"
         description="The requested page does not exist. Return to the homepage or browse the documentation."
         noindex
       />

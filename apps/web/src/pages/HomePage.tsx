@@ -116,7 +116,7 @@ export function HomePage() {
   return (
     <>
       <PageMetadata
-        title="Cinder — Semantic runtime for websites you control"
+        title="Cinder: semantic runtime for websites you control"
         description="Add semantic tags to the websites you control, build a local app graph, resolve commands locally, and use bounded fallback only when needed."
       />
 

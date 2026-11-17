@@ -29,7 +29,7 @@ At a high level, the browser runtime now does this:
 
 ## Main layers
 
-### CSR — Cinder Semantic Runtime
+### CSR (Cinder Semantic Runtime)
 The runtime owns configuration, scanning, graph refresh, local execution, speech integration, fallback wiring, and public SDK methods.
 
 ### Semantic scan
@@ -42,7 +42,7 @@ Tagged DOM becomes normalized semantic entries with metadata such as:
 - selector hints
 - path hints
 
-### CAG — Cinder Application Graph
+### CAG (Cinder Application Graph)
 Scan results become scoped graph nodes and edges.
 
 The graph is now responsible for:
@@ -52,7 +52,7 @@ The graph is now responsible for:
 - indexes by type, route, and context
 - runtime state such as active route, active context, focused node, and selections
 
-### CGE — Cinder Graph Query Engine
+### CGE (Cinder Graph Query Engine)
 Graph queries now use:
 
 - key and alias indexing
@@ -60,7 +60,7 @@ Graph queries now use:
 - scoped preference scoring
 - snapshot-level candidate caching
 
-### CIE — Cinder Intent Engine
+### CIE (Cinder Intent Engine)
 Local resolution now runs through planner modules rather than one monolithic resolver.
 
 That includes planners for:
@@ -90,7 +90,7 @@ Dispatch turns structured steps into actual app behavior through:
 - optional DOM adapters
 - optional bindings
 
-### CRE — Reflex engine
+### CRE (Reflex engine)
 The reflex layer turns execution results into deterministic user-facing feedback.
 
 ## Runtime state matters now

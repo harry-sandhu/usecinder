@@ -24,13 +24,13 @@ See [the quick start](https://usecinder.dev/docs/quick-start) for a real first i
 
 ## Workspace overview
 
-- `packages/shared` — shared contracts, graph primitives, tags, intents, and config types
-- `packages/cinder` — core runtime implementation, published to npm as `usecinder`
-- `packages/cinder-embeddings` — optional tier 2: a free, client-side embedding model (`@usecinder/embeddings`)
-- `packages/cli` — developer-run tagging audit and coding-agent integration tool (`@usecinder/cli`)
-- `apps/web` — docs/marketing website (usecinder.dev)
-- `apps/react-formtest`, `apps/vue-formtest`, `apps/embeddings-formtest` — minimal real integration examples
-- `docs/prompts/` — agent-runnable tagging/enrichment checklists referenced from the docs site
+- `packages/shared`: shared contracts, graph primitives, tags, intents, and config types
+- `packages/cinder`: core runtime implementation, published to npm as `usecinder`
+- `packages/cinder-embeddings`: optional tier 2: a free, client-side embedding model (`@usecinder/embeddings`)
+- `packages/cli`: developer-run tagging audit and coding-agent integration tool (`@usecinder/cli`)
+- `apps/web`: docs/marketing website (usecinder.dev)
+- `apps/react-formtest`, `apps/vue-formtest`, `apps/embeddings-formtest`: minimal real integration examples
+- `docs/prompts/`: agent-runnable tagging/enrichment checklists referenced from the docs site
 
 Tier 1 (local graph) and tier 2 (`@usecinder/embeddings`) are entirely free and run in the browser.
 Tier-3 AI fallback is available exclusively through **Cinder Relay**, a hosted, metered service -

@@ -38,7 +38,7 @@ export function DocsPage() {
     return (
       <>
         <PageMetadata
-          title="Docs Page Not Found — Cinder"
+          title="Docs Page Not Found | Cinder"
           description="The requested documentation page does not exist yet. Head back to the docs home or browse the core pages."
           noindex
         />
@@ -114,7 +114,7 @@ export function DocsPage() {
 
   return (
     <>
-      <PageMetadata title={`${page.title} — Cinder Docs`} description={page.description} type="article" />
+      <PageMetadata title={`${page.title} | Cinder Docs`} description={page.description} type="article" />
       <section {...getWebCinderRouteAttributes(location.pathname)}>
         <article id="docs-page-article" data-doc-slug={page.slug} cinder-context="docs-page-article" className="space-y-10">
           <header id="docs-page-header" className="space-y-4 border-b border-slate-200 pb-8 dark:border-slate-800">
