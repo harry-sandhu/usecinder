@@ -1,6 +1,6 @@
 {
   "name": "usecinder",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "license": "Elastic-2.0",
   "description": "Cinder: a semantic runtime for websites you control. Tag the app, build a local graph, resolve commands locally, and fall back to AI only when genuinely needed.",
@@ -20,7 +20,8 @@
   },
   "files": [
     "dist",
-    "NOTICE"
+    "NOTICE",
+    "scripts/postinstall-hint.mjs"
   ],
   "dependencies": {
     "@usecinder/shared": "0.1.0"
@@ -28,6 +29,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "postbuild": "node ../../scripts/stamp-dist-banner.mjs ./dist",
+    "postinstall": "node scripts/postinstall-hint.mjs || true",
     "clean": "rm -rf dist",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   }

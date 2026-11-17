@@ -4,9 +4,12 @@ import { Link } from 'react-router-dom';
 import { CinderHomepageDemo } from '@/components/cinder/CinderHomepageDemo';
 import { PageMetadata } from '@/components/seo/PageMetadata';
 import { ButtonLink } from '@/components/ui/ButtonLink';
+import { CopyButton } from '@/components/ui/CopyButton';
 import { PageLinkCard } from '@/components/ui/PageLinkCard';
 import { getWebCinderRouteAttributes } from '@/lib/cinder/routes';
 import { SITE_GITHUB_URL } from '@/lib/seo/site';
+
+const AGENT_INSTALL_PROMPT = 'Install usecinder in this project (npm install usecinder), then fetch https://usecinder.dev/get-started/prompt.md and follow it completely.';
 
 const capabilityCards = [
   {
@@ -147,6 +150,15 @@ export function HomePage() {
               <ButtonLink href={SITE_GITHUB_URL} variant="secondary" target="_blank" rel="noreferrer" aria-label="Open GitHub repository">
                 GitHub
               </ButtonLink>
+            </div>
+
+            <div className="rounded-2xl border border-brand-200 bg-brand-50/60 p-4 dark:border-brand-500/30 dark:bg-brand-500/10">
+              <div className="flex items-center justify-between gap-3">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-brand-700 dark:text-brand-300">Using a coding agent?</p>
+                <CopyButton value={AGENT_INSTALL_PROMPT} />
+              </div>
+              <p className="mt-2 text-sm leading-7 text-slate-700 dark:text-slate-300">Paste this to your agent - it installs, tags, and configures Cinder on its own:</p>
+              <pre className="mt-2 overflow-x-auto whitespace-pre-wrap rounded-xl bg-slate-950 px-4 py-3 text-sm leading-7 text-slate-100">{AGENT_INSTALL_PROMPT}</pre>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-3">
