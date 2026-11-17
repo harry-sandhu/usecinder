@@ -1,0 +1,27 @@
+export const meta = {
+  title: 'Why we built Cinder',
+  description: 'Most "AI makes your app commandable" tools reach for the cloud on every request. We think that’s backwards - resolve locally first, and only pay for AI when you genuinely need it.',
+  date: '2026-11-17',
+};
+
+The pitch behind most "talk to your app" tools is the same: wrap an LLM around your UI, send every command to the cloud, let the model figure out what the user meant. It works, demo-well, and it's expensive and slow for the thing it's actually used for most: a user asking their own app to do something the app's developer already knows how to do.
+
+"Open the reports page." "Clear the crop filter." "Show soybean prices in Punjab." None of these need a frontier model to understand - the developer who built the reports page, the crop filter, and the price lookup already knows exactly what those commands mean. The problem isn't that the app doesn't understand the user. It's that there's no structured way for the developer to tell the runtime what they already know.
+
+## Semantic tags, not prompts
+
+Cinder's bet is that a handful of plain HTML attributes - `cinder-route`, `cinder-action`, `cinder-field`, `cinder-filter`, `cinder-output` - are a better interface for this than a prompt. A tag is unambiguous, versioned with your code, and costs nothing to evaluate. A prompt is a guess, re-evaluated on every request, with real latency and a real bill attached.
+
+So tier 1 is a deterministic graph: tag your real routes/contexts/actions/fields, Cinder scans the DOM once, builds a scoped graph, and resolves most real commands against that graph directly - no model, no network call, no bill. We found, building and testing this against real apps, that the honest majority of what users actually ask for falls into this bucket once an app is reasonably tagged.
+
+## The AI tiers exist for the honest remainder
+
+Tier 2 (`@usecinder/embeddings`) catches typos and paraphrases of things that are already tagged - still entirely client-side, still free, because recovering "clera the croup filter" doesn't require a cloud round-trip either.
+
+Tier 3 - [Relay](/docs/relay) - is what's left: requests the deterministic graph and the local model genuinely can't resolve, usually open-ended or analytical ones. This is the one tier that costs real money, and we built it to be billed like what it actually is: a prepaid wallet metered against real token usage, never a flat fee for a feature most commands never touch.
+
+## The honest tradeoff
+
+This only pays off if you're willing to tag your app. Cinder is not going to understand an untagged page the way a general-purpose web agent might try to. We think that's the right tradeoff for an app you actually control and ship - the alternative is paying cloud-AI latency and cost on every single command, for an app whose structure you already know perfectly well.
+
+If that tradeoff makes sense for what you're building, [the install is one line](/docs/installation). If you'd rather have a coding agent do the first tagging pass, [point it at this](/docs/get-started) instead of doing it by hand.

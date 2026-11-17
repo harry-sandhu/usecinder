@@ -2,7 +2,7 @@
 // See LICENSE and NOTICE in the repository root. Do not remove this notice.
 import { Link } from 'react-router-dom';
 import { getWebCinderRouteAttributes } from '@/lib/cinder/routes';
-import { SITE_GITHUB_URL } from '@/lib/seo/site';
+import { SITE_GITHUB_DISCUSSIONS_URL, SITE_GITHUB_ISSUES_URL, SITE_GITHUB_URL } from '@/lib/seo/site';
 
 const footerLinks = [
   { href: '/docs/installation', label: 'Installation' },
@@ -11,6 +11,12 @@ const footerLinks = [
   { href: '/docs/architecture', label: 'Architecture' },
   { href: '/docs/guides/debugging', label: 'Debugging' },
   { href: '/relay', label: 'Relay' },
+  { href: '/blog', label: 'Blog' },
+];
+
+const footerExternalLinks = [
+  { href: SITE_GITHUB_ISSUES_URL, label: 'Report an issue' },
+  { href: SITE_GITHUB_DISCUSSIONS_URL, label: 'Discussions' },
 ];
 
 export function Footer() {
@@ -39,6 +45,11 @@ export function Footer() {
             <a href={SITE_GITHUB_URL} target="_blank" rel="noreferrer" className="font-medium text-slate-600 transition-colors hover:text-slate-950 dark:text-slate-300 dark:hover:text-white">
               GitHub
             </a>
+            {footerExternalLinks.map((link) => (
+              <a key={link.href} href={link.href} target="_blank" rel="noreferrer" className="font-medium text-slate-600 transition-colors hover:text-slate-950 dark:text-slate-300 dark:hover:text-white">
+                {link.label}
+              </a>
+            ))}
           </nav>
         </div>
       </div>

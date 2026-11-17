@@ -1,0 +1,31 @@
+export const meta = {
+  title: 'Introducing Cinder',
+  description: 'Cinder is live: a free, local-first semantic runtime for websites you control, with hosted AI fallback through Cinder Relay when you actually need it.',
+  date: '2026-11-17',
+};
+
+Cinder is public today: `npm install usecinder`.
+
+The short version - tag your app's real routes, actions, fields, and outputs with plain HTML attributes, and Cinder resolves text or voice commands against that structure entirely in the browser. No server, no AI call, no account, for the vast majority of commands a real user types.
+
+## What's actually in this release
+
+- **Tier 1** - a deterministic, graph-aware local resolver. Scans your tagged DOM, builds a scoped application graph, and resolves commands against it - route navigation, form fields, filters, actions, composite multi-step flows, negation ("clear the filter"), numeric comparisons ("amount over 100").
+- **Tier 2** - [`@usecinder/embeddings`](/docs/concepts/tier-2-embeddings), a free, client-side model that catches typos and paraphrases tier 1 couldn't resolve. Still no network call.
+- **Tier 3** - [Cinder Relay](/docs/relay), a hosted, metered proxy for genuine AI fallback. This is the one part of the stack that costs money, and only when you actually use it - a prepaid wallet, billed from real token usage, never a flat subscription.
+- **`@usecinder/cli`** - crawls your real running app, finds untagged elements and weak labels, and writes a report your coding agent can act on.
+- An [agent-fetchable onboarding prompt](/docs/get-started) - point a coding agent at one URL and it installs, tags, audits, and verifies Cinder in your app without further input.
+
+## What this is not
+
+Cinder is not trying to be a universal web agent that works on arbitrary, untagged pages. It's strongest on websites you control and are willing to tag deliberately - dashboards, internal tools, admin panels, structured forms. That focus is deliberate, not a limitation we're apologizing for.
+
+## Try it
+
+```bash
+npm install usecinder
+```
+
+Start with the [quick start](/docs/quick-start), or hand a coding agent the [onboarding prompt](/docs/get-started) and let it do the first pass for you.
+
+Found a bug or have a question? [Open an issue](https://github.com/harry-sandhu/usecinder/issues) or [start a discussion](https://github.com/harry-sandhu/usecinder/discussions) - both are open now.

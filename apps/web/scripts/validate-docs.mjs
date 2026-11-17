@@ -5,8 +5,9 @@ import path from 'node:path';
 
 const root = process.cwd();
 const docsRoot = path.join(root, 'src', 'content', 'docs');
+const blogRoot = path.join(root, 'src', 'content', 'blog');
 const srcRoot = path.join(root, 'src');
-const staticRoutes = new Set(['/', '/docs', '/relay', '/relay/login', '/relay/dashboard']);
+const staticRoutes = new Set(['/', '/docs', '/relay', '/relay/login', '/relay/dashboard', '/blog']);
 
 function filePathToSlug(filePath) {
   const relative = path.relative(docsRoot, filePath).replace(/\\/g, '/').replace(/\.mdx$/, '');
@@ -65,9 +66,11 @@ async function collectFiles(directory, matcher) {
 }
 
 const docFiles = await collectFiles(docsRoot, (filePath) => filePath.endsWith('.mdx'));
+const blogFiles = await collectFiles(blogRoot, (filePath) => filePath.endsWith('.mdx')).catch(() => []);
 const sourceFiles = await collectFiles(srcRoot, (filePath) => filePath.endsWith('.tsx') || filePath.endsWith('.mdx'));
 const docRoutes = new Set(docFiles.map(filePathToSlug));
-const knownRoutes = new Set([...staticRoutes, ...docRoutes]);
+const blogRoutes = new Set(blogFiles.map((filePath) => `/blog/${path.basename(filePath, '.mdx')}`));
+const knownRoutes = new Set([...staticRoutes, ...docRoutes, ...blogRoutes]);
 const problems = [];
 
 for (const filePath of sourceFiles) {

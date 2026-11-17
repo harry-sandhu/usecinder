@@ -15,6 +15,7 @@ const navigation = [
   { to: '/docs/api', label: 'API' },
   { to: '/docs/architecture', label: 'Architecture' },
   { to: '/relay', label: 'Relay' },
+  { to: '/blog', label: 'Blog' },
 ];
 
 function isTypingTarget(target: EventTarget | null) {

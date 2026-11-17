@@ -2,8 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://usecinder.dev/</loc>
-    <lastmod>2026-11-17T09:57:03.675Z</lastmod>
+    <lastmod>2026-11-17T10:46:18.027Z</lastmod>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://usecinder.dev/blog</loc>
+    <lastmod>2026-11-17T10:46:18.027Z</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://usecinder.dev/blog/introducing-cinder</loc>
+    <lastmod>2026-11-17T10:43:16.567Z</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://usecinder.dev/blog/why-we-built-cinder</loc>
+    <lastmod>2026-11-17T10:43:34.033Z</lastmod>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://usecinder.dev/docs</loc>
@@ -437,7 +452,7 @@
   </url>
   <url>
     <loc>https://usecinder.dev/relay</loc>
-    <lastmod>2026-11-17T09:57:03.675Z</lastmod>
+    <lastmod>2026-11-17T10:46:18.027Z</lastmod>
     <priority>0.9</priority>
   </url>
 </urlset>

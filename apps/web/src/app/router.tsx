@@ -9,6 +9,8 @@ import { DocsPage } from '@/pages/docs/DocsPage';
 import { RelayAuthPage } from '@/pages/relay/RelayAuthPage';
 import { RelayDashboardPage } from '@/pages/relay/RelayDashboardPage';
 import { RelayLandingPage } from '@/pages/relay/RelayLandingPage';
+import { BlogIndexPage } from '@/pages/blog/BlogIndexPage';
+import { BlogPostPage } from '@/pages/blog/BlogPostPage';
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +46,14 @@ export const router = createBrowserRouter([
       {
         path: 'relay/dashboard',
         element: <RelayDashboardPage />,
+      },
+      {
+        path: 'blog',
+        element: <BlogIndexPage />,
+      },
+      {
+        path: 'blog/:slug',
+        element: <BlogPostPage />,
       },
       {
         path: '*',

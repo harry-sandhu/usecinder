@@ -5,6 +5,7 @@ import path from 'node:path';
 
 const root = process.cwd();
 const docsRoot = path.join(root, 'src', 'content', 'docs');
+const blogRoot = path.join(root, 'src', 'content', 'blog');
 const publicRoot = path.join(root, 'public');
 const sitemapPath = path.join(publicRoot, 'sitemap.xml');
 const siteUrl = (process.env.SITE_URL || process.env.VITE_SITE_URL || 'https://usecinder.dev').replace(/\/$/, '');
@@ -53,6 +54,7 @@ async function collectMdxFiles(directory) {
 }
 
 const docsFiles = await collectMdxFiles(docsRoot);
+const blogFiles = await collectMdxFiles(blogRoot).catch(() => []);
 // Hardcoded here because these aren't under src/content/docs (no .mdx file to discover them
 // from) - only the public, indexable pages belong here. /relay/login and /relay/dashboard are
 // deliberately excluded: both set PageMetadata's noindex flag, since one is a bare auth form
@@ -60,6 +62,7 @@ const docsFiles = await collectMdxFiles(docsRoot);
 const staticRouteEntries = [
   { path: '/', priority: '1.0' },
   { path: '/relay', priority: '0.9' },
+  { path: '/blog', priority: '0.7' },
 ];
 
 const routeEntries = [
@@ -72,6 +75,19 @@ const routeEntries = [
           path: filePathToSlug(filePath),
           lastmod: details.mtime.toISOString(),
           priority: filePath.includes(`${path.sep}index.mdx`) ? '0.9' : '0.8',
+        };
+      }),
+    )
+  ),
+  ...(
+    await Promise.all(
+      blogFiles.map(async (filePath) => {
+        const details = await stat(filePath);
+        const slug = path.basename(filePath, '.mdx');
+        return {
+          path: `/blog/${slug}`,
+          lastmod: details.mtime.toISOString(),
+          priority: '0.6',
         };
       }),
     )

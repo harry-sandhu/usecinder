@@ -70,6 +70,11 @@ const staticRoutes: WebRouteMeta[] = [
     path: '/relay/dashboard',
     aliases: uniqueAliases(['relay dashboard', 'relay projects', 'relay usage', 'relay billing']),
   },
+  {
+    key: 'blog-home',
+    path: '/blog',
+    aliases: uniqueAliases(['blog', 'cinder blog', 'blog home', 'updates']),
+  },
 ];
 
 const docRoutes: WebRouteMeta[] = docsPages
