@@ -7,7 +7,7 @@
     "predev": "node scripts/prebuild-sdk.mjs",
     "dev": "vite",
     "prebuild": "node scripts/prebuild-sdk.mjs",
-    "build": "npm run generate:sitemap && vite build && node scripts/prerender.mjs",
+    "build": "npm run generate:sitemap && vite build && npx playwright install --with-deps chromium && node scripts/prerender.mjs",
     "preview": "vite preview",
     "typecheck": "node scripts/prebuild-sdk.mjs && tsc -p tsconfig.json --noEmit",
     "validate:links": "node scripts/validate-docs.mjs",
