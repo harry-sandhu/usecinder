@@ -1,6 +1,6 @@
 // Copyright (c) 2026 harry-sandhu. Licensed under the Elastic License 2.0 (ELv2).
 // See LICENSE and NOTICE in the repository root. Do not remove this notice.
-import { useEffect } from 'react';
+import { createContext, useContext, useEffect } from 'react';
 import { SITE_NAME, SITE_OG_IMAGE, SITE_THEME_COLOR_DARK, SITE_THEME_COLOR_LIGHT, SITE_URL } from '@/lib/seo/site';
 
 interface PageMetadataProps {
@@ -11,6 +11,19 @@ interface PageMetadataProps {
   pathname?: string;
   noindex?: boolean;
 }
+
+// Captures the exact props each page passes to PageMetadata, for the SSR prerender script
+// (scripts/prerender.mjs via src/entry-server.tsx) to read after renderToString finishes - since
+// renderToString never runs effects, the useEffect below (which sets real DOM tags client-side)
+// never fires during SSR. Writing to this ref directly in the render body, not in an effect,
+// keeps the SSR-emitted <head> tags guaranteed identical to what the client would set itself,
+// with no second copy of per-page titles/descriptions to keep in sync.
+export interface SsrMetadataSnapshot extends Required<Pick<PageMetadataProps, 'title' | 'description' | 'type'>> {
+  image: string;
+  noindex: boolean;
+}
+
+export const SsrMetadataContext = createContext<{ current?: SsrMetadataSnapshot } | undefined>(undefined);
 
 function upsertMeta(selector: string, attributes: Record<string, string>) {
   let element = document.head.querySelector<HTMLMetaElement>(selector);
@@ -50,6 +63,12 @@ export function PageMetadata({
   pathname,
   noindex = false,
 }: PageMetadataProps) {
+  const ssrMetadataRef = useContext(SsrMetadataContext);
+
+  if (ssrMetadataRef) {
+    ssrMetadataRef.current = { title, description, type, image, noindex };
+  }
+
   useEffect(() => {
     const resolvedPathname = pathname ?? window.location.pathname;
     const canonicalUrl = new URL(resolvedPathname, `${SITE_URL}/`).toString();
